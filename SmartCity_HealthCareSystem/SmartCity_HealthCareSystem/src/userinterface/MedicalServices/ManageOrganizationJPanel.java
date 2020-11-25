@@ -5,6 +5,7 @@
  */
 package userinterface.MedicalServices;
 
+import Business.EcoSystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -14,11 +15,16 @@ import javax.swing.JPanel;
  */
 public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
+    private JPanel rightPanel;
+    private EcoSystem ecosystem;
+    
     /**
      * Creates new form ManageOrganizationJPanel
      */
     public ManageOrganizationJPanel(JPanel rightPanel) {
         initComponents();
+        this.rightPanel = rightPanel;
+        this.ecosystem = ecosystem;
     }
 
     /**
@@ -67,6 +73,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         });
 
         btnLab.setText("Laboratory");
+        btnLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLabActionPerformed(evt);
+            }
+        });
 
         btnPharmacy.setText("Pharmacy");
         btnPharmacy.addActionListener(new java.awt.event.ActionListener() {
@@ -110,19 +121,35 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     private void btnVaccinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinesActionPerformed
         // TODO add your handling code here:
+        CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel,ecosystem);
+        rightPanel.add("createVaccinesJPanel",createVaccinesJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_btnVaccinesActionPerformed
 
     private void btnPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPharmacyActionPerformed
         // TODO add your handling code here:
+        CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel,ecosystem);
+        rightPanel.add("createPharmacyJPanel",createPharmacyJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_btnPharmacyActionPerformed
 
     private void btnDonorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonorActionPerformed
         // TODO add your handling code here:
-//        UserHospitalOptionsPanel userHospitalOptionsPanel = new UserHospitalOptionsPanel(rightPanel);
-//        rightPanel.add("userHospitalOptionsPanel",userHospitalOptionsPanel);
-//        CardLayout layout=(CardLayout)rightPanel.getLayout();
-//        layout.next(rightPanel);
+        CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel,ecosystem);
+        rightPanel.add("createDonorJPanel",createDonorJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_btnDonorActionPerformed
+
+    private void btnLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabActionPerformed
+        // TODO add your handling code here:
+        CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel,ecosystem);
+        rightPanel.add("createLaboratoryJPanel",createLaboratoryJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_btnLabActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
