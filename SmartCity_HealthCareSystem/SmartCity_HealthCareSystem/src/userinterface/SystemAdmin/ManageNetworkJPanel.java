@@ -8,7 +8,6 @@ package userinterface.SystemAdmin;
 import Business.EcoSystem;
 import Business.Network.Network;
 import java.awt.CardLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
