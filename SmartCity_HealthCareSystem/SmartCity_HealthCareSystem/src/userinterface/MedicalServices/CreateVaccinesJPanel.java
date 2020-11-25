@@ -5,17 +5,24 @@
  */
 package userinterface.MedicalServices;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author jshar
  */
 public class CreateVaccinesJPanel extends javax.swing.JPanel {
 
+    private JPanel rightPanel;
+    private EcoSystem ecosystem;
     /**
      * Creates new form CreateVaccinesJPanel
      */
-    public CreateVaccinesJPanel() {
+    public CreateVaccinesJPanel(JPanel rightPanel, EcoSystem ecosystem) {
         initComponents();
+        this.rightPanel = rightPanel;
+        this.ecosystem = ecosystem;
     }
 
     /**
@@ -26,6 +33,8 @@ public class CreateVaccinesJPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
