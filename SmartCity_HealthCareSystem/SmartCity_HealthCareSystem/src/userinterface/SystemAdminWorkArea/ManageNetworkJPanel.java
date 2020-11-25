@@ -7,12 +7,12 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+<<<<<<< HEAD
 import java.awt.CardLayout;
+=======
+>>>>>>> c97dc31e92fae00b4c1fc04384fd19788b55065e
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;

@@ -45,7 +45,6 @@ public abstract class Organization {
         Vaccines("Vaccines"),
         Pharmacy("Pharmacy"),
         Laboratory("Laboratory"),
-        Insurance("Insurance"),
         HealthCamps("HealthCamps"),
         SurveyDashboard("SurveyDashboard");
         

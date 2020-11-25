@@ -6,6 +6,7 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Doctor;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -19,10 +20,10 @@ import javax.swing.JPanel;
 public class AmbulanceManager extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        //remove null
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system) {
+        System.out.println(userProcessContainer.getComponents());
+        //return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
         return null;
-        //return new DoctorWorkAreaJPanel(userProcessContainer, account, (Doctor)organization, enterprise);
     }
     
     

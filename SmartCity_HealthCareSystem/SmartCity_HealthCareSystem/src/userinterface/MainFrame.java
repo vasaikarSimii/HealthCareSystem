@@ -8,6 +8,7 @@ package userinterface;
 import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -27,6 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Organization organization;
     private UserAccount userAccount;
     private Enterprise enterprise;
+    private Network network;
     /**
      * Creates new form MainFrame
      */
@@ -196,7 +198,7 @@ public class MainFrame extends javax.swing.JFrame {
         UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(txtUsername.getText(), txtPassword.getText());
         
         CardLayout layout = (CardLayout) container.getLayout();
-        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, organization, enterprise, system));
+        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, organization, enterprise, network, system));
         layout.next(container);
         
     }//GEN-LAST:event_btnLogin1ActionPerformed
