@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author MyPC1
+ * @author seemin
  */
 public class EcoSystem extends Organization{
     
@@ -56,6 +56,14 @@ public class EcoSystem extends Organization{
         }
         for(Network network:networkList){
             
+        }
+        return true;
+    }
+    public boolean isUnique(String name){
+        for(Network network : networkList){
+            if(network.getName().equalsIgnoreCase(name)){
+                return false;
+            }
         }
         return true;
     }
