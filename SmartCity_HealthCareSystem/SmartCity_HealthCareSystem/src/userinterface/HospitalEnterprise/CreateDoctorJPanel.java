@@ -65,7 +65,7 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Password:");
 
-        btnSubmit.setText("Submit");
+        btnSubmit.setText("Create");
 
         tblDoctor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

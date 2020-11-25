@@ -5,6 +5,9 @@
  */
 package userinterface.DoctorRole;
 
+import Business.EcoSystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author jshar
@@ -14,9 +17,21 @@ public class DoctorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorJPanel
      */
-    public DoctorJPanel() {
+   private JPanel userProcessContainer;
+    private EcoSystem ecosystem;
+
+    /**
+     *
+     * Creates new form ManageNetworkJPanel
+     */
+    
+    public DoctorJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
+
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

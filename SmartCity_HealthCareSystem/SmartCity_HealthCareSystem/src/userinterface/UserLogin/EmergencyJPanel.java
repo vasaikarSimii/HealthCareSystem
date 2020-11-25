@@ -5,6 +5,7 @@
  */
 package userinterface.UserLogin;
 
+import Business.EcoSystem;
 import javax.swing.JPanel;
 
 /**
@@ -16,10 +17,17 @@ public class EmergencyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form EmergencyJPanel
      */
-    public EmergencyJPanel(JPanel rightPanel) {
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
+    /**
+     * Creates new form UserMainPanel
+     */
+    public EmergencyJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

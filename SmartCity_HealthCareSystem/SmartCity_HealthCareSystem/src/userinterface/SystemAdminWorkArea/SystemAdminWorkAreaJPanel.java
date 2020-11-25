@@ -19,7 +19,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
- * @author MyPC1
+ * @author seemin
  */
 public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
@@ -30,10 +30,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem ecosystem;
     public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
         initComponents();
-        System.out.println("here");
         this.userProcessContainer=userProcessContainer;        
         this.ecosystem=ecosystem;
-        //manageNetwork();
         populateTree();
         
     }
