@@ -6,6 +6,10 @@
 package userinterface.MedicalServicesEnterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
 /**
@@ -14,15 +18,12 @@ import javax.swing.JPanel;
  */
 public class CreateDonorJPanel extends javax.swing.JPanel {
 
-    private JPanel rightPanel;
-    private EcoSystem ecosystem;
     /**
      * Creates new form CreateDonorJPanel
      */
-    public CreateDonorJPanel(JPanel rightPanel, EcoSystem ecosystem) {
+    public CreateDonorJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account) {
         initComponents();
-        this.rightPanel = rightPanel;
-        this.ecosystem = ecosystem;
+
     }
 
     /**
@@ -47,6 +48,7 @@ public class CreateDonorJPanel extends javax.swing.JPanel {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -84,6 +86,12 @@ public class CreateDonorJPanel extends javax.swing.JPanel {
 
         btnCreate.setText("Create");
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("MANAGE DONATION CAMP ORGANIZATION");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,13 +116,17 @@ public class CreateDonorJPanel extends javax.swing.JPanel {
                             .addComponent(btnCreate)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(532, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel6)
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,6 +167,7 @@ public class CreateDonorJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDonors;
     private javax.swing.JTextField txtLocation;
