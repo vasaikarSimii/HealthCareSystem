@@ -6,6 +6,11 @@
 package userinterface.MedicalServicesEnterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
 /**
@@ -14,15 +19,24 @@ import javax.swing.JPanel;
  */
 public class CreateVaccinesJPanel extends javax.swing.JPanel {
 
-    private JPanel rightPanel;
-    private EcoSystem ecosystem;
+    JPanel userProcessContainer;
+    Enterprise enterprise;
+    Network network;
+    Organization organization;
+    EcoSystem system;
+    UserAccount account;
+    OrganizationDirectory directory;
     /**
      * Creates new form CreateVaccinesJPanel
      */
-    public CreateVaccinesJPanel(JPanel rightPanel, EcoSystem ecosystem) {
+    public CreateVaccinesJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account) {
         initComponents();
-        this.rightPanel = rightPanel;
-        this.ecosystem = ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.network = network;
+        this.system = system;
     }
 
     /**

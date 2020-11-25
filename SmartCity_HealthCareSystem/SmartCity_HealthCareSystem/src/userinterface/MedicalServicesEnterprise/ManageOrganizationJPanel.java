@@ -6,6 +6,12 @@
 package userinterface.MedicalServicesEnterprise;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.Organization.Type;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -15,16 +21,49 @@ import javax.swing.JPanel;
  */
 public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
-    private JPanel rightPanel;
-    private EcoSystem ecosystem;
+    JPanel userProcessContainer;
+    Enterprise enterprise;
+    Network network;
+    Organization organization;
+    EcoSystem system;
+    UserAccount account;
+    OrganizationDirectory directory;
     
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageOrganizationJPanel(JPanel rightPanel) {
+    public ManageOrganizationJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account) {
         initComponents();
-        this.rightPanel = rightPanel;
-        this.ecosystem = ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.network = network;
+        this.system = system;
+        populateTable();
+        populateCombo();
+    }
+    
+    private void populateCombo(){
+        organizationJComboBox.removeAllItems();
+        for (Organization.Type type : Organization.Type.values()){
+            if (!type.getValue().equals(Organization.Type.Donors.getValue())){
+                organizationJComboBox.addItem(type);
+            }
+            else if (!type.getValue().equals(Organization.Type.Laboratory.getValue())){
+                organizationJComboBox.addItem(type);
+            }
+            else if (!type.getValue().equals(Organization.Type.Pharmacy.getValue())){
+                organizationJComboBox.addItem(type);
+            }
+            else if (!type.getValue().equals(Organization.Type.Vaccines.getValue())){
+                organizationJComboBox.addItem(type);
+            }
+        }
+    }
+    
+    private void populateTable() {
+        
     }
 
     /**
@@ -38,10 +77,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnDonor = new javax.swing.JButton();
-        btnVaccines = new javax.swing.JButton();
-        btnLab = new javax.swing.JButton();
-        btnPharmacy = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        organizationJComboBox = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        OrganizationNametxt = new javax.swing.JTextField();
+        addJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -58,31 +98,16 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnDonor.setText("Donor");
-        btnDonor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDonorActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Organization Type ");
 
-        btnVaccines.setText("Vaccines");
-        btnVaccines.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVaccinesActionPerformed(evt);
-            }
-        });
+        organizationJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnLab.setText("Laboratory");
-        btnLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLabActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Organization Name ");
 
-        btnPharmacy.setText("Pharmacy");
-        btnPharmacy.addActionListener(new java.awt.event.ActionListener() {
+        addJButton.setText("Add Organization");
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPharmacyActionPerformed(evt);
+                addJButtonActionPerformed(evt);
             }
         });
 
@@ -91,73 +116,58 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDonor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnVaccines, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLab, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(505, Short.MAX_VALUE))
+                        .addGap(92, 92, 92)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(297, 297, 297)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(OrganizationNametxt)
+                            .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(401, 401, 401)
+                        .addComponent(addJButton)))
+                .addContainerGap(504, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(82, 82, 82)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDonor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVaccines, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLab, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(391, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(OrganizationNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(addJButton)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVaccinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinesActionPerformed
-        // TODO add your handling code here:
-        CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel,ecosystem);
-        rightPanel.add("createVaccinesJPanel",createVaccinesJPanel);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnVaccinesActionPerformed
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 
-    private void btnPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPharmacyActionPerformed
-        // TODO add your handling code here:
-        CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel,ecosystem);
-        rightPanel.add("createPharmacyJPanel",createPharmacyJPanel);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnPharmacyActionPerformed
-
-    private void btnDonorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonorActionPerformed
-        // TODO add your handling code here:
-        CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel,ecosystem);
-        rightPanel.add("createDonorJPanel",createDonorJPanel);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnDonorActionPerformed
-
-    private void btnLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabActionPerformed
-        // TODO add your handling code here:
-        CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel,ecosystem);
-        rightPanel.add("createLaboratoryJPanel",createLaboratoryJPanel);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnLabActionPerformed
+        Type type = (Type) organizationJComboBox.getSelectedItem();
+        directory.createOrganization(type);
+        populateTable();
+    }//GEN-LAST:event_addJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDonor;
-    private javax.swing.JButton btnLab;
-    private javax.swing.JButton btnPharmacy;
-    private javax.swing.JButton btnVaccines;
+    private javax.swing.JTextField OrganizationNametxt;
+    private javax.swing.JButton addJButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox organizationJComboBox;
     // End of variables declaration//GEN-END:variables
 }
