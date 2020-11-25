@@ -18,6 +18,7 @@ import javax.swing.JPanel;
  * @author jshar
  */
 public class CreateAdditionalServicesJPanel extends javax.swing.JPanel {
+    
     JPanel userProcessContainer;
     Enterprise enterprise;
     Network network;
