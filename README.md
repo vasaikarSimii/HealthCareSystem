@@ -1,4 +1,4 @@
-# TEAM_ASV Final Project
+# TEAM_ASV SmartCity_HealthCareSystem
 
 Seemin Vasaikar - 001565151 - vasaikar.s@northeastern.edu
 Aaradhy Sharma : 1040799 - sharma.aara@northeastern.edu
