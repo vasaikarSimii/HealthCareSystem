@@ -33,6 +33,7 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum Type{
+        
         User("User"),
         Doctor("Doctor"),
         PatientProfile("PatientProfile"),
@@ -45,11 +46,9 @@ public abstract class Organization {
         Vaccines("Vaccines"),
         Pharmacy("Pharmacy"),
         Laboratory("Laboratory"),
-        Insurance("Insurance"),
         HealthCamps("HealthCamps"),
         SurveyDashboard("SurveyDashboard");
-        
-        
+             
         
                
         
@@ -65,7 +64,7 @@ public abstract class Organization {
     public Organization(String name) {
         this.name = name;
         workQueue = new WorkQueue();
-        //employeeDirectory = new EmployeeDirectory();
+        employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
         ++counter;
@@ -81,10 +80,7 @@ public abstract class Organization {
         return organizationID;
     }
 
-//    public EmployeeDirectory getEmployeeDirectory() {
-//        return employeeDirectory;
-//    }
-//    
+
     public String getName() {
         return name;
     }

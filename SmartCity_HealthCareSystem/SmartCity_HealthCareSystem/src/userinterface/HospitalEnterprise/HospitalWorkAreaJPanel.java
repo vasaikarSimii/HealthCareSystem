@@ -5,21 +5,39 @@
  */
 package userinterface.HospitalEnterprise;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
- * @author jshar
+ * @author seemin
  */
 public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form HospitalWorkAreaJPanel
-     */
-    public HospitalWorkAreaJPanel() {
+    
+    JPanel userProcessContainer;
+    Enterprise enterprise;
+    Network network;
+    Organization organization;
+    EcoSystem system;
+    UserAccount account;
+    OrganizationDirectory directory;
+    public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
-    }
-
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.network = network;
+        this.system = system;
+        
+        }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +49,10 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        btnManage = new javax.swing.JButton();
+        ManageOrganizationBtn = new javax.swing.JButton();
+        ManageDoctorsBtn = new javax.swing.JButton();
+        ManageAdditionalServicesBtn = new javax.swing.JButton();
+        ManageCovidCareBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         jSplitPane1.setDividerLocation(250);
@@ -39,10 +60,39 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
-        btnManage.setText("Manage Organization");
-        btnManage.addActionListener(new java.awt.event.ActionListener() {
+        ManageOrganizationBtn.setBackground(new java.awt.Color(255, 255, 255));
+        ManageOrganizationBtn.setText("Manage All Organizations");
+        ManageOrganizationBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        ManageOrganizationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageActionPerformed(evt);
+                ManageOrganizationBtnActionPerformed(evt);
+            }
+        });
+
+        ManageDoctorsBtn.setBackground(new java.awt.Color(255, 255, 255));
+        ManageDoctorsBtn.setText("Manage Doctors");
+        ManageDoctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        ManageDoctorsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageDoctorsBtnActionPerformed(evt);
+            }
+        });
+
+        ManageAdditionalServicesBtn.setBackground(new java.awt.Color(255, 255, 255));
+        ManageAdditionalServicesBtn.setText("Manage Additional Services");
+        ManageAdditionalServicesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        ManageAdditionalServicesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageAdditionalServicesBtnActionPerformed(evt);
+            }
+        });
+
+        ManageCovidCareBtn.setBackground(new java.awt.Color(255, 255, 255));
+        ManageCovidCareBtn.setText("Manage Covid Care");
+        ManageCovidCareBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        ManageCovidCareBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageCovidCareBtnActionPerformed(evt);
             }
         });
 
@@ -51,16 +101,26 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnManage, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageCovidCareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageAdditionalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(206, 206, 206)
-                .addComponent(btnManage, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addGap(94, 94, 94)
+                .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ManageAdditionalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ManageCovidCareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -92,17 +152,46 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageActionPerformed
+    private void ManageOrganizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageOrganizationBtnActionPerformed
         // TODO add your handling code here:
-        ManageOrganizationJPanel createOrgaizationJPanel = new ManageOrganizationJPanel(rightPanel);
-        rightPanel.add("userHospitalOptionsPanel",createOrgaizationJPanel);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnManageActionPerformed
+       // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
+        
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(userProcessContainer,system, organization,  network, enterprise, account);
+        userProcessContainer.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_ManageOrganizationBtnActionPerformed
+
+    private void ManageDoctorsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDoctorsBtnActionPerformed
+        // TODO add your handling code here:
+        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(userProcessContainer,system, organization,  network, enterprise, account);
+        userProcessContainer.add("CreateDoctorJPanel",CreateDoctorJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_ManageDoctorsBtnActionPerformed
+
+    private void ManageAdditionalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageAdditionalServicesBtnActionPerformed
+        // TODO add your handling code here:
+        CreateAdditionalServicesJPanel CreateAdditionalServicesJPanel=new CreateAdditionalServicesJPanel(userProcessContainer,system, organization,  network, enterprise, account);
+        userProcessContainer.add("CreateAdditionalServicesJPanel",CreateAdditionalServicesJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_ManageAdditionalServicesBtnActionPerformed
+
+    private void ManageCovidCareBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCovidCareBtnActionPerformed
+        // TODO add your handling code here:
+        CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(userProcessContainer,system, organization,  network, enterprise, account);
+        userProcessContainer.add("CreateCovidJPanel",CreateCovidJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_ManageCovidCareBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManage;
+    private javax.swing.JButton ManageAdditionalServicesBtn;
+    private javax.swing.JButton ManageCovidCareBtn;
+    private javax.swing.JButton ManageDoctorsBtn;
+    private javax.swing.JButton ManageOrganizationBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;

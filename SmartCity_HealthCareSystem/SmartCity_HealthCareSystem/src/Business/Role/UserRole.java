@@ -6,10 +6,13 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 //import userinterface.LabAssistantRole.LabAssistantWorkAreaJPanel;
 import javax.swing.JPanel;
+import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
+import userinterface.UserEnterprise.UserRoleWorkAreaJPanel;
 
 /**
  *
@@ -18,9 +21,10 @@ import javax.swing.JPanel;
 public class UserRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return null;
-        //return new LabAssistantWorkAreaJPanel(userProcessContainer, account, organization, business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system) {
+        System.out.println(userProcessContainer.getComponents());
+        return new UserRoleWorkAreaJPanel(userProcessContainer, system);
     }
+
     
 }
