@@ -51,10 +51,7 @@ public class OrganizationDirectory {
             organization = new PoliceDepartment();
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.FireDepartment.getValue())){
-            organization = new Insurance();
-            organizationList.add(organization);
-        }
+       
         else if (type.getValue().equals(Type.Donors.getValue())){
             organization = new Donors();
             organizationList.add(organization);
