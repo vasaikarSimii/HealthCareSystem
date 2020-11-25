@@ -1,3 +1,3 @@
-# Dev_Huskies_Final_Project
+# TEAM_ASV Final Project
 
-Shivi Bhatt 001027605 bhatt.s@husy.neu.edu
+Seemin Vasaikar - 001565151 - vasaikar.s@northeastern.edu
