@@ -66,7 +66,7 @@
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="141" max="32767" attributes="0"/>
+              <EmptySpace pref="859" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,7 +104,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="114" max="32767" attributes="0"/>
+              <EmptySpace pref="303" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

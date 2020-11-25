@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.UserLogin;
+package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
 import javax.swing.JPanel;
@@ -118,9 +118,7 @@ public class EmergencyJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3)))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -145,7 +143,7 @@ public class EmergencyJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addComponent(jLabel4)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(859, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +174,7 @@ public class EmergencyJPanel extends javax.swing.JPanel {
                     .addComponent(rBtnNoFire))
                 .addGap(18, 18, 18)
                 .addComponent(btnConfirm)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

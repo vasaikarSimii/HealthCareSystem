@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.UserLogin;
+package userinterface.UserEnterprise;
 
 /**
  *
@@ -86,7 +86,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(jTextField1))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(603, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +99,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnConfirmAppointment)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

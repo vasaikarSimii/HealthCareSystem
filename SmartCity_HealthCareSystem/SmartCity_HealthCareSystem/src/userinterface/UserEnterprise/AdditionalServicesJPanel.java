@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.UserLogin;
+package userinterface.UserEnterprise;
 
 /**
  *
@@ -77,7 +77,7 @@ public class AdditionalServicesJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(761, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +88,7 @@ public class AdditionalServicesJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnConfirm)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

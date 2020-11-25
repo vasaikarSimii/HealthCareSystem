@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.MedicalServices;
+package userinterface.MedicalServicesEnterprise;
 
 /**
  *
  * @author jshar
  */
-public class CreateVaccinesJPanel extends javax.swing.JPanel {
+public class CreatePharmacyJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CreateVaccinesJPanel
+     * Creates new form CreatePharmacy
      */
-    public CreateVaccinesJPanel() {
+    public CreatePharmacyJPanel() {
         initComponents();
     }
 
@@ -31,11 +31,11 @@ public class CreateVaccinesJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1345, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

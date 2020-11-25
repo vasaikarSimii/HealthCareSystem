@@ -12,7 +12,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 //import userinterface.DoctorRole.DoctorWorkAreaJPanel;
 import javax.swing.JPanel;
-import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
+import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
 
 /**
  *

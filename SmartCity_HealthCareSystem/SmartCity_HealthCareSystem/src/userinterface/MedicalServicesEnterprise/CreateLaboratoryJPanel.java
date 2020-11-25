@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.MedicalServices;
+package userinterface.MedicalServicesEnterprise;
 
 /**
  *
  * @author jshar
  */
-public class CreatePharmacyJPanel extends javax.swing.JPanel {
+public class CreateLaboratoryJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CreatePharmacy
+     * Creates new form CreateLaboratoryJPanel
      */
-    public CreatePharmacyJPanel() {
+    public CreateLaboratoryJPanel() {
         initComponents();
     }
 

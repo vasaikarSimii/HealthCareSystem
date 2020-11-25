@@ -11,8 +11,8 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 //import userinterface.LabAssistantRole.LabAssistantWorkAreaJPanel;
 import javax.swing.JPanel;
-import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
-import userinterface.UserLogin.UserRoleWorkAreaJPanel;
+import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
+import userinterface.UserEnterprise.UserRoleWorkAreaJPanel;
 
 /**
  *
