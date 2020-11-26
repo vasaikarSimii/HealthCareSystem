@@ -17,8 +17,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorJPanel
      */
-   private JPanel userProcessContainer;
-    private EcoSystem ecosystem;
+    
+//   private JPanel userProcessContainer;
+//    private EcoSystem ecosystem;
 
     /**
      *
@@ -28,8 +29,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
     public DoctorJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
 
-        this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
+//        this.userProcessContainer = userProcessContainer;
+//        this.ecosystem = ecosystem;
     }
    
 
