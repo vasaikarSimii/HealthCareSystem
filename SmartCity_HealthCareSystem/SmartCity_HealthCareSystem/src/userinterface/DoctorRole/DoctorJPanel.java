@@ -18,8 +18,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
      * Creates new form DoctorJPanel
      */
     
-//   private JPanel userProcessContainer;
-//    private EcoSystem ecosystem;
+    private JPanel userProcessContainer;
+    private EcoSystem ecosystem;
 
     /**
      *
@@ -29,8 +29,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
     public DoctorJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
 
-//        this.userProcessContainer = userProcessContainer;
-//        this.ecosystem = ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
     }
    
 
@@ -127,17 +127,17 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addComponent(btnViewPatient)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept)
                     .addComponent(btnDeny)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(119, 119, 119)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(btnNextSteps)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
