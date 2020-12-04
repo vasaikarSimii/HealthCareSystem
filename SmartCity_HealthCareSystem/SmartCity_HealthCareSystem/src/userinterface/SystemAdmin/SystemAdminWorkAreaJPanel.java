@@ -137,11 +137,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblSelectedNode1.setBackground(new java.awt.Color(153, 255, 204));
+        lblSelectedNode1.setBackground(new java.awt.Color(204, 255, 204));
         lblSelectedNode1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lblSelectedNode1.setOpaque(true);
 
-        jTree.setBackground(new java.awt.Color(153, 255, 204));
+        jTree.setBackground(new java.awt.Color(204, 255, 204));
         jTree.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jTree.setForeground(new java.awt.Color(0, 0, 0));
         jTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {

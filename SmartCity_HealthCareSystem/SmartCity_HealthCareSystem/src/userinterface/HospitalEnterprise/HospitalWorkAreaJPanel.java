@@ -23,19 +23,26 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     Enterprise enterprise;
     Network network;
-    Organization organization;
+    OrganizationDirectory directory;
     EcoSystem system;
     UserAccount account;
-    OrganizationDirectory directory;
-    public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    Organization organization;
+    
+//    public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+//        initComponents();
+//        this.account = account;
+//        this.organization = organization;
+//        this.enterprise = enterprise;
+//        this.network = network;
+//        this.system = system;
+//        
+//        }
+    public HospitalWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
         initComponents();
-        this.account = account;
-        this.organization = organization;
+        this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
-        this.network = network;
-        this.system = system;
-        
-        }
+       // valueLabel.setText(enterprise.getName());
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +59,8 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         ManageDoctorsBtn = new javax.swing.JButton();
         ManageCovidCareBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
+
+        setPreferredSize(new java.awt.Dimension(1400, 700));
 
         jSplitPane1.setDividerLocation(250);
         jSplitPane1.setDividerSize(1);
@@ -90,7 +99,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ManageCovidCareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,24 +115,14 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ManageCovidCareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
-        rightPanel.setLayout(rightPanelLayout);
-        rightPanelLayout.setHorizontalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1093, Short.MAX_VALUE)
-        );
-        rightPanelLayout.setVerticalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
-        );
-
+        rightPanel.setPreferredSize(new java.awt.Dimension(1200, 700));
+        rightPanel.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(rightPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -140,26 +139,31 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
 
     private void ManageOrganizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageOrganizationBtnActionPerformed
         // TODO add your handling code here:
-       // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
         
-        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization,  network, enterprise, account);
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel);
         rightPanel.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
+        
     }//GEN-LAST:event_ManageOrganizationBtnActionPerformed
 
     private void ManageDoctorsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDoctorsBtnActionPerformed
         // TODO add your handling code here:
-        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
-        rightPanel.add("CreateDoctorJPanel",CreateDoctorJPanel);
+  
+       // CreateDoctorJPanel = new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
+       
+        CreateDoctorJPanel createDoctorJPanel = new CreateDoctorJPanel(rightPanel);
+        rightPanel.add("CreateDoctorJPanel",createDoctorJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
     }//GEN-LAST:event_ManageDoctorsBtnActionPerformed
 
     private void ManageCovidCareBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCovidCareBtnActionPerformed
         // TODO add your handling code here:
-        CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(rightPanel,system, organization,  network, enterprise, account);
-        rightPanel.add("CreateCovidJPanel",CreateCovidJPanel);
+       // CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(rightPanel,system, organization,  network, enterprise, account);
+       
+        CreateCovidJPanel createCovidJPanel = new CreateCovidJPanel(rightPanel);
+        rightPanel.add("CreateCovidJPanel", createCovidJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
     }//GEN-LAST:event_ManageCovidCareBtnActionPerformed

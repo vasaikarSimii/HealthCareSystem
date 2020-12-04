@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 //import userinterface.DoctorRole.DoctorWorkAreaJPanel;
 import javax.swing.JPanel;
+import userinterface.EmergencyServicesEnterprise.EmergencyServicesWorkAreaJPanel;
 
 /**
  *
@@ -21,10 +22,9 @@ public class EmergencyAdminRole extends Role{
 
    @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system) {
-        System.out.println(userProcessContainer.getComponents());
-        //return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
-        return null;
-    }
+        //System.out.println(userProcessContainer.getComponents());
+        return new EmergencyServicesWorkAreaJPanel(userProcessContainer,enterprise);
+        }
     
     
 }

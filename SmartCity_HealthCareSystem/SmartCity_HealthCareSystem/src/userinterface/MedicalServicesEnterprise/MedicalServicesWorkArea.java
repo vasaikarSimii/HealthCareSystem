@@ -32,15 +32,20 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form MedicalServicesWorkArea
      */
-    public MedicalServicesWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+    public MedicalServicesWorkArea(JPanel userProcessContainer,Enterprise enterprise){
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;
-        this.organization = organization;
         this.enterprise = enterprise;
-        this.network = network;
-        this.system = system;
     }
+//    public MedicalServicesWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
+//        initComponents();
+//        this.userProcessContainer = userProcessContainer;
+//        this.account = account;
+//        this.organization = organization;
+//        this.enterprise = enterprise;
+//        this.network = network;
+//        this.system = system;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +66,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
         rightPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1400, 800));
 
         jSplitPane1.setDividerLocation(250);
         jSplitPane1.setDividerSize(1);
@@ -124,7 +130,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
                     .addComponent(btnVaccines, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,20 +145,23 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
                 .addComponent(btnDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
+
+        rightPanel.setBackground(new java.awt.Color(255, 255, 255));
+        rightPanel.setPreferredSize(null);
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);
         rightPanelLayout.setHorizontalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1093, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(rightPanel);
@@ -173,7 +182,8 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
 
-        ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(rightPanel ,system, organization,  network, enterprise, account);
+        //ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(rightPanel ,system, organization,  network, enterprise, account);
+        ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(rightPanel);
         rightPanel.add("manageOrganizationJPanel",manageOrganizationJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -182,7 +192,8 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
 
     private void btnLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaboratoryActionPerformed
         // TODO add your handling code here:
-        CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel,system, organization,  network, enterprise, account);
+       // CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel,system, organization,  network, enterprise, account);
+      CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel);
         rightPanel.add("createLaboratoryJPanel",createLaboratoryJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -190,7 +201,8 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
 
     private void btnVaccinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinesActionPerformed
         // TODO add your handling code here:
-        CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel,system, organization,  network, enterprise, account);
+        //CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel,system, organization,  network, enterprise, account);
+        CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel);
         rightPanel.add("createVaccinesJPanel",createVaccinesJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -198,7 +210,8 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
 
     private void btnDonorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonorsActionPerformed
         // TODO add your handling code here:
-        CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel,system, organization,  network, enterprise, account);
+        //CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel,system, organization,  network, enterprise, account);
+        CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel);
         rightPanel.add("createDonorJPanel",createDonorJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -206,7 +219,8 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
 
     private void btnPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPharmacyActionPerformed
         // TODO add your handling code here:
-        CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel,system, organization,  network, enterprise, account);
+        //CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel,system, organization,  network, enterprise, account);
+        CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel);
         rightPanel.add("createPharmacyJPanel",createPharmacyJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
