@@ -39,10 +39,16 @@ public class CreateVaccinesJPanel extends javax.swing.JPanel {
 //        this.system = system;
 //    }
 
-    CreateVaccinesJPanel(JPanel rightPanel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+ CreateVaccinesJPanel(JPanel userProcessContainer) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+         this.enterprise = enterprise;
+         populateTable();
     }
-
+   public void populateTable(){
+       
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
