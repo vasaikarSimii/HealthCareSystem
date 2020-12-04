@@ -5,7 +5,13 @@
  */
 package userinterface.UserRegistration;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Population.PeopleDirectory;
+import Business.Role.UserRole;
+import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 /**
@@ -14,11 +20,19 @@ import javax.swing.JOptionPane;
  */
 public class CreateUserAccountJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private EcoSystem ecoSystem;
+    private PeopleDirectory peopleDirectory;
+    
+    
     /**
      * Creates new form CreateUserAccountJPanel
      */
-    public CreateUserAccountJPanel() {
+    public CreateUserAccountJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, PeopleDirectory peopleDirectory) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecoSystem = ecoSystem;
+        this.peopleDirectory = peopleDirectory;
     }
 
     /**
@@ -55,6 +69,10 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         boxBloodGroup = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,7 +158,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 421, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, -1, -1));
 
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -148,10 +166,18 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 421, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, -1, -1));
 
         boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
         add(boxBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 306, 60, -1));
+
+        jLabel13.setText("Password:");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
+
+        jLabel14.setText("Username:");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 180, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void rBtnOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnOthersActionPerformed
@@ -210,6 +236,12 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         }
         else if(rBtnOthers.isSelected()) {
             gender = "Others";
+        }
+        
+        String address = txtAddress.getText();
+        if(address.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Address caanot be empty");
+            return;
         }
         
         String email = txtEmail.getText();
@@ -287,8 +319,17 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+        
         
         //Now here we will save the values in DB
+        System.out.println(ecoSystem.toString());
+        ecoSystem.getPeopleDirectory().newPeople(name, gender, email, phoneNumber, bloodGroup, address, height, weight);
+        Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(email);
+        UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new UserRole());
+        
+        JOptionPane.showMessageDialog(null, "User Profile Created");
         
         
         
@@ -324,6 +365,8 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -340,7 +383,9 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtHeight;
     private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtUsername;
     private javax.swing.JTextField txtWeight;
     // End of variables declaration//GEN-END:variables
 }

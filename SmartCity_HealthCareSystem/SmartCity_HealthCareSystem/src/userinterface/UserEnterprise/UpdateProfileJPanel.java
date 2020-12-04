@@ -51,14 +51,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         rBtnMale = new javax.swing.JRadioButton();
         rBtnFemale = new javax.swing.JRadioButton();
         rBtnOthers = new javax.swing.JRadioButton();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        txtOperationHistory = new javax.swing.JTextField();
-        ttMedicalAllergies = new javax.swing.JTextField();
-        txtEmergencyContact = new javax.swing.JTextField();
-        txtFamilyMedHist = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,11 +60,11 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 219, 165, -1));
 
         jLabel5.setText("Email Address:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 262, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
         add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 259, 165, -1));
 
         jLabel7.setText("Phone Number:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 297, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, -1, -1));
         add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 294, 165, -1));
         add(txtWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 334, 60, -1));
         add(txtHeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 374, 60, -1));
@@ -96,7 +88,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 586, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Update Profile");
@@ -113,11 +105,11 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
 
         jLabel2.setText("Last Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 82, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 82, -1));
         add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 171, -1));
 
         jLabel4.setText("Gender:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
         rBtnMale.setText("Male");
         rBtnMale.addActionListener(new java.awt.event.ActionListener() {
@@ -142,28 +134,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
             }
         });
         add(rBtnOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
-
-        jLabel9.setText("Operation History:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 417, -1, -1));
-
-        jLabel13.setText("Medicine Allergies:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 457, -1, -1));
-
-        jLabel14.setText("Family Medical History:");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 497, -1, -1));
-
-        jLabel15.setText("Emergency Contact Number:");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 540, -1, -1));
-
-        txtOperationHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtOperationHistoryActionPerformed(evt);
-            }
-        });
-        add(txtOperationHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 414, 269, -1));
-        add(ttMedicalAllergies, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 454, 269, -1));
-        add(txtEmergencyContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 534, 269, -1));
-        add(txtFamilyMedHist, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 494, 269, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
@@ -245,10 +215,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rBtnOthersActionPerformed
 
-    private void txtOperationHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOperationHistoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOperationHistoryActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
@@ -256,9 +222,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -266,19 +229,14 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton rBtnFemale;
     private javax.swing.JRadioButton rBtnMale;
     private javax.swing.JRadioButton rBtnOthers;
-    private javax.swing.JTextField ttMedicalAllergies;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtEmergencyContact;
-    private javax.swing.JTextField txtFamilyMedHist;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtHeight;
     private javax.swing.JTextField txtLastName;
-    private javax.swing.JTextField txtOperationHistory;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtWeight;
     // End of variables declaration//GEN-END:variables
