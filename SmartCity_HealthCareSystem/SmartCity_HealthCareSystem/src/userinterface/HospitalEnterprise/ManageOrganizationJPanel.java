@@ -29,8 +29,9 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     Organization organization;
     EcoSystem system;
     UserAccount account;
-    OrganizationDirectory directory;
+    OrganizationDirectory organizationDirectory;
     
+<<<<<<< HEAD
    public ManageOrganizationJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -38,6 +39,21 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         
 //        populateTable();
 //        populateCombo();
+=======
+   
+
+    ManageOrganizationJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account, OrganizationDirectory organizationDirectory) {
+       initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.network = network;
+        this.system = system;
+        this.organizationDirectory = organizationDirectory;
+        populateTable();
+        populateCombo();
+>>>>>>> cf4cfc186f49dfda569932f4ae03d0122bcb85cf
     }
 
     
@@ -79,6 +95,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     }
 
+<<<<<<< HEAD
 //    private void populateTable(){
 //        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 //        
@@ -93,6 +110,22 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 //            model.addRow(row);
 //        }
 //    }
+=======
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Organization organization : organizationDirectory.getOrganizationList()){
+            Object[] row = new Object[2];
+            row[0] = organization.getOrganizationID();
+            row[1] = organization.getName();
+           
+            
+            model.addRow(row);
+        }
+    }
+>>>>>>> cf4cfc186f49dfda569932f4ae03d0122bcb85cf
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,9 +242,15 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 
+<<<<<<< HEAD
 //        Type type = (Type) organizationJComboBox.getSelectedItem();
 //        directory.createOrganization(type);
 //        populateTable();
+=======
+        Type type = (Type) organizationJComboBox.getSelectedItem();
+        organizationDirectory.createOrganization(type);
+        populateTable();
+>>>>>>> cf4cfc186f49dfda569932f4ae03d0122bcb85cf
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed

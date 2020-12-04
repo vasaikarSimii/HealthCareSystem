@@ -41,8 +41,15 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+<<<<<<< HEAD
        // valueLabel.setText(enterprise.getName());
     }
+=======
+        this.network = network;
+        this.system = system;
+        this.directory = directory;
+        }
+>>>>>>> cf4cfc186f49dfda569932f4ae03d0122bcb85cf
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,7 +147,11 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
     private void ManageOrganizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageOrganizationBtnActionPerformed
         // TODO add your handling code here:
         
+<<<<<<< HEAD
         ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel);
+=======
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization,  network, enterprise, account, directory);
+>>>>>>> cf4cfc186f49dfda569932f4ae03d0122bcb85cf
         rightPanel.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);

@@ -7,6 +7,8 @@ package userinterface.UserRegistration;
 
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Organization.Organization;
+import Business.Organization.User;
 import Business.Population.PeopleDirectory;
 import Business.Role.UserRole;
 import Business.UserAccount.UserAccount;
@@ -267,7 +269,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
-//        Validation for Unique Phone Number
+//      Validation for Unique Phone Number
 
         String bloodGroup = "";
         
@@ -322,11 +324,12 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         String userName = txtUsername.getText();
         String password = txtPassword.getText();
         
-        
+        Organization organization = new User();
         //Now here we will save the values in DB
         System.out.println(ecoSystem.toString());
-        ecoSystem.getPeopleDirectory().newPeople(name, gender, email, phoneNumber, bloodGroup, address, height, weight);
-        Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(email);
+//        ecoSystem.getPeopleDirectory().newPeople(name, gender, email, phoneNumber, bloodGroup, address, height, weight);
+        Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(email);    
+        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, new UserRole());
         UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new UserRole());
         
         JOptionPane.showMessageDialog(null, "User Profile Created");
