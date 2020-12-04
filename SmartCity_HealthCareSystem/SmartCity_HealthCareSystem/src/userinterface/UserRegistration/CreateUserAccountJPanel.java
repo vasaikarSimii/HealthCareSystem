@@ -269,7 +269,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
-//        Validation for Unique Phone Number
+//      Validation for Unique Phone Number
 
         String bloodGroup = "";
         
