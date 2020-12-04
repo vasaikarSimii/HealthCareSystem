@@ -59,6 +59,9 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             if (!type.getValue().equals(Organization.Type.Doctor.getValue())){
                 organizationJComboBox.addItem(type);
             }
+            else if (!type.getValue().equals(Organization.Type.AdditionServices.getValue())){
+                organizationJComboBox.addItem(type);
+            }
             else if (!type.getValue().equals(Organization.Type.CovidCare.getValue())){
                 organizationJComboBox.addItem(type);
             }
@@ -77,7 +80,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             Object[] row = new Object[2];
             row[0] = organization.getOrganizationID();
             row[1] = organization.getName();
-           
             
             model.addRow(row);
         }

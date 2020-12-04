@@ -65,7 +65,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "patient name", "Location", "Ambulane requirment", "Ambulance Availabel"
+                "patient name", "Location", "Ambulane requirment", "Ambulance Available"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
