@@ -36,12 +36,18 @@ public abstract class Organization {
         
         User("User"),
         Doctor("Doctor"),
+        PatientProfile("PatientProfile"),
+        AdditionServices("AdditionServices"),
         CovidCare("CovidCare"),
         Ambulance("Ambulance"),
+        PoliceDepartment("PoliceDepartment"),
+        FireDepartment("FireDepartment"),
         Donors("Donors"),
         Vaccines("Vaccines"),
         Pharmacy("Pharmacy"),
-        Laboratory("Laboratory");
+        Laboratory("Laboratory"),
+        HealthCamps("HealthCamps"),
+        SurveyDashboard("SurveyDashboard");
              
         
                

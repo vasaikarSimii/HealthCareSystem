@@ -10,7 +10,7 @@ import Business.Organization.OrganizationDirectory;
 
 /**
  *
- * @author 
+ * @author MyPC1
  */
 public abstract class Enterprise extends Organization{
     
@@ -22,9 +22,7 @@ public abstract class Enterprise extends Organization{
     }
     
     public enum EnterpriseType{
-        Hospital("Hospital"),
-        Emergency("Emergency"),
-        MedicalServices("MedicalServices");
+        Hospital("Hospital");
         
         private String value;
         
