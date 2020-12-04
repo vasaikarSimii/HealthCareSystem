@@ -9,6 +9,9 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Role.EmergencyAdminRole;
+import Business.Role.HospitalAdminRole;
+import Business.Role.MedicalServicesAdmin;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -236,9 +239,20 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         String password = String.valueOf(passwordJPasswordField.getPassword());
         String name = nameJTextField.getText();
         
-        Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
-        
-        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new SystemAdminRole());
+        if(enterprise.getEnterpriseType().equals(Enterprise.EnterpriseType.Hospital)){
+            Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+        }
+        else if(enterprise.getEnterpriseType().equals(Enterprise.EnterpriseType.Emergency)){
+            
+            Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new EmergencyAdminRole());
+        }
+        else if(enterprise.getEnterpriseType().equals(Enterprise.EnterpriseType.MedicalServices)){
+            
+            Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new MedicalServicesAdmin());
+        }
         populateTable();
 
     }//GEN-LAST:event_submitJButtonActionPerformed

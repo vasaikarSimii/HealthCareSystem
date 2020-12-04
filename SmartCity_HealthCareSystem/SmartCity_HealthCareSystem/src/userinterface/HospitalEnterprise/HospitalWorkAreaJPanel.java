@@ -29,7 +29,6 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
     OrganizationDirectory directory;
     public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
@@ -143,26 +142,26 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
        // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
         
-        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization,  network, enterprise, account);
+        rightPanel.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageOrganizationBtnActionPerformed
 
     private void ManageDoctorsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDoctorsBtnActionPerformed
         // TODO add your handling code here:
-        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("CreateDoctorJPanel",CreateDoctorJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
+        rightPanel.add("CreateDoctorJPanel",CreateDoctorJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageDoctorsBtnActionPerformed
 
     private void ManageCovidCareBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCovidCareBtnActionPerformed
         // TODO add your handling code here:
-        CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("CreateCovidJPanel",CreateCovidJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(rightPanel,system, organization,  network, enterprise, account);
+        rightPanel.add("CreateCovidJPanel",CreateCovidJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageCovidCareBtnActionPerformed
 
 

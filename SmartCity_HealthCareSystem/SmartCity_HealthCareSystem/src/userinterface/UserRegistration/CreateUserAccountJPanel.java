@@ -5,7 +5,13 @@
  */
 package userinterface.UserRegistration;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Population.PeopleDirectory;
+import Business.Role.UserRole;
+import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 /**
@@ -14,11 +20,19 @@ import javax.swing.JOptionPane;
  */
 public class CreateUserAccountJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private EcoSystem ecoSystem;
+    private PeopleDirectory peopleDirectory;
+    
+    
     /**
      * Creates new form CreateUserAccountJPanel
      */
-    public CreateUserAccountJPanel() {
+    public CreateUserAccountJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, PeopleDirectory peopleDirectory) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecoSystem = ecoSystem;
+        this.peopleDirectory = peopleDirectory;
     }
 
     /**
@@ -224,6 +238,12 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             gender = "Others";
         }
         
+        String address = txtAddress.getText();
+        if(address.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Address caanot be empty");
+            return;
+        }
+        
         String email = txtEmail.getText();
         
         flag = email.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
@@ -299,8 +319,17 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+        
         
         //Now here we will save the values in DB
+        System.out.println(ecoSystem.toString());
+        ecoSystem.getPeopleDirectory().newPeople(name, gender, email, phoneNumber, bloodGroup, address, height, weight);
+        Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(email);
+        UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new UserRole());
+        
+        JOptionPane.showMessageDialog(null, "User Profile Created");
         
         
         
