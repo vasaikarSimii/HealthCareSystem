@@ -225,10 +225,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageEnterpriseAdminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEnterpriseAdminBtnActionPerformed
         // TODO add your handling code here:
-        ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel=new ManageEnterpriseAdminJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("manageEnterpriseAdminJPanel",manageEnterpriseAdminJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel=new ManageEnterpriseAdminJPanel(rightSystemAdminPanel, ecosystem);
+        rightSystemAdminPanel.add("manageEnterpriseAdminJPanel",manageEnterpriseAdminJPanel);
+        CardLayout layout=(CardLayout)rightSystemAdminPanel.getLayout();
+        layout.next(rightSystemAdminPanel);
     }//GEN-LAST:event_manageEnterpriseAdminBtnActionPerformed
 
     private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
@@ -241,20 +241,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageNetworkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageNetworkBtnActionPerformed
         // TODO add your handling code here:
-        ManageNetworkJPanel manageNetworkJPanel=new ManageNetworkJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("manageNetworkJPanel",manageNetworkJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        ManageNetworkJPanel manageNetworkJPanel=new ManageNetworkJPanel(rightSystemAdminPanel, ecosystem);
+        rightSystemAdminPanel.add("manageNetworkJPanel",manageNetworkJPanel);
+        CardLayout layout=(CardLayout)rightSystemAdminPanel.getLayout();
+        layout.next(rightSystemAdminPanel);
         
 
     }//GEN-LAST:event_manageNetworkBtnActionPerformed
 
     private void manageEnterpriseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEnterpriseBtnActionPerformed
         // TODO add your handling code here:
-        ManageEnterpriseJPanel manageEnterpriseJPanel=new ManageEnterpriseJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("manageEnterpriseJPanel",manageEnterpriseJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        ManageEnterpriseJPanel manageEnterpriseJPanel=new ManageEnterpriseJPanel(rightSystemAdminPanel, ecosystem);
+        rightSystemAdminPanel.add("manageEnterpriseJPanel",manageEnterpriseJPanel);
+        CardLayout layout=(CardLayout)rightSystemAdminPanel.getLayout();
+        layout.next(rightSystemAdminPanel);
     }//GEN-LAST:event_manageEnterpriseBtnActionPerformed
 
 
