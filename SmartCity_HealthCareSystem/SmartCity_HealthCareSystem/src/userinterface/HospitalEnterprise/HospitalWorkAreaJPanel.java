@@ -34,7 +34,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.network = network;
         this.system = system;
-        
+        this.directory = directory;
         }
     
     /**
@@ -142,7 +142,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
        // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
         
-        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization,  network, enterprise, account);
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization,  network, enterprise, account, directory);
         rightPanel.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
