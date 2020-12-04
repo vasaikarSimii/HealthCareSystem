@@ -37,7 +37,6 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         LeftPanel = new javax.swing.JPanel();
         EmergencyServicesBtn = new javax.swing.JButton();
-        CommunityServicesBtn = new javax.swing.JButton();
         HospitalServicesBtn = new javax.swing.JButton();
         MedicalServicesBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
@@ -55,15 +54,6 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         EmergencyServicesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EmergencyServicesBtnActionPerformed(evt);
-            }
-        });
-
-        CommunityServicesBtn.setBackground(new java.awt.Color(255, 255, 255));
-        CommunityServicesBtn.setText("Community Services");
-        CommunityServicesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
-        CommunityServicesBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CommunityServicesBtnActionPerformed(evt);
             }
         });
 
@@ -93,10 +83,12 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EmergencyServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CommunityServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HospitalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HospitalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         LeftPanelLayout.setVerticalGroup(
             LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,11 +97,9 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(HospitalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(EmergencyServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CommunityServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(452, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(LeftPanel);
@@ -150,14 +140,6 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_EmergencyServicesBtnActionPerformed
 
-    private void CommunityServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommunityServicesBtnActionPerformed
-        // TODO add your handling code here:
-//        EmergencyJPanel EmergencyJPanel=new EmergencyJPanel(userProcessContainer, ecosystem);
-//        userProcessContainer.add("EmergencyJPanel",EmergencyJPanel);
-//        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
-    }//GEN-LAST:event_CommunityServicesBtnActionPerformed
-
     private void HospitalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalServicesBtnActionPerformed
         // TODO add your handling code here:
         UserHospitalOptionsPanel UserHospitalOptionsPanel=new UserHospitalOptionsPanel(userProcessContainer, ecosystem);
@@ -168,15 +150,14 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void MedicalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicalServicesBtnActionPerformed
         // TODO add your handling code here:
-//        EmergencyJPanel EmergencyJPanel=new EmergencyJPanel(userProcessContainer, ecosystem);
-//        userProcessContainer.add("EmergencyJPanel",EmergencyJPanel);
-//        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
+        MedicalServicesJPanel medicalServicesJPanel=new MedicalServicesJPanel(userProcessContainer, ecosystem);
+        userProcessContainer.add("EmergencyJPanel",medicalServicesJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_MedicalServicesBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CommunityServicesBtn;
     private javax.swing.JButton EmergencyServicesBtn;
     private javax.swing.JButton HospitalServicesBtn;
     private javax.swing.JPanel LeftPanel;

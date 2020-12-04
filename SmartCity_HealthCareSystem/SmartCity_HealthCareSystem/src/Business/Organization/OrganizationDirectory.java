@@ -29,16 +29,6 @@ public class OrganizationDirectory {
             organization = new Doctor();
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.PatientProfile.getValue())){
-            organization = new PatientProfile();
-            organizationList.add(organization);
-        
-        
-        }
-        else if (type.getValue().equals(Type.AdditionServices.getValue())){
-            organization = new AdditionServices();
-            organizationList.add(organization);
-        }
         else if (type.getValue().equals(Type.CovidCare.getValue())){
             organization = new CovidCare();
             organizationList.add(organization);
@@ -47,11 +37,6 @@ public class OrganizationDirectory {
             organization = new Ambulance();
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.PoliceDepartment.getValue())){
-            organization = new PoliceDepartment();
-            organizationList.add(organization);
-        }
-       
         else if (type.getValue().equals(Type.Donors.getValue())){
             organization = new Donors();
             organizationList.add(organization);
@@ -64,16 +49,10 @@ public class OrganizationDirectory {
             organization = new Laboratory();
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.HealthCamps.getValue())){
-            organization = new HealthCamps();
+        else if (type.getValue().equals(Type.User.getValue())){
+            organization = new Laboratory();
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.SurveyDashboard.getValue())){
-            organization = new SurveyDashboard();
-            organizationList.add(organization);
-        }
-        
-        
         return organization;
     }
 }

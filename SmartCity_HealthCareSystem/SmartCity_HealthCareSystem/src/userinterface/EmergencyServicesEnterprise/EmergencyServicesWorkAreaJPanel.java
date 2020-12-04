@@ -12,7 +12,6 @@ import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.CommunityServicesEnterprise.*;
 
 /**
  *
@@ -60,8 +59,6 @@ EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, EcoSystem system, O
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         ManageOrganizationBtn = new javax.swing.JButton();
-        ManageDoctorsBtn = new javax.swing.JButton();
-        ManageDoctorsBtn1 = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -80,45 +77,20 @@ EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, EcoSystem system, O
             }
         });
 
-        ManageDoctorsBtn.setBackground(new java.awt.Color(255, 255, 255));
-        ManageDoctorsBtn.setText("Fire Dept");
-        ManageDoctorsBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
-        ManageDoctorsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManageDoctorsBtnActionPerformed(evt);
-            }
-        });
-
-        ManageDoctorsBtn1.setBackground(new java.awt.Color(255, 255, 255));
-        ManageDoctorsBtn1.setText("Police Dept");
-        ManageDoctorsBtn1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
-        ManageDoctorsBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManageDoctorsBtn1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ManageDoctorsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(210, 210, 210)
                 .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ManageDoctorsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(448, Short.MAX_VALUE))
         );
 
@@ -182,22 +154,8 @@ EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, EcoSystem system, O
 //        layout.next(userProcessContainer);
     }//GEN-LAST:event_ManageOrganizationBtnActionPerformed
 
-    private void ManageDoctorsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDoctorsBtnActionPerformed
-        // TODO add your handling code here:
-//        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-//        userProcessContainer.add("CreateDoctorJPanel",CreateDoctorJPanel);
-//        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
-    }//GEN-LAST:event_ManageDoctorsBtnActionPerformed
-
-    private void ManageDoctorsBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDoctorsBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ManageDoctorsBtn1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ManageDoctorsBtn;
-    private javax.swing.JButton ManageDoctorsBtn1;
     private javax.swing.JButton ManageOrganizationBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
