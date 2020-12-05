@@ -29,13 +29,12 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
     OrganizationDirectory directory;
     public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
         this.network = network;
         this.system = system;
-        
+        this.directory = directory;
         }
     
     /**
@@ -51,7 +50,6 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         ManageOrganizationBtn = new javax.swing.JButton();
         ManageDoctorsBtn = new javax.swing.JButton();
-        ManageAdditionalServicesBtn = new javax.swing.JButton();
         ManageCovidCareBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
@@ -78,15 +76,6 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        ManageAdditionalServicesBtn.setBackground(new java.awt.Color(255, 255, 255));
-        ManageAdditionalServicesBtn.setText("Manage Additional Services");
-        ManageAdditionalServicesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
-        ManageAdditionalServicesBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManageAdditionalServicesBtnActionPerformed(evt);
-            }
-        });
-
         ManageCovidCareBtn.setBackground(new java.awt.Color(255, 255, 255));
         ManageCovidCareBtn.setText("Manage Covid Care");
         ManageCovidCareBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
@@ -105,7 +94,6 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ManageCovidCareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManageAdditionalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
@@ -117,10 +105,8 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ManageAdditionalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(ManageCovidCareBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addContainerGap(448, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -156,39 +142,30 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
        // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
         
-        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization,  network, enterprise, account, directory);
+        rightPanel.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageOrganizationBtnActionPerformed
 
     private void ManageDoctorsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDoctorsBtnActionPerformed
         // TODO add your handling code here:
-        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("CreateDoctorJPanel",CreateDoctorJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        CreateDoctorJPanel CreateDoctorJPanel=new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
+        rightPanel.add("CreateDoctorJPanel",CreateDoctorJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageDoctorsBtnActionPerformed
-
-    private void ManageAdditionalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageAdditionalServicesBtnActionPerformed
-        // TODO add your handling code here:
-        CreateAdditionalServicesJPanel CreateAdditionalServicesJPanel=new CreateAdditionalServicesJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("CreateAdditionalServicesJPanel",CreateAdditionalServicesJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_ManageAdditionalServicesBtnActionPerformed
 
     private void ManageCovidCareBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCovidCareBtnActionPerformed
         // TODO add your handling code here:
-        CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(userProcessContainer,system, organization,  network, enterprise, account);
-        userProcessContainer.add("CreateCovidJPanel",CreateCovidJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(rightPanel,system, organization,  network, enterprise, account);
+        rightPanel.add("CreateCovidJPanel",CreateCovidJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageCovidCareBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ManageAdditionalServicesBtn;
     private javax.swing.JButton ManageCovidCareBtn;
     private javax.swing.JButton ManageDoctorsBtn;
     private javax.swing.JButton ManageOrganizationBtn;

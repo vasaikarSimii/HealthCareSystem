@@ -34,21 +34,19 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
 
-        populateNetworkTable();
-        
-       
-        
+        populateTable();  
     }
 
-    private void populateNetworkTable() {
-        DefaultTableModel model = (DefaultTableModel) networkJTable.getModel();
-        networkJTable.setFont(new Font("Serif", Font.BOLD, 20));
-        networkJTable.getTableHeader().setBackground(Color.CYAN);
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblNetwork.getModel();
+        tblNetwork.setFont(new Font("Serif", Font.BOLD, 20));
+        tblNetwork.getTableHeader().setBackground(Color.CYAN);
         
         model.setRowCount(0);
         for (Network network : ecosystem.getNetworkList()) {
-            Object[] row = new Object[1];
+            Object[] row = new Object[2];
             row[0] = network.getName();
+            row[1] = network.getState();
             model.addRow(row);
         }
     }
@@ -63,30 +61,32 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        networkJTable = new javax.swing.JTable();
+        tblNetwork = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        nameJTextField = new javax.swing.JTextField();
+        txtStateName = new javax.swing.JTextField();
         submitJButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        txtNetworkName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        networkJTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblNetwork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "State Name"
+                "Network Name", "State"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -97,9 +97,9 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(networkJTable);
+        jScrollPane1.setViewportView(tblNetwork);
 
-        jLabel1.setText("State Name");
+        jLabel1.setText("State Name:");
 
         submitJButton.setText("Submit");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -114,26 +114,38 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("MANAGE NETWORK");
 
+        txtNetworkName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNetworkNameActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Network Name:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(138, 138, 138)
-                            .addComponent(jLabel1)
-                            .addGap(46, 46, 46)
-                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(submitJButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(81, 81, 81)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(submitJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtStateName, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                    .addComponent(txtNetworkName))))
+                        .addGap(117, 117, 117)))
                 .addContainerGap(723, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,42 +155,59 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNetworkName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(submitJButton)
-                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(426, Short.MAX_VALUE))
+                    .addComponent(txtStateName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(submitJButton)
+                .addContainerGap(348, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
-        String name = nameJTextField.getText().trim();
-        if(!name.isEmpty()){
-            if(ecosystem.isUnique(name)){
-                Network network = ecosystem.createAndAddNetwork();
-                network.setName(name);
-                JOptionPane.showMessageDialog(null, "Network Successfully Created");
-                nameJTextField.setText("");
-            } else{
-                JOptionPane.showMessageDialog(null, "Network Already Exits");
-            }
-        } else{
-            JOptionPane.showMessageDialog(null, "Enter city name");
+        String name = txtNetworkName.getText();
+        String state = txtStateName.getText();
+        
+        if(name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter Network name");
+            return;
         }
-        
-        
-        populateNetworkTable();
+        else if(state.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter State name");
+            return;
+        }
+        else if(ecosystem.isNotUniqueNetwork(state)){
+            JOptionPane.showMessageDialog(null, "Alert..!! Network on this State already exits");
+            return; 
+        } 
+        Network network = ecosystem.createAndAddNetwork();
+        network.setName(name);
+        network.setState(state);
+        JOptionPane.showMessageDialog(null, "Network Successfully Created");
+        txtStateName.setText("");
+        txtNetworkName.setText("");
+        populateTable();
     }//GEN-LAST:event_submitJButtonActionPerformed
+
+    private void txtNetworkNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNetworkNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNetworkNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nameJTextField;
-    private javax.swing.JTable networkJTable;
     private javax.swing.JButton submitJButton;
+    private javax.swing.JTable tblNetwork;
+    private javax.swing.JTextField txtNetworkName;
+    private javax.swing.JTextField txtStateName;
     // End of variables declaration//GEN-END:variables
 }

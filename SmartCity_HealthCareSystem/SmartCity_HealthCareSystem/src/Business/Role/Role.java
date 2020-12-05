@@ -8,7 +8,9 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -17,24 +19,25 @@ import javax.swing.JPanel;
  */
 
 public abstract class Role {
+
+//    public Component createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem system) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
     public enum RoleType{
         
         SystemAdmin("SystemAdmin"),
         UserRole("UserRole"),
         DoctorRole("DoctorRole"),
-        PatientProfileManager("PatientProfileManager"),
-        AdditionalServicesManager("AdditionalServicesManager"),
         CovidCareManager("CovidCareManager"),
         AmbulanceManager("AmbulanceManager"),
-        PoliceManager("PoliceManager"),
-        FireDeptManager("FireDeptManager"),
         DonorManager("DonorManager"),
         VaccineManager("VaccineManager"),
         PharmacyManager("PharmacyManager"),
         LaboratoryManager("LaboratoryManager"),
-        HealthCampManager("HealthCampManager"),
-        SurveyManager("SurveyManager");
+        HospitalAdminRole("Hospital"),
+        EmergencyAdminRole("Emergency"),
+        MedicalServicesAdmin("MedicalServices");
        
         
         
@@ -53,7 +56,10 @@ public abstract class Role {
         }
     }
     
-        
+       //  public Component createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem system) {
+   
+   
+    
     public abstract JPanel createWorkArea(JPanel userProcessContainer, 
             UserAccount account, 
             Organization organization, 
@@ -66,6 +72,4 @@ public abstract class Role {
     public String toString() {
         return this.getClass().getName();
     }
-    
-    
 }

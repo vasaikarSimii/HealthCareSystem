@@ -28,11 +28,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     Organization organization;
     EcoSystem system;
     UserAccount account;
-    OrganizationDirectory directory;
+    OrganizationDirectory organizationDirectory;
     
    
 
-    ManageOrganizationJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account) {
+    ManageOrganizationJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account, OrganizationDirectory organizationDirectory) {
        initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
@@ -40,6 +40,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.network = network;
         this.system = system;
+        this.organizationDirectory = organizationDirectory;
         populateTable();
         populateCombo();
     }
@@ -59,9 +60,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             if (!type.getValue().equals(Organization.Type.Doctor.getValue())){
                 organizationJComboBox.addItem(type);
             }
-            else if (!type.getValue().equals(Organization.Type.AdditionServices.getValue())){
-                organizationJComboBox.addItem(type);
-            }
             else if (!type.getValue().equals(Organization.Type.CovidCare.getValue())){
                 organizationJComboBox.addItem(type);
             }
@@ -76,10 +74,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         
-        for (Organization organization : directory.getOrganizationList()){
+        for (Organization organization : organizationDirectory.getOrganizationList()){
             Object[] row = new Object[2];
             row[0] = organization.getOrganizationID();
             row[1] = organization.getName();
+           
             
             model.addRow(row);
         }
@@ -195,7 +194,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 
         Type type = (Type) organizationJComboBox.getSelectedItem();
-        directory.createOrganization(type);
+        organizationDirectory.createOrganization(type);
         populateTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 
