@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.Population.PeopleDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -22,13 +23,15 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     private EcoSystem system;
     private PeopleDirectory peopleDirectory;
+    private OrganizationDirectory organizationDirectory;
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel(EcoSystem system, PeopleDirectory peopleDirectory) {
+    public LoginJPanel(EcoSystem system, PeopleDirectory peopleDirectory,OrganizationDirectory organizationDirectory) {
         initComponents();
         this.system = system;
         this.peopleDirectory = peopleDirectory;
+        this.organizationDirectory = organizationDirectory;
         
     }
 
@@ -54,6 +57,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1400, 700));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
 
@@ -61,6 +65,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         container.setLayout(new java.awt.CardLayout());
 
         LoginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        LoginPanel.setPreferredSize(new java.awt.Dimension(1400, 700));
 
         btnSignUp.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnSignUp.setText("Sign Up");
@@ -134,7 +139,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                     .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGap(431, 431, 431)
                         .addComponent(jLabel3)))
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LoginPanelLayout.setVerticalGroup(
             LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +150,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,7 +170,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(548, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(263, 263, 263))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +184,7 @@ public class LoginJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addComponent(jLabel1)
-                .addContainerGap(471, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -265,7 +270,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         }
         else{
             CardLayout layout = (CardLayout) container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system));
+            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system, organizationDirectory));
             layout.next(container);
         }
     }//GEN-LAST:event_btnLogin1ActionPerformed

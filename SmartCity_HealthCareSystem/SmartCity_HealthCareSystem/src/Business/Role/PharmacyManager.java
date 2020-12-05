@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
@@ -19,7 +20,7 @@ import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
  */
 public class PharmacyManager extends Role {
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
         System.out.println(userProcessContainer.getComponents());
         return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
     }
