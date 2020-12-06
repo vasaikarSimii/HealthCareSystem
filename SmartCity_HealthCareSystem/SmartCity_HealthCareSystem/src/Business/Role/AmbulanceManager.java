@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class AmbulanceManager extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
         System.out.println(userProcessContainer.getComponents());
         //return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
         return null;

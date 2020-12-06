@@ -6,6 +6,11 @@
 package userinterface.DoctorRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +31,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
      * Creates new form ManageNetworkJPanel
      */
     
-    public DoctorJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
+    public DoctorJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
@@ -51,7 +56,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkArea = new javax.swing.JTable();
         btnNextSteps = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnGenerate = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         boxPharmacy = new javax.swing.JCheckBox();
         boxPharmacy2 = new javax.swing.JCheckBox();
@@ -104,10 +109,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
 
         btnNextSteps.setText("jButton1");
 
-        jButton1.setText("Generate Prescriptions");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerate.setText("Generate Prescriptions");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGenerateActionPerformed(evt);
             }
         });
 
@@ -133,13 +138,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
                         .addComponent(btnNextSteps, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnGenerate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDeny)
                                 .addGap(55, 55, 55)
                                 .addComponent(btnAccept))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -155,15 +160,15 @@ public class DoctorJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(64, 64, 64)
                 .addComponent(btnViewPatient)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept)
                     .addComponent(btnDeny)
-                    .addComponent(jButton1))
+                    .addComponent(btnGenerate))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -188,9 +193,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnAcceptActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        PresciptionJpanel pres = new PresciptionJpanel();
+//        .add("FireDept",fireDept);
+//        CardLayout layout=(CardLayout)rightPanel.getLayout();
+//        layout.next(rightPanel);
+    }//GEN-LAST:event_btnGenerateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,10 +208,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> boxVaccine;
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnDeny;
+    private javax.swing.JButton btnGenerate;
     private javax.swing.JButton btnNextSteps;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnViewPatient;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

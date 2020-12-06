@@ -30,7 +30,7 @@ public abstract class Organization {
     public void setEmployeeDirectory(EmployeeDirectory employeeDirectory) {
         this.employeeDirectory = employeeDirectory;
     }
-    private static int counter=0;
+    private static int counter=1;
     
     public enum Type{
         
@@ -41,7 +41,8 @@ public abstract class Organization {
         Donors("Donors"),
         Vaccines("Vaccines"),
         Pharmacy("Pharmacy"),
-        Laboratory("Laboratory");
+        Laboratory("Laboratory"),
+        Fire("Fire");
              
         
                
@@ -78,6 +79,7 @@ public abstract class Organization {
     public String getName() {
         return name;
     }
+
 
     public WorkQueue getWorkQueue() {
         return workQueue;
