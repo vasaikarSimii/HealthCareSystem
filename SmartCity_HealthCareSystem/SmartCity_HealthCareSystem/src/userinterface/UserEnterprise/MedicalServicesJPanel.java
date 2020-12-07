@@ -17,14 +17,36 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     EcoSystem ecosystem; 
+        String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
     /**
      * Creates new form MedicalServicesJPanel
      */
-    public MedicalServicesJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
+    public MedicalServicesJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
-        
+        this.ecosystem = ecosystem;
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
     }
 
     /**
@@ -79,13 +101,16 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(695, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(705, 705, 705))
             .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(313, 313, 313)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(349, 349, 349)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -95,16 +120,12 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDonateBlood, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(191, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addGap(705, 705, 705))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(49, 49, 49)
                 .addComponent(jLabel6)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -114,9 +135,9 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsurance)
                     .addComponent(jLabel3))
-                .addGap(67, 67, 67)
+                .addGap(73, 73, 73)
                 .addComponent(jLabel4)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(424, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

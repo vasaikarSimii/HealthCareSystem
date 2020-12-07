@@ -10,9 +10,15 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -23,6 +29,10 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private EcoSystem ecosystem;
+    
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
 
     /**
      * Creates new form ManageEnterpriseJPanel
@@ -36,31 +46,54 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     }
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
-
-        model.setRowCount(0);
-        for (Network network : ecosystem.getNetworkList()) {
-            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-                Object[] row = new Object[3];
-                row[0] = enterprise.getName();
-                row[1] = network.getName();
-                row[2] = enterprise.getEnterpriseType().getValue();
-
-                model.addRow(row);
+       try{
+        String sql ="select * from manage_enter";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        enterpriseJTable.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
             }
         }
     }
 
     private void populateComboBox() {
         networkJComboBox.removeAllItems();
-        enterpriseTypeJComboBox.removeAllItems();
+        networkJComboBox.removeAllItems();
+      try{
+        String sql ="select * from network";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+         while (rs.next()) {  
 
-        for (Network network : ecosystem.getNetworkList()) {
-            networkJComboBox.addItem(network);
-        }
-
-        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
-            enterpriseTypeJComboBox.addItem(type);
+        networkJComboBox.addItem(rs.getString("net_name"));  
+ }
+       
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
         }
 
     }
@@ -151,16 +184,33 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
-        Network network = (Network) networkJComboBox.getSelectedItem();
-        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) enterpriseTypeJComboBox.getSelectedItem();
+         String network =  networkJComboBox.getSelectedItem().toString();
+        String type =  enterpriseTypeJComboBox.getSelectedItem().toString();
 
-        if (network == null || type == null) {
-           JOptionPane.showMessageDialog(null, "Invalid Input!");
-           return;
+        try {
+        String sql = " insert into manage_enter values(?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, network);
+                pst.setString(2, type);
+                pst.setString(3, nameJTextField.getText());
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Added successfuly");
+                populateTable();
+                nameJTextField.setText("");
         }
-       String name = nameJTextField.getText();
-
-       Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
 
        populateTable();
     }//GEN-LAST:event_submitJButtonActionPerformed

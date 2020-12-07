@@ -16,13 +16,35 @@ import Business.EcoSystem;
 public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
     /**
      * Creates new form UserMainPanel
      */
-    public UserRoleWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
+    public UserRoleWorkAreaJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
+
         this.ecosystem = ecosystem;
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
     }
 
     /**
@@ -40,6 +62,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         HospitalServicesBtn = new javax.swing.JButton();
         MedicalServicesBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -99,23 +122,17 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(EmergencyServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(452, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(LeftPanel);
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
+        rightPanel.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
-        rightPanel.setLayout(rightPanelLayout);
-        rightPanelLayout.setHorizontalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1143, Short.MAX_VALUE)
-        );
-        rightPanelLayout.setVerticalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
-        );
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/User login.gif"))); // NOI18N
+        rightPanel.add(jLabel1, "card2");
 
         jSplitPane1.setRightComponent(rightPanel);
 
@@ -133,27 +150,27 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void EmergencyServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyServicesBtnActionPerformed
         // TODO add your handling code here:
-        EmergencyJPanel EmergencyJPanel=new EmergencyJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("EmergencyJPanel",EmergencyJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        EmergencyJPanel EmergencyJPanel=new EmergencyJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        rightPanel.add("EmergencyJPanel",EmergencyJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
 
     }//GEN-LAST:event_EmergencyServicesBtnActionPerformed
 
     private void HospitalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalServicesBtnActionPerformed
         // TODO add your handling code here:
-        UserHospitalOptionsPanel UserHospitalOptionsPanel=new UserHospitalOptionsPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("UserHospitalOptionsPanel",UserHospitalOptionsPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        UserHospitalOptionsPanel UserHospitalOptionsPanel=new UserHospitalOptionsPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        rightPanel.add("UserHospitalOptionsPanel",UserHospitalOptionsPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_HospitalServicesBtnActionPerformed
 
     private void MedicalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicalServicesBtnActionPerformed
         // TODO add your handling code here:
-        MedicalServicesJPanel medicalServicesJPanel=new MedicalServicesJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("EmergencyJPanel",medicalServicesJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        MedicalServicesJPanel medicalServicesJPanel=new MedicalServicesJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        rightPanel.add("EmergencyJPanel",medicalServicesJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_MedicalServicesBtnActionPerformed
 
 
@@ -162,6 +179,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton HospitalServicesBtn;
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JButton MedicalServicesBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,14 @@
  */
 package userinterface.UserEnterprise;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
+
 /**
  *
  * @author jshar
@@ -14,10 +22,63 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorAppointmentJPanel
      */
-    public DoctorAppointmentJPanel() {
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+     String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
+            String id=null; 
+               String d_enter=null;
+            String a=null;
+            String b=null;
+               
+    public DoctorAppointmentJPanel(String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
+        populateTable();
     }
-
+ public void populateTable(){
+      try{
+        String sql ="select doc_name,special,location,doc_enter from manage_doc ";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        tblDoctorList.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +93,8 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
         btnConfirmAppointment = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -54,6 +117,11 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblDoctorList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDoctorListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDoctorList);
 
         btnConfirmAppointment.setBackground(new java.awt.Color(204, 204, 255));
@@ -72,34 +140,53 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Please describe your problem?");
 
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("DOCTOR SERVICES");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/doctorall.gif"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConfirmAppointment)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField1))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(603, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(108, 108, 108)
+                .addComponent(jLabel3)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmAppointment)
-                .addContainerGap(358, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnConfirmAppointment))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -109,14 +196,86 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
 
     private void btnConfirmAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmAppointmentActionPerformed
         // TODO add your handling code here:
-        
-        
+        try{
+            String symp=jTextField1.getText();
+        String sql1 = " insert into appointment values(?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql1);
+
+            String patient_name=f_name+" "+l_name;
+            pst.setString(5,a );
+            pst.setString(6,id );
+            pst.setString(7, d_enter);
+            pst.setString(1, patient_name);
+            pst.setString(2, username);
+            pst.setString(3,age );
+            pst.setString(4, symp);
+            
+            
+
+         
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Appointment taken successfuly");
+            jTextField1.setText("");
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }//GEN-LAST:event_btnConfirmAppointmentActionPerformed
+
+    private void tblDoctorListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDoctorListMouseClicked
+        // TODO add your handling code here:
+        try { 
+        int selectedRow = tblDoctorList.getSelectedRow();
+        if (selectedRow>=0){
+         a= (String) tblDoctorList.getValueAt(selectedRow,0);
+         b= (String) tblDoctorList.getValueAt(selectedRow,1);
+            System.out.println(selectedRow+"  "+a);
+             System.out.println(selectedRow+"  "+b);
+              
+            String sql = "select * from manage_doc where doc_name ='" + a + "' AND special='" + b + "'";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            System.out.println("55555555555");
+            if (rs.next()) {
+                
+                id=rs.getString("usern");
+               d_enter=rs.getString("doc_enter");
+                }
+            
+           
+            
+            
+        }  
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_tblDoctorListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmAppointment;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblDoctorList;

@@ -42,7 +42,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         txtFirstName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -51,36 +50,39 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         rBtnMale = new javax.swing.JRadioButton();
         rBtnFemale = new javax.swing.JRadioButton();
         rBtnOthers = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtAddress1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Address:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 222, -1, -1));
-        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 219, 165, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, -1));
+        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 170, -1));
 
         jLabel5.setText("Email Address:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 259, 165, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, -1));
+        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 170, -1));
 
         jLabel7.setText("Phone Number:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, -1, -1));
-        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 294, 165, -1));
-        add(txtWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 334, 60, -1));
-        add(txtHeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 374, 60, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, -1, -1));
+        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 170, -1));
+        add(txtWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 60, -1));
+        add(txtHeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, 60, -1));
 
         jLabel12.setText("cms");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 377, -1, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(204, 204, 255));
         jLabel11.setText("lbs");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 337, -1, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, -1, -1));
 
         jLabel8.setText("Weight:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 340, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, -1, -1));
 
         jLabel10.setText("Height:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 377, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -88,28 +90,24 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Update Profile");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 36, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 570, -1, -1));
 
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
             }
         });
-        add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 171, -1));
+        add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 171, -1));
 
         jLabel3.setText("First Name:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
 
         jLabel2.setText("Last Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 82, -1));
-        add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 171, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 82, -1));
+        add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 171, -1));
 
         jLabel4.setText("Gender:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
         rBtnMale.setText("Male");
         rBtnMale.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +115,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 rBtnMaleActionPerformed(evt);
             }
         });
-        add(rBtnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+        add(rBtnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
 
         rBtnFemale.setText("Female");
         rBtnFemale.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +123,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 rBtnFemaleActionPerformed(evt);
             }
         });
-        add(rBtnFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        add(rBtnFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
 
         rBtnOthers.setText("Others");
         rBtnOthers.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +131,18 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 rBtnOthersActionPerformed(evt);
             }
         });
-        add(rBtnOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
+        add(rBtnOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("UPDATE PROFILE");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 350, -1));
+
+        jLabel13.setText("Age:");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
+        add(txtAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 170, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
@@ -218,10 +227,10 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -229,10 +238,12 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton rBtnFemale;
     private javax.swing.JRadioButton rBtnMale;
     private javax.swing.JRadioButton rBtnOthers;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtAddress1;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtHeight;

@@ -13,6 +13,7 @@ import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 //import userinterface.DoctorRole.DoctorWorkAreaJPanel;
 import javax.swing.JPanel;
+import userinterface.CovidRole.CovidWorkAreaJPanel;
 
 /**
  *
@@ -22,9 +23,8 @@ public class CovidCareManager extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
-        System.out.println(userProcessContainer.getComponents());
-        //return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
-        return null;
+        
+        return new CovidWorkAreaJPanel(userProcessContainer, account, organization, enterprise, network, system, organizationDirectory);
     }
     
     

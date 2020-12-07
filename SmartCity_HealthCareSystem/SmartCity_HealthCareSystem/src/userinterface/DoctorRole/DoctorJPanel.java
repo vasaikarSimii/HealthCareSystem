@@ -11,7 +11,13 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -25,19 +31,56 @@ public class DoctorJPanel extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private EcoSystem ecosystem;
+     Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
 
     /**
      *
      * Creates new form ManageNetworkJPanel
      */
+    String doc_name=null;
+    String special=null;
+    String location=null;
+    String doc_net=null;
+    String doc_enter=null;
+    String name=null;
     
-    public DoctorJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
+    public DoctorJPanel(JPanel userProcessContainer,String doc_name,String special,String location,String doc_net,String doc_enter,String name) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
+       this.doc_name=doc_name;
+       this.special=special;
+       this.location=location;
+       this.doc_net=doc_net;
+       this.doc_enter=doc_enter;
+       this.name=name;
+       populateTable();
     }
-   
+    public void populateTable(){
+       //connect from database -- query
+       try{
+        String sql ="select p_name,p_id,p_age,p_sym from appointment where usern='"+name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        tblPatientProfile.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,7 +104,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
         boxPharmacy = new javax.swing.JCheckBox();
         boxPharmacy2 = new javax.swing.JCheckBox();
         btnSubmit = new javax.swing.JButton();
-        boxVaccine = new javax.swing.JComboBox<>();
+        boxVaccine = new javax.swing.JComboBox<String>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -123,8 +166,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
         boxPharmacy2.setText("Vaccine");
 
         btnSubmit.setText("Send Request");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
-        boxVaccine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flu Shot", "Meningococcal", "Covid-19", "MMR", " " }));
+        boxVaccine.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Flu Shot", "Meningococcal", "Covid-19", "MMR", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -195,11 +243,11 @@ public class DoctorJPanel extends javax.swing.JPanel {
 
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
         // TODO add your handling code here:
-        PresciptionJpanel pres = new PresciptionJpanel();
-//        .add("FireDept",fireDept);
-//        CardLayout layout=(CardLayout)rightPanel.getLayout();
-//        layout.next(rightPanel);
     }//GEN-LAST:event_btnGenerateActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

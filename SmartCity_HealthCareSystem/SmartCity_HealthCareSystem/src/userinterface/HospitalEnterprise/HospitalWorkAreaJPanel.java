@@ -28,8 +28,10 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem system;
     UserAccount account;
     Organization organization;
+    String net_name=null;
+    String emer_name=null;
     
-    public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system, OrganizationDirectory organizationDirectory) {
+    public HospitalWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system, OrganizationDirectory organizationDirectory, String net_name,String emer_name) {
         initComponents();
         this.account = account;
         this.organization = organization;
@@ -37,7 +39,9 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         this.network = network;
         this.system = system;
         this.directory = organizationDirectory;
-        
+        this.net_name=net_name;
+        this.emer_name=emer_name;
+               
 //        for(Organization org : directory.getOrganizationList()) {
 //            Type type = (Type) org.Type.;
 //        }
@@ -66,6 +70,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         ManageDoctorsBtn = new javax.swing.JButton();
         ManageCovidCareBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1400, 700));
 
@@ -130,6 +135,11 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
         rightPanel.setPreferredSize(new java.awt.Dimension(1200, 700));
         rightPanel.setLayout(new java.awt.CardLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/HealthCaremainframe.gif"))); // NOI18N
+        rightPanel.add(jLabel1, "card2");
+
         jSplitPane1.setRightComponent(rightPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -163,7 +173,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
   
        // CreateDoctorJPanel = new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
        
-        CreateDoctorJPanel createDoctorJPanel = new CreateDoctorJPanel(rightPanel,system, organization, network, enterprise, account,directory);
+        CreateDoctorJPanel createDoctorJPanel = new CreateDoctorJPanel(rightPanel,system, organization, network, enterprise, account,directory, net_name,emer_name);
         rightPanel.add("CreateDoctorJPanel",createDoctorJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -173,7 +183,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
        // CreateCovidJPanel CreateCovidJPanel=new CreateCovidJPanel(rightPanel,system, organization,  network, enterprise, account);
        
-        CreateCovidJPanel createCovidJPanel = new CreateCovidJPanel(rightPanel,system, organization, network, enterprise, account);
+        CreateCovidJPanel createCovidJPanel = new CreateCovidJPanel(rightPanel,system, organization, network, enterprise, account,directory, net_name,emer_name);
         rightPanel.add("CreateCovidJPanel", createCovidJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -184,6 +194,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton ManageCovidCareBtn;
     private javax.swing.JButton ManageDoctorsBtn;
     private javax.swing.JButton ManageOrganizationBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;

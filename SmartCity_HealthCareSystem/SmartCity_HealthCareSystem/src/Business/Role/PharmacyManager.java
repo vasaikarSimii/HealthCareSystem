@@ -19,9 +19,14 @@ import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
  * @author Seemin
  */
 public class PharmacyManager extends Role {
+
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
-        System.out.println(userProcessContainer.getComponents());
-        return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business, OrganizationDirectory organizationDirectory) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
+//        System.out.println(userProcessContainer.getComponents());
+//        return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
+//    }
 }

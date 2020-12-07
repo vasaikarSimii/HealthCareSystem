@@ -158,7 +158,7 @@ public class Ambulance extends javax.swing.JPanel {
                                     .addComponent(btnSubmit))))
                         .addGap(33, 33, 33)
                         .addComponent(jButton1)))
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(639, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +192,7 @@ public class Ambulance extends javax.swing.JPanel {
                             .addComponent(jLabel4))))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

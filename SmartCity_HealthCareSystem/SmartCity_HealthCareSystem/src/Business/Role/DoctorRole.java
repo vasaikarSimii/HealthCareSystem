@@ -22,11 +22,16 @@ import userinterface.DoctorRole.DoctorJPanel;
 public class DoctorRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
-        
-        return new DoctorJPanel(userProcessContainer, account, organization, enterprise, network, system, organizationDirectory);
-        
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business, OrganizationDirectory organizationDirectory) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
+//        
+//        return new DoctorJPanel(userProcessContainer, account, organization, enterprise, network, system, organizationDirectory);
+//        
+//    }
     
     
 }
