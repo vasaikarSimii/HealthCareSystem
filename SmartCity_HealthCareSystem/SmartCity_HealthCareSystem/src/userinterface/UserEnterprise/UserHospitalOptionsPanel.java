@@ -59,17 +59,17 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
 
         btnDotorAppointment = new javax.swing.JButton();
         btnCovidTest = new javax.swing.JButton();
-        btnUpdatePatientProfile = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnCheckAppointment = new javax.swing.JButton();
+        btnCheckResult = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         btnDotorAppointment.setBackground(new java.awt.Color(204, 204, 255));
-        btnDotorAppointment.setText("Click Me");
+        btnDotorAppointment.setText("Click For Appointment");
         btnDotorAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDotorAppointmentActionPerformed(evt);
@@ -77,18 +77,10 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
         });
 
         btnCovidTest.setBackground(new java.awt.Color(204, 204, 255));
-        btnCovidTest.setText("Click Me");
+        btnCovidTest.setText("Click For Test");
         btnCovidTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCovidTestActionPerformed(evt);
-            }
-        });
-
-        btnUpdatePatientProfile.setBackground(new java.awt.Color(204, 204, 255));
-        btnUpdatePatientProfile.setText("Click Me");
-        btnUpdatePatientProfile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdatePatientProfileActionPerformed(evt);
             }
         });
 
@@ -97,9 +89,6 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Do you want to have a Covid Test?");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setText("Do you want to update your profile?");
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -110,6 +99,20 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/UserHospitalOption.gif"))); // NOI18N
 
+        btnCheckAppointment.setText("Check Appointment");
+        btnCheckAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckAppointmentActionPerformed(evt);
+            }
+        });
+
+        btnCheckResult.setText("Check Result");
+        btnCheckResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckResultActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,14 +122,16 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDotorAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCovidTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpdatePatientProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCovidTest, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(btnDotorAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCheckAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCheckResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,17 +147,17 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDotorAppointment)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDotorAppointment)
+                        .addComponent(btnCheckAppointment))
                     .addComponent(jLabel1))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(btnCovidTest))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdatePatientProfile)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCovidTest)
+                        .addComponent(btnCheckResult)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -174,23 +179,33 @@ public class UserHospitalOptionsPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnDotorAppointmentActionPerformed
 
-    private void btnUpdatePatientProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePatientProfileActionPerformed
+    private void btnCheckAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAppointmentActionPerformed
         // TODO add your handling code here:
-        UpdateProfileJPanel updateProfileJPanel = new UpdateProfileJPanel();
-        userProcessContainer.add("UpdateProfileJPanel",updateProfileJPanel);
+        CheckDoctorAppointmentJPanel cdajp = new CheckDoctorAppointmentJPanel();
+        userProcessContainer.add("cdajp",cdajp);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnUpdatePatientProfileActionPerformed
+        
+        
+    }//GEN-LAST:event_btnCheckAppointmentActionPerformed
+
+    private void btnCheckResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckResultActionPerformed
+        // TODO add your handling code here:
+        CheckCovidResultJPanel ccrjp = new CheckCovidResultJPanel();
+        userProcessContainer.add("ccrjp",ccrjp);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnCheckResultActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCheckAppointment;
+    private javax.swing.JButton btnCheckResult;
     private javax.swing.JButton btnCovidTest;
     private javax.swing.JButton btnDotorAppointment;
-    private javax.swing.JButton btnUpdatePatientProfile;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

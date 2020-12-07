@@ -56,11 +56,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="639" max="32767" attributes="0"/>
+              <EmptySpace pref="775" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,10 +82,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="txtLocation" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="txtLocation" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -104,7 +99,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="227" max="32767" attributes="0"/>
+              <EmptySpace pref="230" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -201,11 +196,6 @@
     <Component class="javax.swing.JTextField" name="txtLocation">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Set Location"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

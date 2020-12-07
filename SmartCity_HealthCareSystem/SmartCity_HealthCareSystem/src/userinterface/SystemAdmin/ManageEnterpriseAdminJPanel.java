@@ -49,7 +49,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
 
         populateTable();
-        populateNetworkComboBox();
+//        populateNetworkComboBox();
     }
  private void populateTable() {
         try{
@@ -86,6 +86,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         networkJComboBox.addItem(rs.getString("net_name"));  
              System.out.println(rs.getString("net_name"));
              System.out.println("555555555555555");
+             
  }
        
     }
@@ -107,6 +108,35 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     
     public void populateEnterprise(){
        enterpriseJComboBox.removeAllItems();
+//        String n_name=networkJComboBox.getSelectedItem().toString();
+//        
+//           try{
+//        String sql ="select * from manage_enter where network_name='"+n_name+"'";
+//        pst=conn.prepareStatement(sql);
+//        rs=pst.executeQuery();
+//         while (rs.next()) {  
+//
+//        enterpriseJComboBox.addItem(rs.getString("enter_type"));  
+//                }
+//       
+//    }
+//    catch(Exception e){
+//    JOptionPane.showMessageDialog(null, e);
+//    }
+//    finally {
+//            
+//            try{
+//                rs.close();
+//                pst.close();
+//                
+//            }
+//            catch(Exception e){
+//                
+//            }
+//        }
+
+
+        System.out.println("00000000000000");
         String n_name=networkJComboBox.getSelectedItem().toString();
         
            try{
@@ -115,7 +145,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         rs=pst.executeQuery();
          while (rs.next()) {  
 
-        enterpriseJComboBox.addItem(rs.getString("enter_type"));  
+        enterpriseJComboBox.addItem(rs.getString("name"));  
                 }
        
     }
@@ -214,6 +244,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         networkJComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 networkJComboBoxItemStateChanged(evt);
+            }
+        });
+        networkJComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                networkJComboBoxMouseReleased(evt);
             }
         });
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -324,6 +359,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
+
+    private void networkJComboBoxMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkJComboBoxMouseReleased
+        // TODO add your handling code here:
+        populateEnterprise();
+    }//GEN-LAST:event_networkJComboBoxMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
