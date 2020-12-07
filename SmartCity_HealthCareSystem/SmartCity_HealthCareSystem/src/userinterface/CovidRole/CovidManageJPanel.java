@@ -73,7 +73,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
 
-        jButton1.setText("Add Patient");
+        jButton1.setText("Accept Patient");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -86,7 +86,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("COVID CARE ORGANIZATION");
 
-        jButton2.setText("Remove Patient");
+        jButton2.setText("Decline Patient");
 
         jTable2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(

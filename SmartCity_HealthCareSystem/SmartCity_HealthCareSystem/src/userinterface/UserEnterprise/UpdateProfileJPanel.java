@@ -5,7 +5,9 @@
  */
 package userinterface.UserEnterprise;
 
+import Business.EcoSystem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,11 +15,37 @@ import javax.swing.JOptionPane;
  */
 public class UpdateProfileJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    EcoSystem ecosystem;
+    String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
     /**
      * Creates new form UpdateProfileJPanel
      */
-    public UpdateProfileJPanel() {
+    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
     }
 
     /**
