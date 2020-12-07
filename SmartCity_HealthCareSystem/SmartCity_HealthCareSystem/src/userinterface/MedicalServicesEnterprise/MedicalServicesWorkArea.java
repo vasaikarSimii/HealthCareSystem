@@ -181,7 +181,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     private void btnLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaboratoryActionPerformed
         // TODO add your handling code here:
        // CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel,system, organization,  network, enterprise, account);
-      CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel);
+        CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel);
         rightPanel.add("createLaboratoryJPanel",createLaboratoryJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);

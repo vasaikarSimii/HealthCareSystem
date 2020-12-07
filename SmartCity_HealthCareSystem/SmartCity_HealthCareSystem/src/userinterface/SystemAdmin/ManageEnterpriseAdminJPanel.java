@@ -8,7 +8,6 @@ package userinterface.SystemAdmin;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
-import Business.Network.Network;
 import Business.Role.EmergencyAdminRole;
 import Business.Role.HospitalAdminRole;
 import Business.Role.MedicalServicesAdmin;
@@ -16,9 +15,15 @@ import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -28,6 +33,10 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    
+     Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
     /**
      * Creates new form ManageEnterpriseAdminJPanel
      */
@@ -43,36 +52,86 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         populateNetworkComboBox();
     }
  private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
-
-        model.setRowCount(0);
-        for (Network network : ecosystem.getNetworkList()) {
-            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-                for (UserAccount userAccount : enterprise.getUserAccountDirectory().getUserAccountList()) {
-                    Object[] row = new Object[3];
-                    row[0] = enterprise.getName();
-                    row[1] = network.getName();
-                    row[2] = userAccount.getUsername();
-
-                    model.addRow(row);
-                }
+        try{
+        String sql ="select * from manage_logins";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        enterpriseJTable.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
             }
         }
     }
 
     private void populateNetworkComboBox(){
-        networkJComboBox.removeAllItems();
-        
-        for (Network network : ecosystem.getNetworkList()){
-            networkJComboBox.addItem(network);
+               networkJComboBox.removeAllItems();
+        try{
+        String sql ="select * from network";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+            System.out.println("*************");
+         while (rs.next()) {  
+             System.out.println("77777777777");
+        networkJComboBox.addItem(rs.getString("net_name"));  
+             System.out.println(rs.getString("net_name"));
+             System.out.println("555555555555555");
+ }
+       
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
         }
     }
     
-    private void populateEnterpriseComboBox(Network network){
-        enterpriseJComboBox.removeAllItems();
+    public void populateEnterprise(){
+       enterpriseJComboBox.removeAllItems();
+        String n_name=networkJComboBox.getSelectedItem().toString();
         
-        for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            enterpriseJComboBox.addItem(enterprise);
+           try{
+        String sql ="select * from manage_enter where network_name='"+n_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+         while (rs.next()) {  
+
+        enterpriseJComboBox.addItem(rs.getString("enter_type"));  
+                }
+       
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
         }
         
     }
@@ -152,6 +211,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 227, -1, -1));
 
         networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        networkJComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                networkJComboBoxItemStateChanged(evt);
+            }
+        });
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 networkJComboBoxActionPerformed(evt);
@@ -162,7 +226,12 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         jLabel9.setText("Enterprise");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 267, -1, -1));
 
-        enterpriseJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        enterpriseJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
+        enterpriseJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterpriseJComboBoxActionPerformed(evt);
+            }
+        });
         add(enterpriseJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 264, 136, -1));
 
         jLabel10.setText("Username");
@@ -175,39 +244,86 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
-    Enterprise enterprise = (Enterprise) enterpriseJComboBox.getSelectedItem();
-        
-        String username = usernameJTextField.getText();
-        String password = String.valueOf(passwordJPasswordField.getPassword());
-        String name = nameJTextField.getText();
-        
-        if(enterprise.getEnterpriseType().equals(Enterprise.EnterpriseType.Hospital)){
-            Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+    String net_n=networkJComboBox.getSelectedItem().toString();
+        String enter_name=enterpriseJComboBox.getSelectedItem().toString();
+        String u_name=usernameJTextField.getText();
+        String pass=passwordJPasswordField.getText();
+        String name=nameJTextField.getText();
+        try {
+        String sql = " insert into manage_logins values(?,?,?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, net_n);
+                pst.setString(2, enter_name);
+                pst.setString(3, u_name);
+                pst.setString(4, pass);
+                pst.setString(5, name);
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Enterprise Admin Added successfuly");
+                populateTable();
+                nameJTextField.setText("");
+                usernameJTextField.setText("");
+                passwordJPasswordField.setText("");
         }
-        else if(enterprise.getEnterpriseType().equals(Enterprise.EnterpriseType.Emergency)){
-            
-            Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new EmergencyAdminRole());
-        }
-        else if(enterprise.getEnterpriseType().equals(Enterprise.EnterpriseType.MedicalServices)){
-            
-            Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new MedicalServicesAdmin());
-        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
+           
+
         populateTable();
-        JOptionPane.showMessageDialog(null, "Enterprise Admin created successfully");
+      //  JOptionPane.showMessageDialog(null, "Enterprise Admin created successfully");
             
 
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
         // TODO add your handling code here:
-        Network network = (Network) networkJComboBox.getSelectedItem();
-        if (network != null){
-            populateEnterpriseComboBox(network);
-        }
+       
     }//GEN-LAST:event_networkJComboBoxActionPerformed
+
+    private void networkJComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_networkJComboBoxItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_networkJComboBoxItemStateChanged
+
+    private void enterpriseJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterpriseJComboBoxActionPerformed
+        // TODO add your handling code here:
+        System.out.println("00000000000000");
+        String n_name=networkJComboBox.getSelectedItem().toString();
+        
+           try{
+        String sql ="select * from manage_enter where network_name='"+n_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+         while (rs.next()) {  
+
+        enterpriseJComboBox.addItem(rs.getString("name"));  
+                }
+       
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

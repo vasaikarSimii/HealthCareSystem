@@ -22,10 +22,15 @@ import userinterface.UserEnterprise.UserRoleWorkAreaJPanel;
 public class UserRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
-        System.out.println(userProcessContainer.getComponents());
-        return new UserRoleWorkAreaJPanel(userProcessContainer, system);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business, OrganizationDirectory organizationDirectory) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
+//        System.out.println(userProcessContainer.getComponents());
+//        return new UserRoleWorkAreaJPanel(userProcessContainer, system);
+//    }
 
     
 }

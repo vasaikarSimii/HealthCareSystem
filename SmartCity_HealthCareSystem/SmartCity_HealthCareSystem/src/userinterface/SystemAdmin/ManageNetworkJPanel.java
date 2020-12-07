@@ -10,9 +10,15 @@ import Business.Network.Network;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -22,6 +28,10 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem ecosystem;
+    
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
 
     /**
      *
@@ -38,16 +48,25 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     }
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) tblNetwork.getModel();
-        tblNetwork.setFont(new Font("Serif", Font.BOLD, 20));
-        tblNetwork.getTableHeader().setBackground(Color.CYAN);
-        
-        model.setRowCount(0);
-        for (Network network : ecosystem.getNetworkList()) {
-            Object[] row = new Object[2];
-            row[0] = network.getName();
-            row[1] = network.getState();
-            model.addRow(row);
+        try{
+        String sql ="select * from network";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        tblNetwork.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
         }
     }
 
@@ -104,8 +123,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 94, 541, 112));
 
         jLabel1.setText("State Name:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
-        add(txtStateName, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 281, 165, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
+        add(txtStateName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 165, -1));
 
         submitJButton.setText("Submit");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,16 +146,18 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 txtNetworkNameActionPerformed(evt);
             }
         });
-        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 241, 165, -1));
+        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 165, -1));
 
         jLabel2.setText("Network Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
         String name = txtNetworkName.getText();
         String state = txtStateName.getText();
+        
+        
         
         if(name.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Enter Network name");
@@ -146,16 +167,30 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Enter State name");
             return;
         }
-        else if(ecosystem.isNotUniqueNetwork(state)){
-            JOptionPane.showMessageDialog(null, "Alert..!! Network on this State already exits");
-            return; 
-        } 
-        Network network = ecosystem.createAndAddNetwork();
-        network.setName(name);
-        network.setState(state);
-        JOptionPane.showMessageDialog(null, "Network Successfully Created");
-        txtStateName.setText("");
-        txtNetworkName.setText("");
+       try {
+        String sql = " insert into network values(?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, txtNetworkName.getText());
+                pst.setString(2, txtStateName.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Added successfuly");
+                
+                txtNetworkName.setText("");
+                txtStateName.setText("");
+        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            } 
+        
         populateTable();
         
     }//GEN-LAST:event_submitJButtonActionPerformed
