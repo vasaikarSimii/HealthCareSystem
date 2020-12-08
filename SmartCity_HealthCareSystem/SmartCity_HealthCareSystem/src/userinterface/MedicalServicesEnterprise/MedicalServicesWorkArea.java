@@ -60,7 +60,6 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         ManageOrganizationBtn = new javax.swing.JButton();
         btnLaboratory = new javax.swing.JButton();
-        btnVaccines = new javax.swing.JButton();
         btnDonors = new javax.swing.JButton();
         btnPharmacy = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
@@ -91,15 +90,6 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnVaccines.setBackground(new java.awt.Color(255, 255, 255));
-        btnVaccines.setText("Vaccines");
-        btnVaccines.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
-        btnVaccines.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVaccinesActionPerformed(evt);
-            }
-        });
-
         btnDonors.setBackground(new java.awt.Color(255, 255, 255));
         btnDonors.setText("Donors");
         btnDonors.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
@@ -127,25 +117,22 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaboratory, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVaccines, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLaboratory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnVaccines, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLaboratory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(472, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -187,15 +174,6 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
         layout.next(rightPanel);
     }//GEN-LAST:event_btnLaboratoryActionPerformed
 
-    private void btnVaccinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinesActionPerformed
-        // TODO add your handling code here:
-        //CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel,system, organization,  network, enterprise, account);
-        CreateVaccinesJPanel createVaccinesJPanel = new CreateVaccinesJPanel(rightPanel);
-        rightPanel.add("createVaccinesJPanel",createVaccinesJPanel);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_btnVaccinesActionPerformed
-
     private void btnDonorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonorsActionPerformed
         // TODO add your handling code here:
         //CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel,system, organization,  network, enterprise, account);
@@ -220,7 +198,6 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnDonors;
     private javax.swing.JButton btnLaboratory;
     private javax.swing.JButton btnPharmacy;
-    private javax.swing.JButton btnVaccines;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;

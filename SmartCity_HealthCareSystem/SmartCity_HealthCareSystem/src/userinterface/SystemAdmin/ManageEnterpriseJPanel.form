@@ -164,12 +164,12 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/userinterface/Icon/System Admin work area.gif"/>
+          <Image iconType="3" name="/userinterface/Icon/UserHospitalOption.gif"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="760" y="330" width="-1" height="-1"/>
+          <AbsoluteConstraints x="470" y="210" width="700" height="430"/>
         </Constraint>
       </Constraints>
     </Component>

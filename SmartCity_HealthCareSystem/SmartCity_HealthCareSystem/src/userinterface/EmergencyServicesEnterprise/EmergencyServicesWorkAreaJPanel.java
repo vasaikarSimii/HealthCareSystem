@@ -70,6 +70,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
         ManageDoctorsBtn = new javax.swing.JButton();
         btnOrganization = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -126,20 +127,25 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(ManageOrganizationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ManageDoctorsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(426, Short.MAX_VALUE))
+                .addContainerGap(502, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
         rightPanel.setLayout(new java.awt.CardLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/EmergencyServ.gif"))); // NOI18N
+        rightPanel.add(jLabel1, "card2");
+
         jSplitPane1.setRightComponent(rightPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1345, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +184,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton ManageDoctorsBtn;
     private javax.swing.JButton ManageOrganizationBtn;
     private javax.swing.JButton btnOrganization;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;
