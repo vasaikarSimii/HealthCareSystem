@@ -5,7 +5,14 @@
  */
 package userinterface.CovidRole;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -14,14 +21,80 @@ import javax.swing.JPanel;
 public class CovidManageJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
+     Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
     /**
      * Creates new form CovidTestJPanel
      */
-    public CovidManageJPanel(JPanel userProcessContainer) {
+        String name=null;
+    String pass=null;
+      String covid_net=null;
+    String covid_enter=null;
+    String a=null;
+    String b=null;
+    String c=null;
+    String d=null;
+    String e=null;
+    String f=null;
+    String g=null;
+    String h=null;
+    
+    
+    public CovidManageJPanel(JPanel userProcessContainer,String name,String pass,String covid_net,String covid_enter) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+          this.name=name;
+        this.pass=pass;
+        this.covid_net=covid_net;
+        this.covid_enter=covid_enter;
+        populateTable();
+        populateStatusTable();
     }
-
+    private void populateTable(){
+        try{
+        String sql ="select * from covid_booking where covid_center='"+covid_enter+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
+    public void populateStatusTable(){
+        try{
+        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center,request_status from covid_care_result where covid_center='"+covid_enter+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +135,11 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -87,6 +165,11 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         jLabel6.setText("COVID CARE ORGANIZATION");
 
         jButton2.setText("Decline Patient");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,7 +246,127 @@ public class CovidManageJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         try{
+            
+        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql1);
+
+          String request="Accepted";
+          String result="Null";
+             System.out.println("878787"+a);
+         
+          
+            pst.setString(1, a);
+            pst.setString(2, b);
+            pst.setString(3,c );
+            pst.setString(4,d);
+            pst.setString(5, e);
+            pst.setString(6, f);
+            pst.setString(7,g );
+            pst.setString(8,h);
+            pst.setString(9, request);
+            pst.setString(10, result);
+            
+            
+            
+
+         
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
+            populateStatusTable();
+           
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow>=0){
+            a= (String) jTable1.getValueAt(selectedRow,0);
+            b= (String) jTable1.getValueAt(selectedRow,1);
+            c=(String) jTable1.getValueAt(selectedRow,2);
+            d= (String) jTable1.getValueAt(selectedRow,3);
+            e=(String) jTable1.getValueAt(selectedRow,4);
+            f= (String) jTable1.getValueAt(selectedRow,5);
+            g=(String) jTable1.getValueAt(selectedRow,6);
+            h= (String) jTable1.getValueAt(selectedRow,7);
+            System.out.println(selectedRow+"  "+a);
+            System.out.println(selectedRow+"  "+h);
+            
+//            String sql = "select * from manage_doc where doc_name ='" + a + "' AND special='" + b + "'";
+//            pst = conn.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//            System.out.println("55555555555");
+//            if (rs.next()) {
+//
+//
+//                }
+//
+//
+//
+//
+//        }
+//        else
+//        {
+//            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+//        }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql1);
+
+          String request="Declined";
+          String result="Null";
+             System.out.println("878787"+a);
+         
+          
+            pst.setString(1, a);
+            pst.setString(2, b);
+            pst.setString(3,c );
+            pst.setString(4,d);
+            pst.setString(5, e);
+            pst.setString(6, f);
+            pst.setString(7,g );
+            pst.setString(8,h);
+            pst.setString(9, request);
+            pst.setString(10, result);
+            
+            
+            
+
+         
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
+            populateStatusTable();
+           
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

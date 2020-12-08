@@ -12,7 +12,6 @@ import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 //import userinterface.AdministrativeRole.AdminWorkAreaJPanel;
 import javax.swing.JPanel;
-import userinterface.HospitalEnterprise.HospitalWorkAreaJPanel;
 
 
 public class HospitalAdminRole extends Role{

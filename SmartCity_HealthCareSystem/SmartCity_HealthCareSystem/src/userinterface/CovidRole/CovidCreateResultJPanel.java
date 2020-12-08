@@ -5,7 +5,14 @@
  */
 package userinterface.CovidRole;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -17,11 +24,69 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CovidTestJPanel
      */
-    public CovidCreateResultJPanel(JPanel userProcessContainer) {
+        String name=null;
+    String pass=null;
+      String covid_net=null;
+    String covid_enter=null;
+       Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    String p=null;
+    
+    public CovidCreateResultJPanel(JPanel userProcessContainer,String name,String pass,String covid_net,String covid_enter) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.name=name;
+        this.pass=pass;
+        this.covid_net=covid_net;
+        this.covid_enter=covid_enter;
+        populateStatusTable();
+        Update_table();
     }
-
+    public void populateStatusTable(){
+        try{
+        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center,request_status from covid_care_result where covid_center='"+covid_enter+"' AND request_status='"+"Accepted"+"'";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
+    public void Update_table(){
+        try{
+        String sql ="select * from covid_care_result where covid_center='"+covid_enter+"' AND request_status='"+"Accepted"+"'";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +100,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -61,6 +126,11 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -77,8 +147,13 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
         jLabel6.setText("TESTING PANEL");
 
         jButton2.setText("Result");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positive", "Negative" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Positive", "Negative" }));
 
         jTable2.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -120,17 +195,17 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
                         .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(333, 333, 333)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(538, 538, 538)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(614, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(477, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +223,42 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
                 .addContainerGap(255, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow>=0){
+            p= (String) jTable1.getValueAt(selectedRow,0);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    String result=    jComboBox1.getSelectedItem().toString();
+    try{
+//            int seat=Integer.parseInt(jTextField1.getText());
+//            String model=jTextField2.getText();
+//            String name=jComboBox1.getSelectedItem().toString();
+//            String type=jComboBox2.getSelectedItem().toString();
+        String sql = "update covid_care_result set test_result='" + result + "' where patient_i='"+p+"'";
+                pst = conn.prepareStatement(sql);
+                
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Upadted successfuly");
+                Update_table();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            } finally {
+                       
+
+                try {
+
+                } catch (Exception e) {
+
+                }
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

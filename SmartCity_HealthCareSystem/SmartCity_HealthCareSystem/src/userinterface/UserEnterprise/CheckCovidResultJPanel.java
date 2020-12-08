@@ -5,6 +5,16 @@
  */
 package userinterface.UserEnterprise;
 
+import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
+
 /**
  *
  * @author jshar
@@ -14,9 +24,74 @@ public class CheckCovidResultJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CheckCovidResultJPanel
      */
-    public CheckCovidResultJPanel() {
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+     String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
+            String id=null; 
+               String d_enter=null;
+            String a=null;
+            String b=null;
+            JPanel userProcessContainer;
+    public CheckCovidResultJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
+        initComponents();
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
+        this.userProcessContainer = userProcessContainer;
+        populateTable();
     }
+            public void populateTable(){
+      try{
+        
+        
+        
+        try {
+            String sql="select patient_n, test_type, covid_center, request_status, test_result from covid_care_result where patient_i='"+username+"'";
+         //  String sql ="select *  from manage_doc where usern=(select doctor_id from appoint_status where pat_id='"+username+"'";
+           
+            pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (Exception e) {
+        }
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,6 +105,8 @@ public class CheckCovidResultJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -60,6 +137,15 @@ public class CheckCovidResultJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Result.gif"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,26 +153,45 @@ public class CheckCovidResultJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(676, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBack)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 377, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(231, 231, 231))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(38, 38, 38)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(432, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

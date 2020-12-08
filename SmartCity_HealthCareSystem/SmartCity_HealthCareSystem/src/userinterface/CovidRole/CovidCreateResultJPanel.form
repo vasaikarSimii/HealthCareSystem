@@ -21,17 +21,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" min="-2" pref="631" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="601" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="333" max="-2" attributes="0"/>
                               <Component id="jButton2" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="707" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -39,11 +39,11 @@
                       <Component id="jComboBox1" min="-2" pref="124" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="725" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="903" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="614" max="32767" attributes="0"/>
+              <EmptySpace pref="477" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -121,6 +121,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -143,6 +146,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Result"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>

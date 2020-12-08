@@ -76,7 +76,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        boxBloodGroup = new javax.swing.JComboBox<String>();
+        boxBloodGroup = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
@@ -84,6 +84,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtHeight1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,7 +176,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 530, -1, -1));
 
-        boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
+        boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
         add(boxBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 306, 60, -1));
 
         jLabel13.setText("Password:");
@@ -196,6 +197,9 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         jLabel16.setText("Age:");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
         add(txtHeight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/admin login.gif"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void rBtnOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnOthersActionPerformed
@@ -416,6 +420,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> boxBloodGroup;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

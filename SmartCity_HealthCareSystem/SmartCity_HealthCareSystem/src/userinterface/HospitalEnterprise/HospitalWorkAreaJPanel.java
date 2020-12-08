@@ -160,7 +160,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
 
 //        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel);
 
-        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization, network, enterprise, account, directory);
+        ManageOrganizationJPanel ManageOrganizationJPanel=new ManageOrganizationJPanel(rightPanel,system, organization, network, enterprise, account, directory, net_name,emer_name);
 
         rightPanel.add("ManageOrganizationJPanel",ManageOrganizationJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();

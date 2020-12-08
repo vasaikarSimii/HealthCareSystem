@@ -27,10 +27,14 @@ public class CovidWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem system;
     UserAccount account;
     Organization organization;
+    String name=null;
+    String pass=null;
+    String covid_net=null;
+    String covid_enter=null;
     /**
      * Creates new form CovidWorkAreaJPanel
      */
-    public CovidWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system, OrganizationDirectory organizationDirectory) {
+    public CovidWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system, OrganizationDirectory organizationDirectory,String name,String pass,String covid_net,String covid_enter) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
@@ -39,6 +43,10 @@ public class CovidWorkAreaJPanel extends javax.swing.JPanel {
         this.network = network;
         this.system = system;
         this.organization = organization;
+        this.name=name;
+        this.pass=pass;
+        this.covid_net=covid_net;
+        this.covid_enter=covid_enter;
         
     }
 
@@ -127,7 +135,7 @@ public class CovidWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageCovidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCovidActionPerformed
       
-        CovidManageJPanel covidManageJPanel = new CovidManageJPanel(rightPanel);
+        CovidManageJPanel covidManageJPanel = new CovidManageJPanel(rightPanel,name,pass,covid_net,covid_enter);
         rightPanel.add("covidManageJPanel",covidManageJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -136,7 +144,7 @@ public class CovidWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        CovidCreateResultJPanel covidCreateResultJPanel = new CovidCreateResultJPanel(rightPanel);
+        CovidCreateResultJPanel covidCreateResultJPanel = new CovidCreateResultJPanel(rightPanel,name,pass,covid_net,covid_enter);
         rightPanel.add("covidCreateResultJPanel",covidCreateResultJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
