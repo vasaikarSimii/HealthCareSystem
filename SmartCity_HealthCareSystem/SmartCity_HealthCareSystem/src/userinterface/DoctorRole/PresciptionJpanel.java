@@ -132,7 +132,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 100, -1));
 
         jLabel5.setText("MG");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +156,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 jTextField5ActionPerformed(evt);
             }
         });
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 64, -1));
+        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 64, -1));
 
         jLabel9.setText("Doctor Name");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));

@@ -34,9 +34,13 @@ public class AmbulanceRole extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setText("Send Ambulance");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +49,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
 
+        jTable2.setBackground(new java.awt.Color(204, 255, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -60,9 +65,11 @@ public class AmbulanceRole extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 700, 105));
 
+        jButton3.setBackground(new java.awt.Color(0, 153, 153));
         jButton3.setText("refresh");
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
 
+        jTable4.setBackground(new java.awt.Color(204, 255, 204));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -77,6 +84,16 @@ public class AmbulanceRole extends javax.swing.JPanel {
         jScrollPane4.setViewportView(jTable4);
 
         add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 690, 105));
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText(" MANAGE AMBULANCE ");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/ambulance.gif"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, 420));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -87,6 +104,8 @@ public class AmbulanceRole extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;

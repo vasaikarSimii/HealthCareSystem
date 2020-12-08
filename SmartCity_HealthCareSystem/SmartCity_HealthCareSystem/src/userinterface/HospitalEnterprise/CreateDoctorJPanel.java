@@ -61,11 +61,12 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
      CreateDoctorJPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account, OrganizationDirectory organizationDirectory, String net_name,String emer_name) {
        initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.system = system;
         this.account = account;
 //        this.organization = organization;
         this.enterprise = enterprise;
         this.network = network;
-        this.system = system;
+        
         this.directory = organizationDirectory;
         this.net_name=net_name;
         this.emer_name=emer_name;
