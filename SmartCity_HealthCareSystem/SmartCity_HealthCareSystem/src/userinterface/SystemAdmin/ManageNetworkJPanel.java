@@ -124,7 +124,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("State Name:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
-        add(txtStateName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 165, -1));
+        add(txtStateName, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 281, 165, -1));
 
         submitJButton.setText("Submit");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +146,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 txtNetworkNameActionPerformed(evt);
             }
         });
-        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 165, -1));
+        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 241, 165, -1));
 
         jLabel2.setText("Network Name:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));

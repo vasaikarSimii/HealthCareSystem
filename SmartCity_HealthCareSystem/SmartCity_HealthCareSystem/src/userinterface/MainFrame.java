@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.CovidRole.CovidWorkAreaJPanel;
 import userinterface.DoctorRole.DoctorJPanel;
 import userinterface.HospitalEnterprise.HospitalWorkAreaJPanel;
 import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
@@ -114,16 +115,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(1258, Short.MAX_VALUE)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGap(42, 42, 42))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
 
         jSplitPane1.setTopComponent(jPanel2);
@@ -186,7 +187,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel14.setText("Category:");
         jLabel14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin", "End User", "Hospital Enterprise", "Emergency Enterprise", "Medical Services Enterprise", "Doctor", "Covid Care", "Ambulance", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin", "Hospital Enterprise", "End User", "Doctor", "Covid Care" }));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Mainframe.gif"))); // NOI18N
 
@@ -195,49 +196,46 @@ public class MainFrame extends javax.swing.JFrame {
         LoginPanelLayout.setHorizontalGroup(
             LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPanelLayout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(252, 252, 252))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
-                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(233, 233, 233))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(211, 211, 211))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addGap(218, 218, 218)
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(98, 98, 98))))
+                            .addGroup(LoginPanelLayout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(LoginPanelLayout.createSequentialGroup()
+                                .addGap(211, 211, 211)
+                                .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(LoginPanelLayout.createSequentialGroup()
+                                .addGap(180, 180, 180)
+                                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                                        .addGap(22, 22, 22)
+                                        .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(120, Short.MAX_VALUE))))
         );
         LoginPanelLayout.setVerticalGroup(
             LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginPanelLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42)
-                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(244, 244, 244))
-            .addGroup(LoginPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LoginPanelLayout.createSequentialGroup()
-                        .addGap(142, 142, 142)
+                        .addGap(82, 82, 82)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,14 +243,20 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2)))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         container.add(LoginPanel, "card2");
@@ -287,17 +291,278 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
 
-//        LoginJPanel loginJPanel = new LoginJPanel(system,peopleDirectory,organizationDirectory);
-//        container.add("loginPanel",loginJPanel);
-//        CardLayout layout=(CardLayout)container.getLayout();
-//        layout.next(container);
-//        dB4OUtil.storeSystem(system);
-
         container.removeAll();
         dB4OUtil.storeSystem(system);
         LoginPanel.setVisible(true);
         container.add(LoginPanel);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
+        // TODO add your handling code here:
+        //        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            //            JOptionPane.showMessageDialog(null,"Username and Password field's cannot be empty");
+            //            return;
+            //        }
+        //
+        //        else if(system.getUserAccountDirectory().authenticateUser(txtUsername.getText(), txtPassword.getText()) == null) {
+            //            JOptionPane.showMessageDialog(null,"Invalid UserName");
+            //            return;
+            //        }
+        //
+        //        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(txtUsername.getText(), txtPassword.getText());
+        //
+        //        CardLayout layout = (CardLayout) container.getLayout();
+        //        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, organization, enterprise, network, system));
+        //        layout.next(container);
+
+        //        String userName = txtUsername.getText();
+        //        // Get Password
+        //        String password = txtPassword.getText();
+        //
+        //
+        //        //Step1: Check in the system admin user account directory if you have the user
+        //        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        //
+        //        Enterprise inEnterprise=null;
+        //        Organization inOrganization=null;
+        //        Network inNetwork = null;
+        //
+        //        if(userAccount==null){
+            //            //Step 2: Go inside each network and check each enterprise
+            //            for(Network network:system.getNetworkList()){
+                //                //Step 2.a: check against each enterprise
+                //                for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+                    //                    userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                    //                    if(userAccount==null){
+                        //                       //Step 3:check against each organization for each enterprise
+                        //                       for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                            //                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                            //                           if(userAccount!=null){
+                                //                               inEnterprise=enterprise;
+                                //                               inOrganization=organization;
+                                //                               inNetwork = network;
+                                //                               break;
+                                //                           }
+                            //                       }
+                        //
+                        //                    }
+                    //                    else{
+                        //                       inEnterprise=enterprise;
+                        //                       break;
+                        //                    }
+                    //                    if(inOrganization!=null){
+                        //                        break;
+                        //                    }
+                    //                }
+                //                if(inEnterprise!=null){
+                    //                    break;
+                    //                }
+                //            }
+            //        }
+        //
+        //        if(userAccount==null){
+            //            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            //            return;
+            //        }
+        //        else{
+            //            CardLayout layout = (CardLayout) container.getLayout();
+            //            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system, organizationDirectory));
+            //            layout.next(container);
+            //        }
+
+        String name=txtUsername.getText();
+        String pass=txtPassword.getText();
+
+        String choice=jComboBox1.getSelectedItem().toString();
+
+        switch(choice){
+            case "End User":
+            String sql = "select * from user_data where username='"+name+"' and password='"+pass+"'";
+
+            try {
+
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                while(rs.next())
+                {
+                    String f_name=rs.getString("first_name");
+                    String l_name=rs.getString("last_name");
+                    String gender=rs.getString("gender");
+                    String address=rs.getString("address");
+                    String email=rs.getString("email");
+                    String phone=rs.getString("phone");
+                    String blood=rs.getString("blood");
+                    String weight=rs.getString("weight");
+                    String height=rs.getString("height");
+                    String username=rs.getString("username");
+                    String age=rs.getString("age");
+
+                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+                    container.add("ur",ur);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                }
+                JOptionPane.showMessageDialog(null, "Login successful");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            case "Doctor":
+
+            try {
+                sql = "select * from manage_doc where usern='"+name+"' and passw='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String doc_name=rs.getString("doc_name");
+                    String special=rs.getString("special");
+                    String location=rs.getString("location");
+                    String doc_net=rs.getString("doc_net");
+                    String doc_enter=rs.getString("doc_enter");
+                    //  String =rs.getString("doc_enter");
+
+                    DoctorJPanel dp=new DoctorJPanel(container,doc_name,special,location,doc_net,doc_enter,name);
+                    container.add("dp",dp);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                }
+                JOptionPane.showMessageDialog(null, "Login successful");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+
+            case "Hospital Enterprise":
+            sql = "select * from manage_logins where username='"+name+"' and password='"+pass+"'";
+
+            try {
+
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                while(rs.next())
+                {
+                    String net_name=rs.getString("n_name");
+                    String emer_name=rs.getString("e_name");
+
+                    HospitalWorkAreaJPanel hw=new HospitalWorkAreaJPanel(container, null, system, null, null, system, organizationDirectory,net_name, emer_name);
+                    container.add("hw",hw);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                }
+                JOptionPane.showMessageDialog(null, "Login successful");
+                break;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            case "Admin":
+            if(name.equals("sysadmin")&&pass.equals("sysadmin"))
+            {
+                SystemAdminWorkAreaJPanel sa=new SystemAdminWorkAreaJPanel(container);
+                container.add("sa",sa);
+                CardLayout layout=(CardLayout)container.getLayout();
+                layout.next(container);
+                JOptionPane.showMessageDialog(null, "Login successful");
+                break;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Login Failed");
+            }
+            case "Covid Care":
+            sql = "select * from manage_covid where covid_username='"+name+"' and covid_pass='"+pass+"'";
+
+            try {
+
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                while(rs.next())
+                {
+                    String covid_net=rs.getString("covid_net");
+                    String covid_enter=rs.getString("covid_enter");
+
+                    CovidWorkAreaJPanel covid=new CovidWorkAreaJPanel(container, null, system, null, null, system, organizationDirectory,name, pass,covid_net,covid_enter);
+                    container.add("covid",covid);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                }
+                JOptionPane.showMessageDialog(null, "Login successful");
+                break;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
 
@@ -306,251 +571,6 @@ public class MainFrame extends javax.swing.JFrame {
         CardLayout layout=(CardLayout)container.getLayout();
         layout.next(container);
     }//GEN-LAST:event_btnSignUpActionPerformed
-
-    private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
-        // TODO add your handling code here:
-//        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(null,"Username and Password field's cannot be empty");
-//            return;
-//        }
-//
-//        else if(system.getUserAccountDirectory().authenticateUser(txtUsername.getText(), txtPassword.getText()) == null) {
-//            JOptionPane.showMessageDialog(null,"Invalid UserName");
-//            return;
-//        }
-//
-//        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(txtUsername.getText(), txtPassword.getText());
-//
-//        CardLayout layout = (CardLayout) container.getLayout();
-//        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, organization, enterprise, network, system));
-//        layout.next(container);
-
-        
-        
-        
-        
-        
-//        String userName = txtUsername.getText();
-//        // Get Password
-//        String password = txtPassword.getText();
-//        
-//        
-//        //Step1: Check in the system admin user account directory if you have the user
-//        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
-//        
-//        Enterprise inEnterprise=null;
-//        Organization inOrganization=null;
-//        Network inNetwork = null;
-//        
-//        if(userAccount==null){
-//            //Step 2: Go inside each network and check each enterprise
-//            for(Network network:system.getNetworkList()){
-//                //Step 2.a: check against each enterprise
-//                for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
-//                    userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
-//                    if(userAccount==null){
-//                       //Step 3:check against each organization for each enterprise
-//                       for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
-//                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
-//                           if(userAccount!=null){
-//                               inEnterprise=enterprise;
-//                               inOrganization=organization;
-//                               inNetwork = network;
-//                               break;
-//                           }
-//                       }
-//                        
-//                    }
-//                    else{
-//                       inEnterprise=enterprise;
-//                       break;
-//                    }
-//                    if(inOrganization!=null){
-//                        break;
-//                    }  
-//                }
-//                if(inEnterprise!=null){
-//                    break;
-//                }
-//            }
-//        }
-//        
-//        if(userAccount==null){
-//            JOptionPane.showMessageDialog(null, "Invalid credentials");
-//            return;
-//        }
-//        else{
-//            CardLayout layout = (CardLayout) container.getLayout();
-//            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system, organizationDirectory));
-//            layout.next(container);
-//        }
-       
-        String name=txtUsername.getText();
-        String pass=txtPassword.getText();
-        
-        String choice=jComboBox1.getSelectedItem().toString();
-        
-        switch(choice){
-            case "End User":
-                String sql = "select * from user_data where username='"+name+"' and password='"+pass+"'";
-         
-        try {
-           
-            pst =conn.prepareStatement(sql);
-            rs= pst.executeQuery();
-          
-            
-            while(rs.next())
-            {
-                String f_name=rs.getString("first_name");
-                String l_name=rs.getString("last_name");
-                String gender=rs.getString("gender");
-                String address=rs.getString("address");
-                String email=rs.getString("email");
-                String phone=rs.getString("phone");
-                String blood=rs.getString("blood");
-                String weight=rs.getString("weight");
-                String height=rs.getString("height");
-                String username=rs.getString("username");
-                String age=rs.getString("age");
-                
-                
-                
-               
-                UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
-              container.add("ur",ur);
-                CardLayout layout=(CardLayout)container.getLayout();
-                layout.next(container);
-            }
-            JOptionPane.showMessageDialog(null, "Login successful");
-            break;
-            
-           } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
-        }finally{
-            
-        try {
-                    if (rs!=null) {
-                        rs.close();
-                    }
-                    if (pst!=null) {
-                      pst.close();  
-                    }
-//                    if (conn!=null) {
-//                      pst.close();  
-//                    }
-                } catch (SQLException e) {
-                     JOptionPane.showMessageDialog(null, e);
-                }
-        }
-            case "Doctor":
-                 sql = "select * from manage_doc where usern='"+name+"' and passw='"+pass+"'";
-         
-        try {
-           
-            pst =conn.prepareStatement(sql);
-            rs= pst.executeQuery();
-          
-            
-            while(rs.next())
-            {
-                System.out.println("5555555555");
-                String doc_name=rs.getString("doc_name");
-                String special=rs.getString("special");
-                String location=rs.getString("location");
-                String doc_net=rs.getString("doc_net");
-                String doc_enter=rs.getString("doc_enter");
-                
-                
-                
-                
-               
-                DoctorJPanel dp=new DoctorJPanel(container,doc_name,special,location,doc_net,doc_enter,name);
-              container.add("dp",dp);
-                CardLayout layout=(CardLayout)container.getLayout();
-                layout.next(container);
-            }
-            JOptionPane.showMessageDialog(null, "Login successful");
-            break;
-            
-           } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
-        }finally{
-            
-        try {
-                    if (rs!=null) {
-                        rs.close();
-                    }
-                    if (pst!=null) {
-                      pst.close();  
-                    }
-//                    if (conn!=null) {
-//                      pst.close();  
-//                    }
-                } catch (SQLException e) {
-                     JOptionPane.showMessageDialog(null, e);
-                }
-        }
-            
-            case "Hospital Enterprise":
-        sql = "select * from manage_logins where username='"+name+"' and password='"+pass+"'";
-         
-        try {
-           
-            pst =conn.prepareStatement(sql);
-            rs= pst.executeQuery();
-          
-            
-            while(rs.next())
-            {
-                String net_name=rs.getString("n_name");
-                String emer_name=rs.getString("e_name");
-                
-               
-                HospitalWorkAreaJPanel hw=new HospitalWorkAreaJPanel(container, null, system, null, null, system, organizationDirectory,net_name, emer_name);
-                container.add("hw",hw);
-                CardLayout layout=(CardLayout)container.getLayout();
-                layout.next(container);
-            }
-            JOptionPane.showMessageDialog(null, "Login successful");
-            break;
-           } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
-        }finally{
-        try {
-                    if (rs!=null) {
-                        rs.close();
-                    }
-                    if (pst!=null) {
-                      pst.close();  
-                    }
-//                    if (conn!=null) {
-//                      pst.close();  
-//                    }
-                } catch (SQLException e) {
-                     JOptionPane.showMessageDialog(null, e);
-                }
-        }
-            case "Admin":
-                if(name.equals("sysadmin")&&pass.equals("sysadmin"))
-                {
-                    SystemAdminWorkAreaJPanel sa=new SystemAdminWorkAreaJPanel(container);
-                    container.add("sa",sa);
-                    CardLayout layout=(CardLayout)container.getLayout();
-                    layout.next(container);
-                    JOptionPane.showMessageDialog(null, "Login successful");
-                
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Login Failed");
-                }
-        }
-       
-    }//GEN-LAST:event_btnLogin1ActionPerformed
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
 
     /**
      * @param args the command line arguments
