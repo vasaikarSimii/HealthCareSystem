@@ -243,8 +243,8 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 347, -1, -1));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/enterprisesystemadmin.gif"))); // NOI18N
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 230, -1, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/ManageEnterprise.gif"))); // NOI18N
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 710, 440));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed

@@ -71,7 +71,7 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Do you want to Donate Blood? ");
 
-        btnDonateBlood.setBackground(new java.awt.Color(204, 255, 204));
+        btnDonateBlood.setBackground(new java.awt.Color(0, 153, 153));
         btnDonateBlood.setText("Click Me");
         btnDonateBlood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +90,7 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Do you want Insurance?");
 
-        btnInsurance.setBackground(new java.awt.Color(204, 255, 204));
+        btnInsurance.setBackground(new java.awt.Color(0, 153, 153));
         btnInsurance.setText("Click Me");
         btnInsurance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

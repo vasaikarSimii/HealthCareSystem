@@ -111,42 +111,42 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Last Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 82, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 82, -1));
 
         jLabel3.setText("First Name:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jLabel4.setText("Gender:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
 
         jLabel5.setText("Email Address:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
         jLabel6.setText("Address:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         jLabel7.setText("Phone Number:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
 
         jLabel8.setText("Weight:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         jLabel9.setText("Blood Group:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
 
         jLabel10.setText("Height:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
 
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
             }
         });
-        add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 171, -1));
-        add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 171, -1));
-        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 165, -1));
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 165, -1));
-        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 165, -1));
+        add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 171, -1));
+        add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 171, -1));
+        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 165, -1));
+        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 165, -1));
+        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 165, -1));
 
         rBtnMale.setText("Male");
         rBtnMale.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +154,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 rBtnMaleActionPerformed(evt);
             }
         });
-        add(rBtnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+        add(rBtnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
 
         rBtnFemale.setText("Female");
         rBtnFemale.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +162,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 rBtnFemaleActionPerformed(evt);
             }
         });
-        add(rBtnFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
+        add(rBtnFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
 
         rBtnOthers.setText("Others");
         rBtnOthers.addActionListener(new java.awt.event.ActionListener() {
@@ -170,16 +170,16 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 rBtnOthersActionPerformed(evt);
             }
         });
-        add(rBtnOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
-        add(txtWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 60, -1));
+        add(rBtnOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
+        add(txtWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 60, -1));
 
         jLabel11.setBackground(new java.awt.Color(204, 204, 255));
         jLabel11.setText("lbs");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, -1, -1));
-        add(txtHeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 60, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
+        add(txtHeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 60, -1));
 
         jLabel12.setText("cms");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -187,37 +187,37 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, -1));
 
-        btnBack.setText("<Back");
+        btnBack.setText("<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
-        add(boxBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 60, -1));
+        add(boxBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 60, -1));
 
         jLabel13.setText("Password:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, -1, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, -1, -1));
 
         jLabel14.setText("Username:");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, -1, -1));
-        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 180, -1));
-        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 510, 180, -1));
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 180, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 180, -1));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("UPDATE USER PROFILE");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 620, -1));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 620, -1));
 
         jLabel16.setText("Age:");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, -1, -1));
-        add(txtHeight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 60, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, -1, -1));
+        add(txtHeight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 60, -1));
 
         pic1Lbl.setBackground(new java.awt.Color(0, 204, 204));
         pic1Lbl.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -225,7 +225,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         pic1Lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pic1Lbl.setText("Pic 1");
         pic1Lbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        add(pic1Lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 160, 180));
+        add(pic1Lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 160, 180));
 
         BroswePic1Btn.setBackground(new java.awt.Color(0, 153, 153));
         BroswePic1Btn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -238,11 +238,11 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
                 BroswePic1BtnActionPerformed(evt);
             }
         });
-        add(BroswePic1Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 140, -1));
+        add(BroswePic1Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 140, -1));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/userlogin.gif"))); // NOI18N
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 780, 420));
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 780, 420));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed

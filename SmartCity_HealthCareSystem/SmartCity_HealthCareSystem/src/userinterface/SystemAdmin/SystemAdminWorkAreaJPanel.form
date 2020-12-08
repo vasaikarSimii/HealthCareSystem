@@ -6,7 +6,7 @@
       <Color blue="51" green="51" red="d7" type="rgb"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1338, 840]"/>
+      <Dimension value="[1400, 800]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -45,14 +45,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="rightSystemAdminPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="rightSystemAdminPanel" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel3" alignment="0" pref="700" max="32767" attributes="0"/>
-              <Component id="rightSystemAdminPanel" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="rightSystemAdminPanel" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -243,8 +243,10 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[1058, 840]"/>
+              <Dimension value="[1400, 700]"/>
             </Property>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
@@ -253,7 +255,7 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/userinterface/Icon/enterprisesystemadmin.gif"/>
+                  <Image iconType="3" name="/userinterface/Icon/sysadmin.gif"/>
                 </Property>
               </Properties>
               <Constraints>
