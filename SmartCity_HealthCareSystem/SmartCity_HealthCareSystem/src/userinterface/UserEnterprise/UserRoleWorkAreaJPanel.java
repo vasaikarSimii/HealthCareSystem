@@ -61,6 +61,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         EmergencyServicesBtn = new javax.swing.JButton();
         HospitalServicesBtn = new javax.swing.JButton();
         MedicalServicesBtn = new javax.swing.JButton();
+        UpdateUserProfileBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -98,6 +99,15 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        UpdateUserProfileBtn.setBackground(new java.awt.Color(255, 255, 255));
+        UpdateUserProfileBtn.setText("Update User Profile");
+        UpdateUserProfileBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        UpdateUserProfileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateUserProfileBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LeftPanelLayout = new javax.swing.GroupLayout(LeftPanel);
         LeftPanel.setLayout(LeftPanelLayout);
         LeftPanelLayout.setHorizontalGroup(
@@ -107,7 +117,8 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(LeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EmergencyServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HospitalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UpdateUserProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LeftPanelLayout.setVerticalGroup(
@@ -115,11 +126,13 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(LeftPanelLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addComponent(HospitalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(EmergencyServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(MedicalServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(468, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(UpdateUserProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(406, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(LeftPanel);
@@ -156,7 +169,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void HospitalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalServicesBtnActionPerformed
         // TODO add your handling code here:
-        UserHospitalOptionsPanel UserHospitalOptionsPanel=new UserHospitalOptionsPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        HospitalServicesJPanel UserHospitalOptionsPanel=new HospitalServicesJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
         rightPanel.add("UserHospitalOptionsPanel",UserHospitalOptionsPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -170,12 +183,21 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(rightPanel);
     }//GEN-LAST:event_MedicalServicesBtnActionPerformed
 
+    private void UpdateUserProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserProfileBtnActionPerformed
+        // TODO add your handling code here:
+        UpdateProfileJPanel UpdateProfileJPanel=new UpdateProfileJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        rightPanel.add("UpdateProfileJPanel",UpdateProfileJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_UpdateUserProfileBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EmergencyServicesBtn;
     private javax.swing.JButton HospitalServicesBtn;
     private javax.swing.JPanel LeftPanel;
     private javax.swing.JButton MedicalServicesBtn;
+    private javax.swing.JButton UpdateUserProfileBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;

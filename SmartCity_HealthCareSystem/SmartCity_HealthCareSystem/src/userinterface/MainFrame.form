@@ -366,9 +366,9 @@
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="5">
-                            <StringItem index="0" value="Admin"/>
-                            <StringItem index="1" value="Hospital Enterprise"/>
-                            <StringItem index="2" value="End User"/>
+                            <StringItem index="0" value="System Admin"/>
+                            <StringItem index="1" value="End User"/>
+                            <StringItem index="2" value="Hospital Enterprise"/>
                             <StringItem index="3" value="Doctor"/>
                             <StringItem index="4" value="Covid Care"/>
                           </StringArray>

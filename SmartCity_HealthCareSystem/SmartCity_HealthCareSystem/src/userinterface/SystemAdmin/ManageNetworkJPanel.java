@@ -87,6 +87,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtNetworkName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,7 +140,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("MANAGE NETWORK");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 35, 586, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 586, -1));
 
         txtNetworkName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +151,9 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Network Name:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/network.gif"))); // NOI18N
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 710, 520));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
@@ -203,6 +207,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton submitJButton;

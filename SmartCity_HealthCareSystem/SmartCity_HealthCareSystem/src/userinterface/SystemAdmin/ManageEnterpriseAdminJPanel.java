@@ -158,6 +158,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         usernameJTextField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -193,14 +194,14 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 submitJButtonActionPerformed(evt);
             }
         });
-        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 424, 120, -1));
+        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 120, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("MANAGE ENTERPRISE");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 35, 586, -1));
+        jLabel6.setText("MANAGE ENTERPRISE ADMIN");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 586, -1));
         add(passwordJPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 344, 134, -1));
 
         jLabel7.setText("Name");
@@ -240,6 +241,10 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("Password");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 347, -1, -1));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/enterprisesystemadmin.gif"))); // NOI18N
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 280, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
@@ -331,6 +336,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JTable enterpriseJTable;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

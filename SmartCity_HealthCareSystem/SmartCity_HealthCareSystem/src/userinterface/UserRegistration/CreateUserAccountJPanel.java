@@ -12,10 +12,16 @@ import Business.Organization.User;
 import Business.Population.PeopleDirectory;
 import Business.Role.UserRole;
 import Business.UserAccount.UserAccount;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.dbConn;
@@ -84,7 +90,9 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtHeight1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        pic1Lbl = new javax.swing.JLabel();
+        BroswePic1Btn = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -192,14 +200,36 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(0, 51, 0));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("CREATE USER ACCOUNT");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 620, -1));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 620, -1));
 
         jLabel16.setText("Age:");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
         add(txtHeight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/admin login.gif"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, -1, -1));
+        pic1Lbl.setBackground(new java.awt.Color(0, 204, 204));
+        pic1Lbl.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        pic1Lbl.setForeground(new java.awt.Color(153, 153, 153));
+        pic1Lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pic1Lbl.setText("Pic 1");
+        pic1Lbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add(pic1Lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 160, 180));
+
+        BroswePic1Btn.setBackground(new java.awt.Color(0, 153, 153));
+        BroswePic1Btn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BroswePic1Btn.setText("Broswe Pic");
+        BroswePic1Btn.setActionCommand("Broswe Pic ");
+        BroswePic1Btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BroswePic1Btn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BroswePic1Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BroswePic1BtnActionPerformed(evt);
+            }
+        });
+        add(BroswePic1Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 140, -1));
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/userlogin.gif"))); // NOI18N
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 780, 420));
     }// </editor-fold>//GEN-END:initComponents
 
     private void rBtnOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnOthersActionPerformed
@@ -340,10 +370,20 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Height must have digits only");
             return;
         }
-        
+        if (pic1Lbl.getIcon()==null)
+            
+            JOptionPane.showConfirmDialog(null, "Please upload photo");
+             
+        else {
+            JOptionPane.showMessageDialog(null, "Person Profile has been saved successfully");
+         }
+  
         String userName = txtUsername.getText();
         String password = txtPassword.getText();
         String age=txtHeight1.getText();
+    
+       
+        
         try {
         String sql = " insert into user_data values(?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -360,7 +400,8 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 pst.setString(10, userName);
                 pst.setString(11, password);
                 pst.setString(12, age);
-                
+                //add image to Db
+               //pst.setBlob(13, i1);
                 
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "User Added successfuly");
@@ -373,7 +414,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 txtLastName.setText("");
                 txtPhoneNumber.setText("");
                 txtUsername.setText("");
-                
+                pic1Lbl.setIcon(null);
                 
                 txtWeight.setText("");
                 txtUsername.setText("");
@@ -390,6 +431,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e);
             }
             }
+        
         
         
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -415,12 +457,29 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
 
+    private void BroswePic1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BroswePic1BtnActionPerformed
+        // TODO add your handling code here:
+
+       addImage();
+        
+    }//GEN-LAST:event_BroswePic1BtnActionPerformed
+ public void addImage(){
+        
+        JFileChooser chooser1 = new JFileChooser();
+        chooser1.showOpenDialog(null);
+        File file = chooser1.getSelectedFile();
+        String path1 = file.getAbsolutePath();
+        Image im1 = Toolkit.getDefaultToolkit().createImage(path1);
+        im1 = im1.getScaledInstance(pic1Lbl.getWidth(), pic1Lbl.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i1 = new ImageIcon(im1);
+        pic1Lbl.setIcon(i1);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BroswePic1Btn;
     private javax.swing.JComboBox<String> boxBloodGroup;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -428,6 +487,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -436,6 +496,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel pic1Lbl;
     private javax.swing.JRadioButton rBtnFemale;
     private javax.swing.JRadioButton rBtnMale;
     private javax.swing.JRadioButton rBtnOthers;

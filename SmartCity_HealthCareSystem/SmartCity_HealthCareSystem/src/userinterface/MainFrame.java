@@ -187,7 +187,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel14.setText("Category:");
         jLabel14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin", "Hospital Enterprise", "End User", "Doctor", "Covid Care" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "System Admin", "End User", "Hospital Enterprise", "Doctor", "Covid Care" }));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Mainframe.gif"))); // NOI18N
 
@@ -504,13 +504,13 @@ public class MainFrame extends javax.swing.JFrame {
                         pst.close();
                     }
                     //                    if (conn!=null) {
-                        //                      pst.close();
+                        //                      pst.c   lose();
                         //                    }
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
             }
-            case "Admin":
+            case "System Admin":
             if(name.equals("sysadmin")&&pass.equals("sysadmin"))
             {
                 SystemAdminWorkAreaJPanel sa=new SystemAdminWorkAreaJPanel(container);
