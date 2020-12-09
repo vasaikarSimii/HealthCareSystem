@@ -7,6 +7,7 @@ package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
 import Business.Population.PeopleDirectory;
+import java.awt.CardLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -464,6 +465,8 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void BroswePic1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BroswePic1BtnActionPerformed
