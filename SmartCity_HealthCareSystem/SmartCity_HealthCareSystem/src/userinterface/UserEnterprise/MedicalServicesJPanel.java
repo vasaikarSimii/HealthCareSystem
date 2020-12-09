@@ -65,10 +65,13 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         btnInsurance = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnDonateCheck = new javax.swing.JButton();
+        btnInsuranceCheck = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Do you want to Donate Blood? ");
 
         btnDonateBlood.setBackground(new java.awt.Color(0, 153, 153));
@@ -88,6 +91,7 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
         jLabel6.setText("MEDICAL SERVICES");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Do you want Insurance?");
 
         btnInsurance.setBackground(new java.awt.Color(0, 153, 153));
@@ -100,6 +104,22 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/doctor browsing.gif"))); // NOI18N
+
+        btnDonateCheck.setBackground(new java.awt.Color(0, 153, 153));
+        btnDonateCheck.setText("Check Status");
+        btnDonateCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDonateCheckActionPerformed(evt);
+            }
+        });
+
+        btnInsuranceCheck.setBackground(new java.awt.Color(0, 153, 153));
+        btnInsuranceCheck.setText("Check Status");
+        btnInsuranceCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsuranceCheckActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,7 +143,11 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnDonateBlood, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnDonateBlood, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDonateCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInsuranceCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -137,11 +161,13 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDonateBlood)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(btnDonateCheck))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsurance)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(btnInsuranceCheck))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
@@ -170,10 +196,28 @@ public class MedicalServicesJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnInsuranceActionPerformed
 
+    private void btnDonateCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonateCheckActionPerformed
+        // TODO add your handling code here:
+         CheckDonateBloodStatusJPanel dbsjp= new CheckDonateBloodStatusJPanel(userProcessContainer,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        userProcessContainer.add("dbsjp",dbsjp);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnDonateCheckActionPerformed
+
+    private void btnInsuranceCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsuranceCheckActionPerformed
+        // TODO add your handling code here:
+        CheckInsuranceStatusJPanel cisjp= new CheckInsuranceStatusJPanel(userProcessContainer,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        userProcessContainer.add("cisjp",cisjp);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnInsuranceCheckActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDonateBlood;
+    private javax.swing.JButton btnDonateCheck;
     private javax.swing.JButton btnInsurance;
+    private javax.swing.JButton btnInsuranceCheck;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
