@@ -156,11 +156,11 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 jTextField5ActionPerformed(evt);
             }
         });
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 64, -1));
+        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 90, -1));
 
         jLabel9.setText("Doctor Name");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 89, -1));
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 100, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

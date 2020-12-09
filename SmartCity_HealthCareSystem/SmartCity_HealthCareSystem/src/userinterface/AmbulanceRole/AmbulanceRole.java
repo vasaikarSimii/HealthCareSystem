@@ -66,7 +66,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 700, 105));
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
-        jButton3.setText("refresh");
+        jButton3.setText("Refresh");
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
 
         jTable4.setBackground(new java.awt.Color(204, 255, 204));
