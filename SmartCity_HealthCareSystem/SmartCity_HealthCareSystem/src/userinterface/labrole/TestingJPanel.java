@@ -68,7 +68,7 @@ EcoSystem system;
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 262, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,7 +99,7 @@ EcoSystem system;
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("TESTING REQUESTS");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 490, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 490, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
