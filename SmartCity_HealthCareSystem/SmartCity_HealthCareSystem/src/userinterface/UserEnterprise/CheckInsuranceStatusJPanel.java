@@ -93,7 +93,7 @@ public class CheckInsuranceStatusJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Insurance Company Name", "Duration", "Amount Paid", "Status"
+                "Insurance Company Name", "Duration", "Amount", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
