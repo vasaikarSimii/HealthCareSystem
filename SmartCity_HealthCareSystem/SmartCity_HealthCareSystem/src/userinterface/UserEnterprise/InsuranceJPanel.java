@@ -7,6 +7,7 @@ package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -87,6 +88,16 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         jLabel4.setText("Plan Type:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platinum", "Gold", "Silver", "Bronze", " " }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBox1MousePressed(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Amount to be pay:");
 
@@ -222,6 +233,33 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MousePressed
+        // TODO add your handling code here:
+        if(!(month6btn.isSelected() || month9btn.isSelected() || month12btn.isSelected() || month3btn.isSelected())) {
+            JOptionPane.showMessageDialog(null, "Please select Duration First");
+            return;
+        }
+        int monthValue = 0;
+        if(month3btn.isSelected()) {
+            monthValue = 200;
+        }
+        else if(month6btn.isSelected()) {
+            monthValue = 350;
+        }
+        else if(month9btn.isSelected()) {
+            monthValue = 450;
+        }
+        else if(month12btn.isSelected()) {
+            monthValue = 525;
+        }
+        
+    }//GEN-LAST:event_jComboBox1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

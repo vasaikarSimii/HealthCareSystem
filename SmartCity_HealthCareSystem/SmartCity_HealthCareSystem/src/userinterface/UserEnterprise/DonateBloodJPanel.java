@@ -6,6 +6,7 @@
 package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -14,14 +15,14 @@ import javax.swing.JPanel;
  */
 public class DonateBloodJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessInterface;
+    JPanel userProcessContainer;
     EcoSystem ecosystem;
     /**
      * Creates new form DonateBloodJPanel
      */
-    public DonateBloodJPanel(JPanel userProcessInterface, EcoSystem ecosystem) {
+    public DonateBloodJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
-        this.userProcessInterface = userProcessInterface;
+        this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         
     }
@@ -78,6 +79,11 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/bloodDonateUser.gif"))); // NOI18N
 
         btnBack1.setText("<<Back");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,6 +126,13 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
