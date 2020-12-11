@@ -23,10 +23,15 @@ import userinterface.MedicalServicesEnterprise.MedicalServicesWorkArea;
 public class MedicalServicesAdmin extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
-        System.out.println(userProcessContainer.getComponents());
-        return new MedicalServicesWorkArea(userProcessContainer, enterprise);
-        }
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business, OrganizationDirectory organizationDirectory) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
+//        System.out.println(userProcessContainer.getComponents());
+//        return new MedicalServicesWorkArea(userProcessContainer, enterprise);
+//        }
     
     
 }

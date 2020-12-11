@@ -11,7 +11,14 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -25,6 +32,12 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
     Organization organization;
     EcoSystem system;
     UserAccount account;
+     Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+     String net_name=null;
+    String emer_name=null;
+  
     /**
      * Creates new form CreateLaboratoryJPanel
      */
@@ -40,15 +53,71 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
 
     
 
-    CreateLaboratoryJPanel(JPanel userProcessContainer) {
+    CreateLaboratoryJPanel(JPanel userProcessContainer,String net_name,String emer_name) {
         this.userProcessContainer = userProcessContainer;
+          this.net_name=net_name;
+        this.emer_name=emer_name;
+        System.out.println("2"+emer_name);
          initComponents();
          populateTable();
+         
+         populateNameComboBox();
         
     }
      public void populateTable(){
        //connect from database -- query
+         try{
+        String sql ="select * from manage_lab where lab_enter='"+emer_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
    }
+     public void populateNameComboBox(){
+               jComboBox1.removeAllItems();
+        try{
+        String sql ="select * from manage_medical where org_type='"+"Laboratory"+"' AND org_enter='"+emer_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+            System.out.println("*************");
+         while (rs.next()) {  
+             System.out.println("77777777777");
+        jComboBox1.addItem(rs.getString("org_name"));  
+            // System.out.println(rs.getString("net_name"));
+             System.out.println("555555555555555");
+ }
+       
+    }
+        
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +131,6 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        txtLabName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -71,6 +139,7 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1400, 700));
@@ -94,12 +163,6 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Laboratory Name:");
 
-        txtLabName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLabNameActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Location:");
 
         jLabel3.setText("Username:");
@@ -107,12 +170,19 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
         jLabel4.setText("Password:");
 
         jButton1.setText("Create");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("MANAGE LABORATORY ORGANIZATION");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,10 +201,10 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtLabName)
                                 .addComponent(txtLocation)
                                 .addComponent(txtUsername)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))))
+                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,10 +219,10 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(txtLabName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -167,17 +237,55 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLabNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLabNameActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtLabNameActionPerformed
+        String name=jComboBox1.getSelectedItem().toString();
+        String location = txtLocation.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        try {
+        String sql = " insert into manage_lab values(?,?,?,?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setString(2, location);
+                pst.setString(3, username);
+                pst.setString(4, password);
+                pst.setString(5, net_name);
+                pst.setString(6, emer_name);
+                
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Organisation Added successfuly");
+                populateTable();
+                txtLocation.setText("");
+                txtPassword.setText("");
+                txtUsername.setText("");
+                
+        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
+        
+        populateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -185,7 +293,6 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtLabName;
     private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;

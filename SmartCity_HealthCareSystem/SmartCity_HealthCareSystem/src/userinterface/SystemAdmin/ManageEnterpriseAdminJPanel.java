@@ -217,6 +217,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 networkJComboBoxItemStateChanged(evt);
             }
         });
+        networkJComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                networkJComboBoxMouseClicked(evt);
+            }
+        });
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 networkJComboBoxActionPerformed(evt);
@@ -329,6 +334,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
+
+    private void networkJComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkJComboBoxMouseClicked
+        // TODO add your handling code here:
+        populateEnterprise();
+    }//GEN-LAST:event_networkJComboBoxMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

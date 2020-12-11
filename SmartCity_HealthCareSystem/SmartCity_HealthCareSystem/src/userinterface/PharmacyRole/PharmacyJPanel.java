@@ -5,6 +5,17 @@
  */
 package userinterface.PharmacyRole;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
+
 /**
  *
  * @author jshar
@@ -14,10 +25,68 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PharmacyJPanel
      */
-    public PharmacyJPanel() {
+    private JPanel userProcessContainer;
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+     String net_name=null;
+    String emer_name=null;
+    String org=null;
+    String location=null;
+    String username=null;
+    String password=null;
+    String net=null;
+    String enter=null;
+    String a=null;
+    String b=null;
+     String c=null;
+    String d=null;
+    String e=null;
+    String f=null;
+    String g=null;
+    String h=null;
+     String i=null;
+    String j=null;
+    String k=null;
+    String l=null;
+    
+    public PharmacyJPanel(JPanel userProcessContainer,String org,String location,String username,String password,String net,String enter) {
         initComponents();
+          this.userProcessContainer = userProcessContainer;
+        
+        this.org=org;
+        this.location=location;
+        this.username=username;
+        this.password=password;
+        this.net=net;
+        this.enter=enter;
+        populateTable();
     }
 
+    
+    public void populateTable(){
+       //connect from database -- query
+         try{
+        String sql ="select * from prescription";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,9 +105,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -64,23 +130,30 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        jLabel1.setText("All Medicines");
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Patient ID", "Drug name", "Drug Type", "Drug Quantity", "Dose ", "Duration", "Available"
+                "Patient ID", "Drug name", "Drug Type", "Drug Quantity", "Dose ", "Duration"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -92,20 +165,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("PHARMACY ORGANIZATION");
-
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 51, 0));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("PHARMACY DATABASE");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/pharmacyRole.gif"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,75 +172,188 @@ public class PharmacyJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(639, 639, 639)
+                        .addGap(358, 358, 358)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(67, 67, 67))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(360, 360, 360)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnAddSock))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(30, 30, 30)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(60, 60, 60)))
-                        .addComponent(jLabel2)))
-                .addContainerGap(392, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(136, 136, 136))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddSock)
+                        .addGap(226, 226, 226))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel7)
-                        .addGap(99, 99, 99)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(76, 76, 76)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddSock))
-                .addGap(169, 169, 169))
+                .addGap(122, 122, 122))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
+
+            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql1);
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+            Date date = new Date();  
+           String date_time= formatter.format(date);
+            System.out.println("da"+date_time);
+            
+            String acc="Denied";
+           
+
+            System.out.println("Date " + date);
+
+              pst.setString(1,a );
+            pst.setString(2, b);
+            pst.setString(3,c );
+            pst.setString(4,d);
+            pst.setString(5, e);
+            pst.setString(6, f);
+            pst.setString(7, g);
+            pst.setString(8, h);
+            pst.setString(9, i);
+            pst.setString(10, j);
+           // pst.setString(11, k);
+            //pst.setString(12, l);
+            pst.setString(11, date_time);
+            pst.setString(12, acc);
+            pst.setString(13, org);
+            pst.setString(14, username);
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
+           // populateWorkTable();
+
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try{
+
+            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql1);
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+            Date date = new Date();  
+           String date_time= formatter.format(date);
+            System.out.println("da"+date_time);
+            
+            String acc="Accepted";
+           
+
+            System.out.println("Date " + date);
+
+            pst.setString(1,a );
+            pst.setString(2, b);
+            pst.setString(3,c );
+            pst.setString(4,d);
+            pst.setString(5, e);
+            pst.setString(6, f);
+            pst.setString(7, g);
+            pst.setString(8, h);
+            pst.setString(9, i);
+            pst.setString(10, j);
+           // pst.setString(11, k);
+            //pst.setString(12, l);
+            pst.setString(11, date_time);
+            pst.setString(12, acc);
+            pst.setString(13, org);
+            pst.setString(14, username);
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
+           // populateWorkTable();
+
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        System.out.println("EEEEEEEEEE");
+        int selectedRow = jTable1.getSelectedRow();
+        System.out.println("FFFFFFFFFFFFFFF");
+        if (selectedRow>=0){
+            System.out.println("GGGGGGGGG");
+            a= (String) jTable1.getValueAt(selectedRow,0);
+            System.out.println("");
+            b= (String) jTable1.getValueAt(selectedRow,1);
+            c=(String) jTable1.getValueAt(selectedRow,2);
+            d= (String) jTable1.getValueAt(selectedRow,3);
+            e=(String) jTable1.getValueAt(selectedRow,4);
+            f= (String) jTable1.getValueAt(selectedRow,5);
+            g=(String) jTable1.getValueAt(selectedRow,6);
+            h= (String) jTable1.getValueAt(selectedRow,7);
+            i=(String) jTable1.getValueAt(selectedRow,8);
+            j= (String) jTable1.getValueAt(selectedRow,9);
+          //  k=(String) jTable1.getValueAt(selectedRow,10);
+         //   l= (String) jTable1.getValueAt(selectedRow,11);
+            System.out.println(selectedRow+"  "+a);
+            System.out.println(selectedRow+"  "+h);
+            
+//                String sql = "select * from manage_doc where doc_name ='" + a + "' AND special='" + b + "'";
+//                pst = conn.prepareStatement(sql);
+//                rs = pst.executeQuery();
+//                System.out.println("55555555555");
+//                if (rs.next()) {
+//
+//                }
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a Row!!");
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -189,9 +361,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

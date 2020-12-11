@@ -7,8 +7,13 @@ package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
 import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.dbConn;
 
 /**
  *
@@ -18,14 +23,43 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
+             Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
     /**
      * Creates new form InsuranceJPanel
      */
-    public InsuranceJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
+    public InsuranceJPanel(JPanel userProcessContainer, String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
+       // this.ecosystem = ecosystem;
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
         
+    }
+
+    public InsuranceJPanel(JPanel container, String company, String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -44,11 +78,10 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         month9btn = new javax.swing.JRadioButton();
         month12btn = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
         txtAmountToBePay = new javax.swing.JTextField();
         btnPay = new javax.swing.JButton();
-        btnGenerateRecipt = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
@@ -87,23 +120,16 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Plan Type:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platinum", "Gold", "Silver", "Bronze", " " }));
-        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jComboBox1MousePressed(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Platinum", "Gold", "Silver", "Bronze", " " }));
 
         jLabel5.setText("Amount to be pay:");
 
-        btnPay.setText("Pay");
-
-        btnGenerateRecipt.setText("Generate Recipt");
+        btnPay.setText("Request Insurance");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -137,8 +163,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnGenerateRecipt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, 0, 111, Short.MAX_VALUE)
                                     .addComponent(txtAmountToBePay))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,9 +208,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(txtAmountToBePay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPay))
-                .addGap(18, 18, 18)
-                .addComponent(btnGenerateRecipt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -234,37 +257,96 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jComboBox1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MousePressed
-        // TODO add your handling code here:
-        if(!(month6btn.isSelected() || month9btn.isSelected() || month12btn.isSelected() || month3btn.isSelected())) {
-            JOptionPane.showMessageDialog(null, "Please select Duration First");
-            return;
-        }
-        int monthValue = 0;
+//        String duration=null;
+//        float base;
+//        if(month3btn.isSelected()) {
+//            duration = "6 months";
+//            
+//        }
+//        else if(month6btn.isSelected()) {
+//            duration = "1 year";
+//        }
+//        else if(month9btn.isSelected()) {
+//            duration = "2 years";
+//        }
+//        else if(month12btn.isSelected()) {
+//            duration = "5 years";
+//        }
+//        String pack=jComboBox1.getSelectedItem().toString();
+//        switch(pack)
+//        {
+//            case "Platinum":
+//                
+//            case "Gold":
+//                    case "Silver":
+//                    case "Bronze":
+//                        
+//                
+//            
+//        }
+        String duration=null;
         if(month3btn.isSelected()) {
-            monthValue = 200;
+            duration = "6 months";
+            
         }
         else if(month6btn.isSelected()) {
-            monthValue = 350;
+            duration = "1 year";
         }
         else if(month9btn.isSelected()) {
-            monthValue = 450;
+            duration = "2 years";
         }
         else if(month12btn.isSelected()) {
-            monthValue = 525;
+            duration = "5 years";
         }
-        
-    }//GEN-LAST:event_jComboBox1MousePressed
+        String pack=jComboBox1.getSelectedItem().toString();
+         float amount=Integer.parseInt(txtAmountToBePay.getText());
+        try {
+        String sql = " insert into insure_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, f_name);
+                pst.setString(2, l_name);
+                pst.setString(3, gender);
+                pst.setString(4, address);
+                pst.setString(5, email);
+                pst.setString(6, phone);
+                pst.setString(7, blood);
+                pst.setString(8, weight);
+                pst.setString(9, height);
+                pst.setString(10, username);
+              //  pst.setString(11, password);
+                pst.setString(11, age);
+                pst.setString(12, duration);
+                pst.setString(13, pack);
+                pst.setFloat(14, amount);
+                pst.setString(15,"Requested");
+                
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Insurance Requested  successfuly");
+                
+               
+                txtAmountToBePay.setText("");
+                
+        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
+    }//GEN-LAST:event_btnPayActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnGenerateRecipt;
     private javax.swing.JButton btnPay;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

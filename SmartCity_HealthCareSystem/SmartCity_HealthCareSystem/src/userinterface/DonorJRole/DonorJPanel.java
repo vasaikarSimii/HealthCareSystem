@@ -5,6 +5,16 @@
  */
 package userinterface.DonorJRole;
 
+import Business.EcoSystem;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
+
 /**
  *
  * @author jshar
@@ -14,9 +24,80 @@ public class DonorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DonorJPanel
      */
-    public DonorJPanel() {
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+      String a=null;
+    String b=null;
+     String c=null;
+    String d=null;
+    String e=null;
+    String f=null;
+    JPanel userProcessContainer;
+ EcoSystem system;
+ String org=null;
+         String location=null;
+                 String username=null;
+                         String net=null;
+                                 String enter=null; 
+    
+    public DonorJPanel(JPanel userProcessContainer,String org,String  location,String username,String net,String enter) {
         initComponents();
+         this.userProcessContainer=userProcessContainer;
+        this.org=org;
+        this.location=location;
+        this.username=username;
+        this.net=net;
+        this.enter=enter;
+        populateResultTable();
+        populateTable();
     }
+        public void populateTable(){
+       //connect from database -- query
+         try{
+        String sql ="select * from donor_request where donor_org='"+org+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
+     public void populateResultTable(){
+       //connect from database -- query
+         try{
+        String sql ="select * from donor_request where donor_org='"+org+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,25 +113,11 @@ public class DonorJPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Patient Name", "Age", "Blood Group"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        btnAdd.setText("Accept Request");
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -58,10 +125,41 @@ public class DonorJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Patient Name", "Age", "Blood Group", "Status"
+                "Patient Name", "Age", "Blood Group", "Donation Camp Name"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        btnAdd.setText("Accept Request");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Patient Name", "Age", "Blood Group", "Donation Type", "Status"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("DONOR REQUESTS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,32 +167,90 @@ public class DonorJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(68, 68, 68)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(570, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(459, 459, 459)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1289, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(432, 432, 432))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(39, 39, 39)
                 .addComponent(btnAdd)
-                .addGap(61, 61, 61)
+                .addGap(69, 69, 69)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(243, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+         System.out.println("EEEEEEEEEE");
+        int selectedRow = jTable1.getSelectedRow();
+        System.out.println("FFFFFFFFFFFFFFF");
+        if (selectedRow>=0){
+            System.out.println("GGGGGGGGG");
+            a= (String) jTable1.getValueAt(selectedRow,9);
+            System.out.println("");
+            b= (String) jTable1.getValueAt(selectedRow,1);
+            c=(String) jTable1.getValueAt(selectedRow,2);
+            d= (String) jTable1.getValueAt(selectedRow,3);
+            e=(String) jTable1.getValueAt(selectedRow,4);
+            f= (String) jTable1.getValueAt(selectedRow,5);
+            
+          //  k=(String) jTable1.getValueAt(selectedRow,10);
+         //   l= (String) jTable1.getValueAt(selectedRow,11);
+            System.out.println(selectedRow+"  "+a);
+            System.out.println(selectedRow+"  "+f);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here
+        try{
+            //            int seat=Integer.parseInt(jTextField1.getText());
+            //            String model=jTextField2.getText();
+            //            String name=jComboBox1.getSelectedItem().toString();
+            //String result=jComboBox1.getSelectedItem().toString();
+            String sql = "update donor_request set status='" + "Accepted" + "' where username='"+a+"'";
+            pst = conn.prepareStatement(sql);
+
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data Updated successfuly");
+            populateResultTable();
+            populateTable();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } finally {
+
+            try {
+
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

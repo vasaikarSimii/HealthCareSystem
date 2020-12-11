@@ -6,7 +6,16 @@
 package userinterface.labrole;
 
 import Business.EcoSystem;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -14,14 +23,81 @@ import javax.swing.JPanel;
  */
 public class VaccineJPanel extends javax.swing.JPanel {
 JPanel userProcessContainer;
+Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    String a=null;
+    String b=null;
+     String c=null;
+    String d=null;
+    String e=null;
+    String f=null;
 EcoSystem system;
+ String org=null;
+         String location=null;
+                 String username=null;
+                         String net=null;
+                                 String enter=null;
       
 
-    VaccineJPanel(JPanel userProcessContainer, EcoSystem system) {
+    VaccineJPanel(JPanel userProcessContainer, String org,String  location,String username,String net,String enter) {
          initComponents();
        this.userProcessContainer = userProcessContainer;
-        this.system = system;
+      //  this.system = system;
+        this.org=org;
+        this.location=location;
+        this.username=username;
+        this.net=net;
+        this.enter=enter;
+        populateResultTable();
+        populateTable();
          }
+    public void populateTable(){
+       //connect from database -- query
+         try{
+        String sql ="select * from vaccine";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
+     public void populateResultTable(){
+       //connect from database -- query
+         try{
+        String sql ="select * from vaccine_status";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +115,8 @@ EcoSystem system;
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -53,9 +131,19 @@ EcoSystem system;
                 "Patient Name", "Email Address", "Vaccine Type"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnSubmit.setText("Accept Request");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,6 +156,11 @@ EcoSystem system;
                 "Patient Name", "Email Address", "Vaccine Type", "Status"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Vaccineation.gif"))); // NOI18N
@@ -78,6 +171,15 @@ EcoSystem system;
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("VACCINE REQUESTS");
 
+        jButton2.setText("Vaccination Status");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending", "Done " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,16 +188,19 @@ EcoSystem system;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSubmit)
-                                .addGap(44, 44, 44)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSubmit))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)))
+                        .addComponent(jButton2)
+                        .addGap(29, 29, 29)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(250, 250, 250)))
                 .addComponent(jLabel2)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -112,20 +217,143 @@ EcoSystem system;
                         .addComponent(jLabel6)
                         .addGap(53, 53, 53)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnSubmit)
-                        .addGap(56, 56, 56)
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                        .addGap(210, 210, 210)
+                        .addComponent(btnSubmit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try{
+            //            int seat=Integer.parseInt(jTextField1.getText());
+            //            String model=jTextField2.getText();
+            //            String name=jComboBox1.getSelectedItem().toString();
+            String result=jComboBox1.getSelectedItem().toString();
+            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+a+"'";
+            pst = conn.prepareStatement(sql);
+
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Vaccine Data Updated successfuly");
+            populateResultTable();
+            populateTable();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } finally {
+
+            try {
+
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        System.out.println("EEEEEEEEEE");
+        int selectedRow = jTable1.getSelectedRow();
+        System.out.println("FFFFFFFFFFFFFFF");
+        if (selectedRow>=0){
+            System.out.println("GGGGGGGGG");
+            a= (String) jTable1.getValueAt(selectedRow,0);
+            System.out.println("");
+            b= (String) jTable1.getValueAt(selectedRow,1);
+            c=(String) jTable1.getValueAt(selectedRow,2);
+            d= (String) jTable1.getValueAt(selectedRow,3);
+            e=(String) jTable1.getValueAt(selectedRow,4);
+            f= (String) jTable1.getValueAt(selectedRow,5);
+            
+          //  k=(String) jTable1.getValueAt(selectedRow,10);
+         //   l= (String) jTable1.getValueAt(selectedRow,11);
+            System.out.println(selectedRow+"  "+a);
+            System.out.println(selectedRow+"  "+f);
+        }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        System.out.println("EEEEEEEEEE");
+        int selectedRow = jTable1.getSelectedRow();
+        System.out.println("FFFFFFFFFFFFFFF");
+        if (selectedRow>=0){
+            System.out.println("GGGGGGGGG");
+            a= (String) jTable1.getValueAt(selectedRow,0);
+        
+            
+          //  k=(String) jTable1.getValueAt(selectedRow,10);
+         //   l= (String) jTable1.getValueAt(selectedRow,11);
+            System.out.println(selectedRow+"  "+a);
+           
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        try{
+
+            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql1);
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+            Date date = new Date();  
+           String date_time= formatter.format(date);
+            System.out.println("da"+date_time);
+            
+            String acc="Pending";
+           
+
+            System.out.println("Date " + date);
+            System.out.println("A"+a);
+            pst.setString(1,a );
+            pst.setString(2, b);
+            pst.setString(3,c );
+            pst.setString(4,d);
+            pst.setString(5, e);
+            pst.setString(6, f);
+            pst.setString(7, acc);
+             pst.setString(8, "NA");
+             pst.setString(9, org);
+            pst.setString(10, location);
+            pst.setString(11, net);
+            pst.setString(12, enter);
+           
+           
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Test Added in Queue successfuly");
+            populateResultTable();
+           // populateWorkTable();
+
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                pst.close();
+                rs.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
