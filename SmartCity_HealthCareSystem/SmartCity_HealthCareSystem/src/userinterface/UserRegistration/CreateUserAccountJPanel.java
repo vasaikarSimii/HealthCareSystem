@@ -14,7 +14,9 @@ import Business.Role.UserRole;
 import Business.UserAccount.UserAccount;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,6 +42,8 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    byte[] finalfile = null;
+    private String filename = null;
     /**
      * Creates new form CreateUserAccountJPanel
      */
@@ -385,7 +389,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
        
         
         try {
-        String sql = " insert into user_data values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = " insert into user_data values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, firstName);
@@ -400,6 +404,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 pst.setString(10, userName);
                 pst.setString(11, password);
                 pst.setString(12, age);
+                pst.setBytes(13, finalfile);
                 //add image to Db
                //pst.setBlob(13, i1);
                 
@@ -460,7 +465,34 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private void BroswePic1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BroswePic1BtnActionPerformed
         // TODO add your handling code here:
 
-       addImage();
+     JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        try {
+             filename = f.getAbsolutePath();
+        } catch (Exception e) {
+        }
+
+        ImageIcon imageicon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(pic1Lbl.getWidth(), pic1Lbl.getHeight(), Image.SCALE_DEFAULT));
+        pic1Lbl.setIcon(imageicon);
+        File image = null;
+        try {
+            image = new File(filename);
+            
+            FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[16777215];
+            for (int num; (num = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, num);
+
+            }
+            finalfile = bos.toByteArray();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no image selected");
+        }
+        
+
+
         
     }//GEN-LAST:event_BroswePic1BtnActionPerformed
  public void addImage(){

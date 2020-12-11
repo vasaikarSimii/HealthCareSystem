@@ -27,6 +27,7 @@ public class CheckCovidResultJPanel extends javax.swing.JPanel {
     Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
      String f_name=null;
             String l_name=null;
             String gender=null;

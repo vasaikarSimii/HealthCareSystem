@@ -16,13 +16,23 @@ import javax.swing.JPanel;
 public class LabRoleWorkArea extends javax.swing.JPanel {
  JPanel userProcessContainer;
  EcoSystem system;
-    
+ String org=null;
+         String location=null;
+                 String username=null;
+                         String net=null;
+                                 String enter=null; 
     
     /**
      * Creates new form LabRoleWorkArea
      */
-    public LabRoleWorkArea(JPanel userProcessContainer, EcoSystem system) {
+    public LabRoleWorkArea(JPanel userProcessContainer,String org,String  location,String username,String net,String enter) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.org=org;
+        this.location=location;
+        this.username=username;
+        this.net=net;
+        this.enter=enter;
     }
 
     /**
@@ -118,7 +128,7 @@ public class LabRoleWorkArea extends javax.swing.JPanel {
     private void ManageTestingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageTestingBtnActionPerformed
         // TODO add your handling code here:
 
-        TestingJPanel TestingJPanel = new TestingJPanel(userProcessContainer, system);
+        TestingJPanel TestingJPanel = new TestingJPanel(userProcessContainer,org,location,username,net,enter);
         userProcessContainer.add("TestingJPanel",TestingJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -127,7 +137,7 @@ public class LabRoleWorkArea extends javax.swing.JPanel {
     private void ManageVaccineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageVaccineBtnActionPerformed
         // TODO add your handling code here:
         
-        VaccineJPanel VaccineJPanel = new VaccineJPanel(userProcessContainer, system);
+        VaccineJPanel VaccineJPanel = new VaccineJPanel(userProcessContainer, org,location,username,net,enter);
         userProcessContainer.add("VaccineJPanel",VaccineJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

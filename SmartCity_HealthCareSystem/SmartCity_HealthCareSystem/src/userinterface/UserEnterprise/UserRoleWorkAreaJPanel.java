@@ -160,11 +160,15 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void EmergencyServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyServicesBtnActionPerformed
         // TODO add your handling code here:
+        System.out.println("AAAAAAAAAAAAAA");
         EmergencyJPanel EmergencyJPanel=new EmergencyJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        System.out.println("BBBBBBBBB");
         rightPanel.add("EmergencyJPanel",EmergencyJPanel);
+        System.out.println("CCCCCCCCCCC");
         CardLayout layout=(CardLayout)rightPanel.getLayout();
+        System.out.println("DDDDDDDDDDDDDD");
         layout.next(rightPanel);
-
+        System.out.println("EEEEEEEEEEEEE");
     }//GEN-LAST:event_EmergencyServicesBtnActionPerformed
 
     private void HospitalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalServicesBtnActionPerformed

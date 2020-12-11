@@ -12,7 +12,11 @@ import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JPanel;
+import userinterface.dbConn;
 
 /**
  *
@@ -26,6 +30,9 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem system;
     UserAccount account;
     OrganizationDirectory directory;
+    Connection conn= dbConn.getConn();
+    PreparedStatement pst =null;
+    ResultSet rs= null;
     
     /**
      * Creates new form CommunityServicesWorkAreaJPanel
@@ -42,15 +49,19 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 //        populateTable();
 //        
 //    }
-//    
+        String net_name=null;
+        String emer_name=null;
     
-    public EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    public EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, String net_name, String emer_name) {
         initComponents();  
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+        this.net_name=net_name;
+        this.emer_name=emer_name;
         populateTable();
     }
-    
+
+   
     public void populateTable(){
        //connect from database -- query
    }
@@ -70,7 +81,6 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
         ManageDoctorsBtn = new javax.swing.JButton();
         btnOrganization = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -134,11 +144,6 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
         rightPanel.setLayout(new java.awt.CardLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/EmergencyServ.gif"))); // NOI18N
-        rightPanel.add(jLabel1, "card2");
-
         jSplitPane1.setRightComponent(rightPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -156,7 +161,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
     private void ManageOrganizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageOrganizationBtnActionPerformed
         // TODO add your handling code here:
 
-        Ambulance ambulance=new Ambulance(rightPanel);
+        Ambulance ambulance=new Ambulance(rightPanel,net_name);
         rightPanel.add("Ambulance",ambulance);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -168,7 +173,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 
         // CreateDoctorJPanel = new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
 
-        FireDept fireDept = new FireDept(rightPanel);
+        FireDept fireDept = new FireDept(rightPanel,net_name);
         rightPanel.add("FireDept",fireDept);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -176,7 +181,10 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrganizationActionPerformed
         // TODO add your handling code here:
-        
+        ManageOrganizationJPanel man = new ManageOrganizationJPanel(rightPanel,net_name);
+        rightPanel.add("man",man);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_btnOrganizationActionPerformed
 
 
@@ -184,7 +192,6 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton ManageDoctorsBtn;
     private javax.swing.JButton ManageOrganizationBtn;
     private javax.swing.JButton btnOrganization;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;

@@ -28,14 +28,19 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     EcoSystem system;
     UserAccount account;
     OrganizationDirectory directory;
+     String net_name=null;
+    String emer_name=null;
+    
     
     /**
      * Creates new form MedicalServicesWorkArea
      */
-    public MedicalServicesWorkArea(JPanel userProcessContainer,Enterprise enterprise){
+    public MedicalServicesWorkArea(JPanel userProcessContainer,String net_name,String emer_name){
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+        this.net_name=net_name;
+        this.emer_name=emer_name;
     }
 //    public MedicalServicesWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem system) {
 //        initComponents();
@@ -158,7 +163,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
         // NGOAdminManageSceneJPanel manageScene = new NGOAdminManageSceneJPanel( rightSystemAdminPanel,  enterprise,  system,  organization,  network, account);
 
         //ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(rightPanel ,system, organization,  network, enterprise, account);
-        ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(rightPanel);
+        ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(rightPanel, net_name,emer_name);
         rightPanel.add("manageOrganizationJPanel",manageOrganizationJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -168,7 +173,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     private void btnLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaboratoryActionPerformed
         // TODO add your handling code here:
        // CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel,system, organization,  network, enterprise, account);
-      CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel);
+      CreateLaboratoryJPanel createLaboratoryJPanel = new CreateLaboratoryJPanel(rightPanel, net_name,emer_name);
         rightPanel.add("createLaboratoryJPanel",createLaboratoryJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -177,7 +182,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     private void btnDonorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonorsActionPerformed
         // TODO add your handling code here:
         //CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel,system, organization,  network, enterprise, account);
-        CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel);
+        CreateDonorJPanel createDonorJPanel = new CreateDonorJPanel(rightPanel, net_name,emer_name);
         rightPanel.add("createDonorJPanel",createDonorJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -186,7 +191,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     private void btnPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPharmacyActionPerformed
         // TODO add your handling code here:
         //CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel,system, organization,  network, enterprise, account);
-        CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel);
+        CreatePharmacyJPanel createPharmacyJPanel = new CreatePharmacyJPanel(rightPanel, net_name,emer_name);
         rightPanel.add("createPharmacyJPanel",createPharmacyJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
