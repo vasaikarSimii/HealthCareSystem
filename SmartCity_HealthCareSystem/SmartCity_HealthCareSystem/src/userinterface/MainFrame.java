@@ -421,6 +421,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    return;
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
                 txtUsername.setText("");
@@ -469,6 +472,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    return;
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
                 txtUsername.setText("");
@@ -518,6 +524,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    return;
                 }
                 
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -567,6 +576,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
                 txtUsername.setText("");
@@ -614,6 +626,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
                 txtUsername.setText("");
@@ -662,6 +677,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
            
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -711,6 +729,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                     
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -760,6 +781,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                     
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -804,6 +828,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                     
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -845,6 +872,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
                 txtUsername.setText("");
@@ -887,6 +917,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                    
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -919,7 +952,10 @@ public class MainFrame extends javax.swing.JFrame {
                 CardLayout layout=(CardLayout)container.getLayout();
                 layout.next(container);
                 JOptionPane.showMessageDialog(null, "Login successful");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
+                
             }
             else{
                 JOptionPane.showMessageDialog(null, "Login failed");
@@ -945,6 +981,9 @@ public class MainFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
                     JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
                     
                 }
                 JOptionPane.showMessageDialog(null, "Login failed");

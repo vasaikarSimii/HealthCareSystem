@@ -44,7 +44,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
             String a=null;
             String b=null;
                
-    public DoctorAppointmentJPanel(JPanel UserpProcessContainer, String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
+    public DoctorAppointmentJPanel(JPanel userProcessContainer, String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
         this.f_name=f_name;
         this.l_name=l_name;
