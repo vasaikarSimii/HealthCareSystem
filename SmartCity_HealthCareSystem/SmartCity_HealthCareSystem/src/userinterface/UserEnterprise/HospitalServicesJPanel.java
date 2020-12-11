@@ -176,7 +176,7 @@ public class HospitalServicesJPanel extends javax.swing.JPanel {
 
     private void btnDotorAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDotorAppointmentActionPerformed
         // TODO add your handling code here:
-        DoctorAppointmentJPanel doctorAppointmentJPanel = new DoctorAppointmentJPanel(f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        DoctorAppointmentJPanel doctorAppointmentJPanel = new DoctorAppointmentJPanel(userProcessContainer,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
         userProcessContainer.add("doctorAppointmentJPanel",doctorAppointmentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

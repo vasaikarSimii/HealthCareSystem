@@ -162,7 +162,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 690, 105));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 700, 105));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
