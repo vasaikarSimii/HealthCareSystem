@@ -19,6 +19,12 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,6 +55,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
     String a=null;
     String b=null;
     String date=null;
+    String patName = null;
+    String patResult = null;
+    String patEmail = null;
+    String patDate = null;
     
     public DoctorJPanel(JPanel userProcessContainer,String doc_name,String special,String location,String doc_net,String doc_enter,String name) {
         initComponents();
@@ -135,8 +145,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        VaccinejComboBox = new javax.swing.JComboBox<String>();
-        testingjComboBox = new javax.swing.JComboBox<String>();
+        VaccinejComboBox = new javax.swing.JComboBox<>();
+        testingjComboBox = new javax.swing.JComboBox<>();
         btnGenerate = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -146,6 +156,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
         btnAccept = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkArea = new javax.swing.JTable();
+        btnEmail = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1400, 700));
@@ -200,9 +211,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
 
         jCheckBox2.setText("Testing");
 
-        VaccinejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Meningocacal", "Flu Shot", "MMR", "TDC", "Rubella", "Hepatatis" }));
+        VaccinejComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meningocacal", "Flu Shot", "MMR", "TDC", "Rubella", "Hepatatis" }));
 
-        testingjComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ECG", "CBC", "CitiScan", "X-Ray", "Endoscopy", "Sonography" }));
+        testingjComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ECG", "CBC", "CitiScan", "X-Ray", "Endoscopy", "Sonography" }));
 
         btnGenerate.setText("Generate Prescriptions");
         btnGenerate.addActionListener(new java.awt.event.ActionListener() {
@@ -326,7 +337,19 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 "Patient Name", "Accepted/Denied", "Status", "Next Steps"
             }
         ));
+        tblWorkArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblWorkAreaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblWorkArea);
+
+        btnEmail.setText("Send Email");
+        btnEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -334,25 +357,30 @@ public class DoctorJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDeny, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(btnAccept)
-                        .addGap(188, 188, 188))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnDeny, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)
+                                .addComponent(btnAccept)
+                                .addGap(188, 188, 188))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(36, 36, 36)))
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(36, 36, 36)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +398,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
                     .addComponent(btnDeny))
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(435, 435, 435))
+                .addGap(31, 31, 31)
+                .addComponent(btnEmail)
+                .addGap(375, 375, 375))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -596,12 +626,56 @@ public class DoctorJPanel extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
+        // TODO add your handling code here:
+//        String receiver = p;
+//        final String sender = "healthcaresystemaed@gmail.com";
+//        final String password = "healthcaresystem";
+//        String Subjects = "Result";
+//        String msg = "Hello " + patName + "\n\n" + "Your covid result from Covid Center " + coviCenter + " is " + patResult + 
+//                "\n\nThank you" ;
+//                
+//        Properties properties = new Properties();
+//        properties.put("mail.smtp.auth","true");
+//        properties.put("mail.smtp.starttls.enable","true");
+//        properties.put("mail.smtp.host","smtp.gmail.com");
+//        properties.put("mail.smtp.port","587");
+//        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+//            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+//                return new javax.mail.PasswordAuthentication(sender,password);
+//            }
+//        });
+////        
+//        try{
+//            MimeMessage message = new MimeMessage(session);
+//            message.setFrom(new InternetAddress(sender));
+//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+//            message.setSubject(Subjects);
+//            message.setText(msg);
+//            Transport.send(message);
+//        }catch(Exception ex){
+//            System.out.println(""+ex);
+//        }
+    }//GEN-LAST:event_btnEmailActionPerformed
+
+    private void tblWorkAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWorkAreaMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = tblWorkArea.getSelectedRow();
+        if (selectedRow>=0){
+            patEmail = (String) tblWorkArea.getValueAt(selectedRow,0);
+            patName =  (String) tblWorkArea.getValueAt(selectedRow,0);
+            patResult = (String) tblWorkArea.getValueAt(selectedRow,1);
+            patDate = (String) tblWorkArea.getValueAt(selectedRow,2);
+        }  
+    }//GEN-LAST:event_tblWorkAreaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Testingtxt;
     private javax.swing.JComboBox<String> VaccinejComboBox;
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnDeny;
+    private javax.swing.JButton btnEmail;
     private javax.swing.JButton btnGenerate;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

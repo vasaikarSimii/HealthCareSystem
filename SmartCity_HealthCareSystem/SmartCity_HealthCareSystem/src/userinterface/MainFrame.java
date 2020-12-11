@@ -385,6 +385,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         String name=txtUsername.getText();
         String pass=txtPassword.getText();
+        
+        if(name.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username and Password cannot be empty");
+            return;
+        }
 
         String choice=jComboBox1.getSelectedItem().toString();
 
@@ -415,8 +420,11 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("ur",ur);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -437,6 +445,7 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e);
                 }
             }
+            break;
             case "Doctor":
 
             try {
@@ -459,9 +468,13 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("dp",dp);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
+                
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -481,6 +494,7 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e);
                 }
             }
+            break;
             case "Laboratory":
 
             try {
@@ -503,8 +517,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("lab",lab);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -548,8 +566,11 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("donor",donor);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -592,8 +613,11 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("in",in);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -637,8 +661,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("pl",pj);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+           
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -682,8 +710,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("ar",ar);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -727,8 +759,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("ar",ar);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -767,8 +803,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("hw",hw);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -804,8 +844,11 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("mswa",mswa);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -843,8 +886,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("em",em);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                   
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -875,7 +922,10 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Login Failed");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
             }
             case "Covid Care":
             sql = "select * from manage_covid where covid_username='"+name+"' and covid_pass='"+pass+"'";
@@ -894,8 +944,12 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("covid",covid);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
