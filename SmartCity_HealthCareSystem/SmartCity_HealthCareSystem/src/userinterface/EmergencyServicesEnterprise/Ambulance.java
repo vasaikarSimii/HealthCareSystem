@@ -284,11 +284,29 @@ public class Ambulance extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         //add code to store all data in database
-        String name=jComboBox1.getSelectedItem().toString();
+        
+        String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
         String contact = txtLocation2.getText();
         String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        
+        if(name.isEmpty() || contact.isEmpty() || location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_ambulance values(?,?,?,?,?,?)";
 
@@ -312,7 +330,7 @@ public class Ambulance extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Organization must be unique");
         }finally{
             try {
               //  rs.close();

@@ -320,6 +320,12 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
 //            System.out.println(""+ex);
 //        }
 
+        
+        if(jTable2.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null,"Please select row from above table");
+            return;
+        }
+
         String receiver = p;
         final String sender = "healthcaresystemaed@gmail.com";
         final String password = "healthcaresystem";

@@ -116,7 +116,7 @@ public void populateTable(){
         txtLocation = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtLocation2 = new javax.swing.JTextField();
+        txtContact = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCovidCare = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -202,7 +202,7 @@ public void populateTable(){
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLocation2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -240,7 +240,7 @@ public void populateTable(){
                             .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLocation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -277,11 +277,29 @@ public void populateTable(){
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         //add code to store all data in database
-         String name=jComboBox1.getSelectedItem().toString();
-        String contact = txtLocation2.getText();
+        
+       String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
+        String contact = txtContact.getText();
         String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        
+        if(contact.isEmpty() || location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_fire values(?,?,?,?,?,?)";
 
@@ -300,12 +318,12 @@ public void populateTable(){
                 populateTable();
                 txtLocation.setText("");
                 txtPassword.setText("");
-                txtLocation2.setText("");
+                txtContact.setText("");
                 txtUsername.setText("");
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Organization must be unique");
         }finally{
             try {
               //  rs.close();
@@ -342,8 +360,8 @@ public void populateTable(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCovidCare;
+    private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtLocation;
-    private javax.swing.JTextField txtLocation2;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

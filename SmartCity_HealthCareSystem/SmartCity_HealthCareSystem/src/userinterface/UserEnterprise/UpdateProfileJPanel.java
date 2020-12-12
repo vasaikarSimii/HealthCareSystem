@@ -78,6 +78,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         txtWeight.setText(weight);
         txtHeight.setText(height);
         txtHeight1.setText(age);
+        
         boxBloodGroup.setSelectedItem(blood);
     }
 
@@ -107,8 +108,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         txtHeight = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        boxBloodGroup = new javax.swing.JComboBox<String>();
+        boxBloodGroup = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
@@ -202,15 +202,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         });
         add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, -1));
 
-        btnBack.setText("<<Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
-
-        boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
+        boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
         add(boxBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 60, -1));
 
         jLabel13.setText("Password:");
@@ -481,11 +473,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        userProcessContainer.remove(this);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void BroswePic1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BroswePic1BtnActionPerformed
         // TODO add your handling code here:
 JFileChooser chooser = new JFileChooser();
@@ -531,7 +518,6 @@ public void addImage(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BroswePic1Btn;
     private javax.swing.JComboBox<String> boxBloodGroup;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

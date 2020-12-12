@@ -259,6 +259,12 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         String u_name=usernameJTextField.getText();
         String pass=passwordJPasswordField.getText();
         String name=nameJTextField.getText();
+        
+        if(u_name.isEmpty() || pass.isEmpty() || name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Text Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_logins values(?,?,?,?,?)";
 
@@ -277,7 +283,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 passwordJPasswordField.setText("");
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Username must be different from others");
         }finally{
             try {
               //  rs.close();

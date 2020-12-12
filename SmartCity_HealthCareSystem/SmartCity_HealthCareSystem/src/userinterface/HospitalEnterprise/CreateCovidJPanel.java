@@ -274,12 +274,26 @@ public class CreateCovidJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //add code to store all data in database
         
+       String name = null;
         
-      
-        String name=jComboBox1.getSelectedItem().toString();
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Covid Care Organization First");
+            return;
+        }
+        
         String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        
+        if(location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+            return;
+        }
         try {
         String sql = " insert into manage_covid values(?,?,?,?,?,?)";
 
@@ -293,7 +307,7 @@ public class CreateCovidJPanel extends javax.swing.JPanel {
                 
                 
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Organisation Added successfuly");
+                JOptionPane.showMessageDialog(null, "Organization Created..!!");
                 populateTable();
                 txtLocation.setText("");
                 txtPassword.setText("");
@@ -301,7 +315,7 @@ public class CreateCovidJPanel extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Organization ID must be unique");
         }finally{
             try {
               //  rs.close();

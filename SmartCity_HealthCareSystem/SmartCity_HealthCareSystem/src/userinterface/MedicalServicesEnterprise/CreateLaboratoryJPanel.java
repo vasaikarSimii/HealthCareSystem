@@ -59,7 +59,7 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
         this.emer_name=emer_name;
         System.out.println("2"+emer_name);
          initComponents();
-         populateTable();
+//         populateTable();
          
          populateNameComboBox();
         
@@ -243,10 +243,28 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name=jComboBox1.getSelectedItem().toString();
+        
+        String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
         String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        
+        if(location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_lab values(?,?,?,?,?,?)";
 

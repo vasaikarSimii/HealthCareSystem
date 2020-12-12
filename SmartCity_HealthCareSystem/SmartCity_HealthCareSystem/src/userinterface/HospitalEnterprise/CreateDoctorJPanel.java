@@ -233,23 +233,22 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
+                        .addGap(116, 116, 116)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPassword)
-                                .addComponent(txtUsername)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtSpecialization)
-                                .addComponent(txtLocation))
-                            .addComponent(btnSubmit))
-                        .addGap(125, 125, 125)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtLocation)
+                            .addComponent(txtSpecialization)
+                            .addComponent(txtUsername)
+                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, 0, 129, Short.MAX_VALUE)
+                            .addComponent(txtPassword))
+                        .addGap(60, 60, 60)
                         .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
@@ -257,7 +256,7 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,11 +267,11 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -291,9 +290,9 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnSubmit))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(29, 29, 29)
                         .addComponent(jLabel8)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -309,11 +308,28 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //store data to DB
         
-        String name=jComboBox1.getSelectedItem().toString();
+        String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
         String specialization = txtSpecialization.getText();
         String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        
+        if(specialization.isEmpty() || location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_doc values(?,?,?,?,?,?,?)";
 
@@ -328,7 +344,7 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
                 
                 
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Organisation Added successfuly");
+                JOptionPane.showMessageDialog(null, "Organization Created..!!");
                 populateTable();
                 txtLocation.setText("");
                 txtPassword.setText("");
@@ -350,7 +366,6 @@ public class CreateDoctorJPanel extends javax.swing.JPanel {
         
       
         
-        JOptionPane.showMessageDialog(null, "Doctor Organization Created..!!");
         
         populateTable();
         

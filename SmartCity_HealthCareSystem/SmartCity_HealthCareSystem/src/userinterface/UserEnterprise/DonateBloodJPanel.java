@@ -6,6 +6,7 @@
 package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
+import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,6 +62,7 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
         this.height=height;
         this.username=username;
         this.age=age;
+        this.userProcessInterface = userProcessInterface;
         populateTable();
         
     }
@@ -149,6 +151,11 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/bloodDonateUser.gif"))); // NOI18N
 
         btnBack1.setText("<<Back");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -259,6 +266,13 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
             }
 
     }//GEN-LAST:event_btnGenerateRequestActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here:
+        userProcessInterface.remove(this);
+        CardLayout layout = (CardLayout) userProcessInterface.getLayout();
+        layout.previous(userProcessInterface);
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.proteanit.sql.DbUtils;
@@ -39,6 +45,11 @@ public class CovidManageJPanel extends javax.swing.JPanel {
     String f=null;
     String g=null;
     String h=null;
+    String p = null;
+    String patName = null;
+    String coviCenter = null;
+    String patStatus = null;
+    
     
     
     public CovidManageJPanel(JPanel userProcessContainer,String name,String pass,String covid_net,String covid_enter) {
@@ -112,6 +123,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        btnEmail = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -191,6 +203,11 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
@@ -199,6 +216,13 @@ public class CovidManageJPanel extends javax.swing.JPanel {
             jTable2.getColumnModel().getColumn(3).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        btnEmail.setText("Email");
+        btnEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,7 +246,10 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(393, 393, 393)
+                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(389, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -240,7 +267,9 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                     .addComponent(jButton2))
                 .addGap(97, 97, 97)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(btnEmail)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -368,8 +397,58 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
+        // TODO add your handling code here:
+        
+        if(jTable2.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null,"Please select row from above table");
+            return;
+        }
+        
+        String receiver = p;
+        final String sender = "healthcaresystemaed@gmail.com";
+        final String password = "healthcaresystem";
+        String Subjects = "Result";
+        String msg = "Hello " + patName + "\n\n" + "Your covid test from Covid Center " + coviCenter + " is " + patStatus + 
+                "\n\nThank you" ;
+                
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                return new javax.mail.PasswordAuthentication(sender,password);
+            }
+        });
+//        
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(Subjects);
+            message.setText(msg);
+            Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
+    }//GEN-LAST:event_btnEmailActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTable2.getSelectedRow();
+        if (selectedRow>=0){
+            p = (String) jTable2.getValueAt(selectedRow,5);
+            patName = (String) jTable2.getValueAt(selectedRow,1);
+            coviCenter = (String) jTable2.getValueAt(selectedRow,7);
+            patStatus = (String) jTable2.getValueAt(selectedRow,8);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEmail;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
