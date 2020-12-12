@@ -120,6 +120,10 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblNetwork);
+        if (tblNetwork.getColumnModel().getColumnCount() > 0) {
+            tblNetwork.getColumnModel().getColumn(0).setResizable(false);
+            tblNetwork.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 94, 541, 112));
 

@@ -151,11 +151,16 @@ public class CreatePharmacyJPanel extends javax.swing.JPanel {
             new String [] {
                 "Pharmacy Name", "Location"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblPharmacy);
-        if (tblPharmacy.getColumnModel().getColumnCount() > 0) {
-            tblPharmacy.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         jLabel1.setText("Pharmacy Name:");
 

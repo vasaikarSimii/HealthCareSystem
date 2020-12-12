@@ -164,7 +164,15 @@ public class CreateCovidJPanel extends javax.swing.JPanel {
             new String [] {
                 "Covid Care Name", "Location"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCovidCare);
 
         jLabel1.setText("Name:");

@@ -163,7 +163,15 @@ public void populateTable(){
             new String [] {
                 "Fire Dept Station Name", "Location", "Contact Details", "Username"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCovidCare);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

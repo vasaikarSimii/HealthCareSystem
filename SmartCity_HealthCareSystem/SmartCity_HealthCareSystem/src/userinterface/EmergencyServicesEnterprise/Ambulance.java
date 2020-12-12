@@ -181,7 +181,15 @@ public class Ambulance extends javax.swing.JPanel {
             new String [] {
                 "Ambulance Company Name", "Location", "Contact Details"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCovidCare);
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
