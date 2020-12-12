@@ -158,7 +158,15 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
             new String [] {
                 "Laboratory Name", "Location"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Laboratory Name:");

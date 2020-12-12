@@ -134,7 +134,15 @@ public class AmbulanceRole extends javax.swing.JPanel {
             new String [] {
                 "User Name", "Location", "Number of people injured", "Alternate Phone Number", "Time of Response"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 700, 105));
@@ -154,7 +162,15 @@ public class AmbulanceRole extends javax.swing.JPanel {
             new String [] {
                 "User Name", "Location", "Number of people injured", "Alternate Phone Number"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable4MouseClicked(evt);

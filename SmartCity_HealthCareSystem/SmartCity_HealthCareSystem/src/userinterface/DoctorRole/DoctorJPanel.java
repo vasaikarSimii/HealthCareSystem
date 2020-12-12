@@ -179,7 +179,15 @@ public class DoctorJPanel extends javax.swing.JPanel {
             new String [] {
                 "Patient Name", "Age", "Symptoms"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblPatientProfile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPatientProfileMouseClicked(evt);

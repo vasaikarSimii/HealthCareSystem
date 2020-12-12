@@ -35,7 +35,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="715" y="178" width="-1" height="-1"/>
+          <AbsoluteConstraints x="600" y="230" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -45,7 +45,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="180" y="230" width="700" height="105"/>
+          <AbsoluteConstraints x="70" y="280" width="700" height="105"/>
         </Constraint>
       </Constraints>
 
@@ -58,11 +58,11 @@
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="User Name" type="java.lang.Object"/>
-                <Column editable="true" title="Location" type="java.lang.Object"/>
-                <Column editable="true" title="Number of people injured" type="java.lang.Object"/>
-                <Column editable="true" title="Alternate Phone Number" type="java.lang.Object"/>
-                <Column editable="true" title="Time of Response" type="java.lang.Object"/>
+                <Column editable="false" title="User Name" type="java.lang.Object"/>
+                <Column editable="false" title="Location" type="java.lang.Object"/>
+                <Column editable="false" title="Number of people injured" type="java.lang.Object"/>
+                <Column editable="false" title="Alternate Phone Number" type="java.lang.Object"/>
+                <Column editable="false" title="Time of Response" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -110,7 +110,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="760" y="20" width="-1" height="-1"/>
+          <AbsoluteConstraints x="670" y="30" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -120,7 +120,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="190" y="60" width="690" height="105"/>
+          <AbsoluteConstraints x="60" y="70" width="690" height="105"/>
         </Constraint>
       </Constraints>
 
@@ -133,10 +133,10 @@
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="User Name" type="java.lang.Object"/>
-                <Column editable="true" title="Location" type="java.lang.Object"/>
-                <Column editable="true" title="Number of people injured" type="java.lang.Object"/>
-                <Column editable="true" title="Alternate Phone Number" type="java.lang.Object"/>
+                <Column editable="false" title="User Name" type="java.lang.Object"/>
+                <Column editable="false" title="Location" type="java.lang.Object"/>
+                <Column editable="false" title="Number of people injured" type="java.lang.Object"/>
+                <Column editable="false" title="Alternate Phone Number" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -189,7 +189,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="20" width="-1" height="-1"/>
+          <AbsoluteConstraints x="250" y="30" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

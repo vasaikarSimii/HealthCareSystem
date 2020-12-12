@@ -122,7 +122,7 @@ public class FireRole extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, -1, -1));
 
         jTable2.setBackground(new java.awt.Color(204, 255, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -135,14 +135,22 @@ public class FireRole extends javax.swing.JPanel {
             new String [] {
                 "User Name", "Location", "Number of people injured", "Alternate Phone Number", "Time of Response"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 700, 105));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 700, 105));
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
         jButton3.setText("refresh");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, -1, -1));
 
         jTable4.setBackground(new java.awt.Color(204, 255, 204));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -155,7 +163,15 @@ public class FireRole extends javax.swing.JPanel {
             new String [] {
                 "User Name", "Location", "Number of people injured", "Alternate Phone Number"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable4MouseClicked(evt);
@@ -163,14 +179,14 @@ public class FireRole extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 690, 105));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 690, 105));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText(" MANAGE FIRE DEPARTMENT");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/ambulance.gif"))); // NOI18N
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, 420));

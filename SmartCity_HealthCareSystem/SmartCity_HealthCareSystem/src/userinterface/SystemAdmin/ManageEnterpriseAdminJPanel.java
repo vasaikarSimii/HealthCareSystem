@@ -176,7 +176,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -185,6 +185,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         });
         enterpriseJTable.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(enterpriseJTable);
+        enterpriseJTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 94, 523, 95));
 

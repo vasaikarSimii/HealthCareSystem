@@ -145,11 +145,16 @@ public class CreateDonorJPanel extends javax.swing.JPanel {
             new String [] {
                 "Organ Donation Camp Name", "Type of Donation", "Location"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblDonors);
-        if (tblDonors.getColumnModel().getColumnCount() > 0) {
-            tblDonors.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         jLabel1.setText("Donation Camp Name:");
 
