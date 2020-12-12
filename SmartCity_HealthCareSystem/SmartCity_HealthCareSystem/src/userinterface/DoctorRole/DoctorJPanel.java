@@ -20,6 +20,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -319,7 +321,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAccept.setText("Accept Appointment");
+        btnAccept.setText("Complete Appointment");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptActionPerformed(evt);
@@ -628,11 +630,37 @@ public class DoctorJPanel extends javax.swing.JPanel {
 
     private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
         // TODO add your handling code here:
-//        String receiver = p;
+//        int selectedRow = tblWorkArea.getSelectedRow();
+//        String name = (String)tblWorkArea.getValueAt(selectedRow,0);
+//        String email =  null;
+//       
+//       try {
+//            String sql2 = "select email from user_data where username="+name;
+//            pst = conn.prepareStatement(sql2);
+//            rs = pst.executeQuery();
+//            while(rs.next()) {
+//                pst.setString(4,email);
+//            }
+//       } catch (SQLException ex) {
+//           Logger.getLogger(DoctorJPanel.class.getName()).log(Level.SEVERE, null, ex);
+//       }
+//       finally {
+//            
+//            try{
+//                rs.close();
+//                pst.close();
+//                
+//            }
+//            catch(Exception e){
+//                
+//            }
+//        }
+//       
+//        String receiver = email;
 //        final String sender = "healthcaresystemaed@gmail.com";
 //        final String password = "healthcaresystem";
 //        String Subjects = "Result";
-//        String msg = "Hello " + patName + "\n\n" + "Your covid result from Covid Center " + coviCenter + " is " + patResult + 
+//        String msg = "Hello " + patName + "\n\n" + "Your Doctor Appointment is "  + " is " + patResult + 
 //                "\n\nThank you" ;
 //                
 //        Properties properties = new Properties();

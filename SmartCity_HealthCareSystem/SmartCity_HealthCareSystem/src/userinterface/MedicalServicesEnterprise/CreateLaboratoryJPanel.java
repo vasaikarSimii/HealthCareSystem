@@ -59,7 +59,7 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
         this.emer_name=emer_name;
         System.out.println("2"+emer_name);
          initComponents();
-//         populateTable();
+         populateTable();
          
          populateNameComboBox();
         

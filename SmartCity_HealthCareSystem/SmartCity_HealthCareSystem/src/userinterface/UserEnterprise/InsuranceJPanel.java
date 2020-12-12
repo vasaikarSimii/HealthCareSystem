@@ -388,16 +388,16 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         }
         
         if(month6btn.isSelected()) {
-            monthvalue = 200;
+            monthvalue = 50;
         }
         else if(year1btn.isSelected()) {
-            monthvalue = 375;
+            monthvalue = 70;
         }
         else if(year2btn.isSelected()) {
-            monthvalue = 425;
+            monthvalue = 80;
         }
         else if(year5btn.isSelected()) {
-            monthvalue = 600;
+            monthvalue = 100;
         }
         
         if(jComboBox1.getSelectedIndex() == 0) {
