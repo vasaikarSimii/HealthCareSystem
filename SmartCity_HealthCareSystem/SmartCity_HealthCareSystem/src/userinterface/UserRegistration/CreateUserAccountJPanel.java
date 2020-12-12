@@ -93,7 +93,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        txtHeight1 = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
         pic1Lbl = new javax.swing.JLabel();
         BroswePic1Btn = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -208,7 +208,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
 
         jLabel16.setText("Age:");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
-        add(txtHeight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, -1));
+        add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, -1));
 
         pic1Lbl.setBackground(new java.awt.Color(0, 204, 204));
         pic1Lbl.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
@@ -254,9 +254,10 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         //All fields will be necessary
         
         if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtAddress.getText().isEmpty() || 
-                txtEmail.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtHeight.getText().isEmpty() ||
+                txtEmail.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtHeight.getText().isEmpty() || txtAge.getText().isEmpty() ||
                 txtWeight.getText().isEmpty() || (rBtnFemale.isSelected() == false && rBtnMale.isSelected() == false
-                && rBtnOthers.isSelected() == false) || boxBloodGroup.getSelectedIndex() == 0) {
+                && rBtnOthers.isSelected() == false) || boxBloodGroup.getSelectedIndex() == 0
+                || txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fields cannot be empty");
             return;
         }
@@ -374,17 +375,23 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Height must have digits only");
             return;
         }
-        if (pic1Lbl.getIcon()==null)
+        
+        String age=txtAge.getText();
+        flag = age.matches("^[0-9]+$");
+        if(!flag) {
+            JOptionPane.showMessageDialog(null, "Height must have digits only");
+            return;
+        }
+        
+        if (pic1Lbl.getIcon()==null) {
+            JOptionPane.showMessageDialog(null, "Please upload photo");
+            return;
+        }
             
-            JOptionPane.showConfirmDialog(null, "Please upload photo");
-             
-        else {
-            JOptionPane.showMessageDialog(null, "Person Profile has been saved successfully");
-         }
-  
+         
         String userName = txtUsername.getText();
         String password = txtPassword.getText();
-        String age=txtHeight1.getText();
+       
     
        
         
@@ -417,6 +424,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 txtFirstName.setText("");
                 txtHeight.setText("");
                 txtLastName.setText("");
+                txtAge.setText("");
                 txtPhoneNumber.setText("");
                 txtUsername.setText("");
                 pic1Lbl.setIcon(null);
@@ -533,10 +541,10 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton rBtnMale;
     private javax.swing.JRadioButton rBtnOthers;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtHeight;
-    private javax.swing.JTextField txtHeight1;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;

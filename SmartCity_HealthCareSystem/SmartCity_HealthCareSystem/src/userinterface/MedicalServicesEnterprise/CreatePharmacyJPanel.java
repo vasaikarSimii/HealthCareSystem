@@ -245,10 +245,28 @@ public class CreatePharmacyJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        String name=jComboBox1.getSelectedItem().toString();
+        
+       String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
         String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        
+        if(location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_phamacy values(?,?,?,?,?,?)";
 

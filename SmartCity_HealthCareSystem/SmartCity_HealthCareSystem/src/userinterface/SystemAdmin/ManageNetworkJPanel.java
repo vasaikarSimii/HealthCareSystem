@@ -163,12 +163,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         
         
         
-        if(name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter Network name");
-            return;
-        }
-        else if(state.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter State name");
+        if(name.isEmpty() || state.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Text Fields cannot be empty");
             return;
         }
        try {

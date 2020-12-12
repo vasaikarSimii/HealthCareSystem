@@ -37,6 +37,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
              Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
     /**
      * Creates new form InsuranceJPanel
      */
@@ -73,56 +74,64 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        month3btn = new javax.swing.JRadioButton();
         month6btn = new javax.swing.JRadioButton();
-        month9btn = new javax.swing.JRadioButton();
-        month12btn = new javax.swing.JRadioButton();
+        year1btn = new javax.swing.JRadioButton();
+        year2btn = new javax.swing.JRadioButton();
+        year5btn = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtAmountToBePay = new javax.swing.JTextField();
         btnPay = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        btnGenerate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setText("Month:");
 
-        month3btn.setText("6 month");
-        month3btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                month3btnActionPerformed(evt);
-            }
-        });
-
-        month6btn.setText("1 year");
+        month6btn.setText("6 month");
         month6btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 month6btnActionPerformed(evt);
             }
         });
 
-        month9btn.setText("2 year");
-        month9btn.addActionListener(new java.awt.event.ActionListener() {
+        year1btn.setText("1 year");
+        year1btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                month9btnActionPerformed(evt);
+                year1btnActionPerformed(evt);
             }
         });
 
-        month12btn.setText("5 years");
-        month12btn.addActionListener(new java.awt.event.ActionListener() {
+        year2btn.setText("2 year");
+        year2btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                month12btnActionPerformed(evt);
+                year2btnActionPerformed(evt);
+            }
+        });
+
+        year5btn.setText("5 years");
+        year5btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                year5btnActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Plan Type:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Platinum", "Gold", "Silver", "Bronze", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platinum", "Gold", "Silver", "Bronze" }));
 
         jLabel5.setText("Amount to be pay:");
+
+        txtAmountToBePay.setEditable(false);
+        txtAmountToBePay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmountToBePayActionPerformed(evt);
+            }
+        });
 
         btnPay.setText("Request Insurance");
         btnPay.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +156,13 @@ public class InsuranceJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnGenerate.setText("Generate");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,29 +177,30 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnPay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(month6btn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(year1btn)))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBox1, 0, 111, Short.MAX_VALUE)
-                                    .addComponent(txtAmountToBePay))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtAmountToBePay, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnGenerate)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(month3btn)
+                                .addComponent(year2btn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(month6btn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(month9btn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(month12btn))))
+                                .addComponent(year5btn))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(392, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,61 +211,66 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(month3btn)
-                    .addComponent(month12btn)
                     .addComponent(month6btn)
-                    .addComponent(month9btn)
+                    .addComponent(year5btn)
+                    .addComponent(year1btn)
+                    .addComponent(year2btn)
                     .addComponent(jLabel2))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtAmountToBePay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPay))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtAmountToBePay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGenerate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPay))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void month3btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month3btnActionPerformed
-        // TODO add your handling code here:
-        if(month3btn.isSelected()) {
-            month6btn.setSelected(false);
-            month9btn.setSelected(false);
-            month12btn.setSelected(false);
-        }
-    }//GEN-LAST:event_month3btnActionPerformed
 
     private void month6btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month6btnActionPerformed
         // TODO add your handling code here:
         if(month6btn.isSelected()) {
-            month3btn.setSelected(false);
-            month9btn.setSelected(false);
-            month12btn.setSelected(false);
+            year1btn.setSelected(false);
+            year2btn.setSelected(false);
+            year5btn.setSelected(false);
         }
     }//GEN-LAST:event_month6btnActionPerformed
 
-    private void month9btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month9btnActionPerformed
+    private void year1btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year1btnActionPerformed
         // TODO add your handling code here:
-        if(month9btn.isSelected()) {
-            month3btn.setSelected(false);
+        if(year1btn.isSelected()) {
             month6btn.setSelected(false);
-            month12btn.setSelected(false);
+            year2btn.setSelected(false);
+            year5btn.setSelected(false);
         }
-    }//GEN-LAST:event_month9btnActionPerformed
+    }//GEN-LAST:event_year1btnActionPerformed
 
-    private void month12btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month12btnActionPerformed
+    private void year2btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year2btnActionPerformed
         // TODO add your handling code here:
-        if(month12btn.isSelected()) {
-            month3btn.setSelected(false);
+        if(year2btn.isSelected()) {
             month6btn.setSelected(false);
-            month9btn.setSelected(false);
+            year1btn.setSelected(false);
+            year5btn.setSelected(false);
         }
-    }//GEN-LAST:event_month12btnActionPerformed
+    }//GEN-LAST:event_year2btnActionPerformed
+
+    private void year5btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year5btnActionPerformed
+        // TODO add your handling code here:
+        if(year5btn.isSelected()) {
+            month6btn.setSelected(false);
+            year1btn.setSelected(false);
+            year2btn.setSelected(false);
+        }
+    }//GEN-LAST:event_year5btnActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -287,21 +309,28 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 //            
 //        }
         String duration=null;
-        if(month3btn.isSelected()) {
+        
+        if(month6btn.isSelected()) {
             duration = "6 months";
             
         }
-        else if(month6btn.isSelected()) {
+        else if(year1btn.isSelected()) {
             duration = "1 year";
         }
-        else if(month9btn.isSelected()) {
+        else if(year2btn.isSelected()) {
             duration = "2 years";
         }
-        else if(month12btn.isSelected()) {
+        else if(year5btn.isSelected()) {
             duration = "5 years";
         }
         String pack=jComboBox1.getSelectedItem().toString();
-         float amount=Integer.parseInt(txtAmountToBePay.getText());
+        
+        if(txtAmountToBePay.getText().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+            return;
+        }
+        
+        float amount=Integer.parseInt(txtAmountToBePay.getText());
         try {
         String sql = " insert into insure_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -344,9 +373,54 @@ public class InsuranceJPanel extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_btnPayActionPerformed
 
+    private void txtAmountToBePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountToBePayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmountToBePayActionPerformed
+
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
+        // TODO add your handling code here:
+        int monthvalue = 0;
+        int typeValue = 0;
+        
+        if(!(month6btn.isSelected() || year1btn.isSelected() || year2btn.isSelected() || year5btn.isSelected())) {
+            JOptionPane.showMessageDialog(null, "Please select duration");
+            return;
+        }
+        
+        if(month6btn.isSelected()) {
+            monthvalue = 200;
+        }
+        else if(year1btn.isSelected()) {
+            monthvalue = 375;
+        }
+        else if(year2btn.isSelected()) {
+            monthvalue = 425;
+        }
+        else if(year5btn.isSelected()) {
+            monthvalue = 600;
+        }
+        
+        if(jComboBox1.getSelectedIndex() == 0) {
+            typeValue = 600;
+        }
+        else if(jComboBox1.getSelectedIndex() == 1) {
+            typeValue = 425;
+        }
+        else if(jComboBox1.getSelectedIndex() == 2) {
+            typeValue = 375;
+        }
+        else if(jComboBox1.getSelectedIndex() == 3) {
+            typeValue = 200;
+        }
+        
+        int value = monthvalue * typeValue;
+        txtAmountToBePay.setText(String.valueOf(value));
+    }//GEN-LAST:event_btnGenerateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnGenerate;
     private javax.swing.JButton btnPay;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -355,10 +429,10 @@ public class InsuranceJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JRadioButton month12btn;
-    private javax.swing.JRadioButton month3btn;
     private javax.swing.JRadioButton month6btn;
-    private javax.swing.JRadioButton month9btn;
     private javax.swing.JTextField txtAmountToBePay;
+    private javax.swing.JRadioButton year1btn;
+    private javax.swing.JRadioButton year2btn;
+    private javax.swing.JRadioButton year5btn;
     // End of variables declaration//GEN-END:variables
 }

@@ -168,7 +168,7 @@ public class HospitalServicesJPanel extends javax.swing.JPanel {
 
     private void btnCovidTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCovidTestActionPerformed
         // TODO add your handling code here:
-        covidtestbooking covidtestbooking = new covidtestbooking(f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        covidtestbooking covidtestbooking = new covidtestbooking(userProcessContainer,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
         userProcessContainer.add("covidtestbooking",covidtestbooking);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

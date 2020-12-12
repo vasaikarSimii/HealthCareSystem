@@ -271,7 +271,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 150, -1, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -345,6 +345,11 @@ public class PresciptionJpanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
        
+        if(jTable1.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row");
+            return;
+        }
+        
         try {
              
         

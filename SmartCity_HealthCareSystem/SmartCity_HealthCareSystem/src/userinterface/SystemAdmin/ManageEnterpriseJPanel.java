@@ -189,7 +189,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
-         String network =  networkJComboBox.getSelectedItem().toString();
+        if(nameJTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enterprise name cannot be empty");
+            return;
+        }
+        String network =  networkJComboBox.getSelectedItem().toString();
         String type =  enterpriseTypeJComboBox.getSelectedItem().toString();
 
         try {
@@ -206,7 +210,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 nameJTextField.setText("");
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Enterprise Name already exists");
         }finally{
             try {
               //  rs.close();

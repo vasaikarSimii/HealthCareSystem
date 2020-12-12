@@ -178,6 +178,12 @@ public class FireRole extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        if(jTable4.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from table");
+            return;
+        }
+        
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
             Date date = new Date();  
            String date_time= formatter.format(date);

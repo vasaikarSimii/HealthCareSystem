@@ -344,10 +344,14 @@ public class EmergencyJPanel extends javax.swing.JPanel {
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Incident Reported successfuly");
-            jTextField1.setText("");
             populateTable();
+            populateTable1();
+            jTextField1.setText("");
             jTextField2.setText("");
             txtTotalInjury.setText("");
+            jCheckBox1.setSelected(false);
+            jCheckBox2.setSelected(false);
+            
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {

@@ -235,6 +235,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
        String type = organizationJComboBox.getSelectedItem().toString();
         String id=OrganizationNametxt1.getText();
         String name=OrganizationNametxt.getText();
+        
+        if(id.isEmpty() || name.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+        }
+        
        try {
         String sql = " insert into manage_medical values(?,?,?,?,?)";
 
@@ -255,7 +260,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Organization ID must be unique");
         }finally{
             try {
               //  rs.close();
