@@ -155,7 +155,7 @@ Connection conn = dbConn.getConn();
         });
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 294, 1150, 166));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 840, 166));
 
         jButton1.setText("Confirm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +163,7 @@ Connection conn = dbConn.getConn();
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -191,10 +191,10 @@ Connection conn = dbConn.getConn();
         });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 50, -1, 166));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 50, 790, 166));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Positive", "Negative" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 90, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 90, -1));
 
         jButton2.setText("Update Status");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +202,7 @@ Connection conn = dbConn.getConn();
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N

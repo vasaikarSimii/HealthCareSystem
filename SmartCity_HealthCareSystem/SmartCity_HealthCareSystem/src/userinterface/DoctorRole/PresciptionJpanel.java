@@ -382,12 +382,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 myDocumen.add(new Paragraph("NAME: " + q, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
 
                 myDocumen.add(new Paragraph("PATIENT ID " + p, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("Pricipal Allowance: " + pa, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("SA " + sa, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("Research Allowance: " + ra, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("Extra Allowance: " + ea, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("HRA: " + hra, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-                // myDocumen.add(new Paragraph("Total Allowances: "+allowaces, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
+//                
                 myDocumen.add(new Paragraph("----------------------------------------------------------------------------"));
                 myDocumen.add(new Paragraph("MEDICATION", FontFactory.getFont(FontFactory.TIMES_BOLD, 15, Font.BOLD)));
                 myDocumen.add(new Paragraph("DRUG NAME: " + u, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
@@ -396,11 +391,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 myDocumen.add(new Paragraph("DURATON :" + x, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
                  myDocumen.add(new Paragraph("INSTRUCTION :" + y, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
                 
-//                myDocumen.add(new Paragraph("----------------------------------------------------------------------------"));
-//                myDocumen.add(new Paragraph("TOTAL SALARY", FontFactory.getFont(FontFactory.TIMES_BOLD, 15, Font.BOLD)));
-//                 myDocumen.add(new Paragraph("Earnings: " + total, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("Net Salary: " + total, FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, Font.NORMAL)));
-//                myDocumen.add(new Paragraph("----------------------------------------------------------------------------"));
+//                
                 myDocumen.newPage();
                 myDocumen.close();
                 JOptionPane.showMessageDialog(null, "report successfuly generated");

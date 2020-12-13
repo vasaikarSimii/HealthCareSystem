@@ -128,19 +128,19 @@ public class LabRoleWorkArea extends javax.swing.JPanel {
     private void ManageTestingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageTestingBtnActionPerformed
         // TODO add your handling code here:
 
-        TestingJPanel TestingJPanel = new TestingJPanel(userProcessContainer,org,location,username,net,enter);
-        userProcessContainer.add("TestingJPanel",TestingJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        TestingJPanel TestingJPanel = new TestingJPanel(rightPanel,org,location,username,net,enter);
+        rightPanel.add("TestingJPanel",TestingJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageTestingBtnActionPerformed
 
     private void ManageVaccineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageVaccineBtnActionPerformed
         // TODO add your handling code here:
         
-        VaccineJPanel VaccineJPanel = new VaccineJPanel(userProcessContainer, org,location,username,net,enter);
-        userProcessContainer.add("VaccineJPanel",VaccineJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        VaccineJPanel VaccineJPanel = new VaccineJPanel(rightPanel, org,location,username,net,enter);
+        rightPanel.add("VaccineJPanel",VaccineJPanel);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_ManageVaccineBtnActionPerformed
 
 

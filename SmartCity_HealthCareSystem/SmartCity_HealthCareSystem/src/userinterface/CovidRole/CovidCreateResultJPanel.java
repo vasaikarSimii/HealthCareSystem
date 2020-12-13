@@ -55,7 +55,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
     }
     public void populateStatusTable(){
         try{
-        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center,request_status from covid_care_result where covid_center='"+covid_enter+"' AND request_status='"+"Accepted"+"'";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center,request_status from covid_care_result where covid_center='"+covid_enter+"' AND request_status='"+"Accepted"+"' AND test_result ='" +"Null" + "'";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -109,7 +109,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnResult = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -159,10 +159,10 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("TESTING PANEL");
 
-        jButton2.setText("Result");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnResult.setText("Result");
+        btnResult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnResultActionPerformed(evt);
             }
         });
 
@@ -232,7 +232,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(201, 201, 201)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnResult, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -260,7 +260,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(btnResult)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(86, 86, 86)
                         .addComponent(jLabel7)
@@ -283,20 +283,33 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRow = jTable1.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select row first");
+            return;
+        }
+        
+        
+        
+        
     String result=    jComboBox1.getSelectedItem().toString();
     try{
 //            int seat=Integer.parseInt(jTextField1.getText());
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
 //            String type=jComboBox2.getSelectedItem().toString();
-        String sql = "update covid_care_result set test_result='" + result + "' where patient_i='"+p+"'";
+                String sql = "update covid_care_result set test_result='" + result + "' where patient_i='"+p+"'";
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Upadted successfuly");
                 Update_table();
+                populateStatusTable();
+                
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -309,7 +322,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
 
                 }
             }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnResultActionPerformed
 
     private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
         // TODO add your handling code here:
@@ -393,7 +406,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmail;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnResult;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;

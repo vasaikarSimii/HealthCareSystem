@@ -68,6 +68,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
         btnDonors = new javax.swing.JButton();
         btnPharmacy = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1400, 800));
@@ -144,6 +145,11 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
         rightPanel.setLayout(new java.awt.CardLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Medical Services User.gif"))); // NOI18N
+        rightPanel.add(jLabel1, "card2");
+
         jSplitPane1.setRightComponent(rightPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -203,6 +209,7 @@ public class MedicalServicesWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnDonors;
     private javax.swing.JButton btnLaboratory;
     private javax.swing.JButton btnPharmacy;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel rightPanel;

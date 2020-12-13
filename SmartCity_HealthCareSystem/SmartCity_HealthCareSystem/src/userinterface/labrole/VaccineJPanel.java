@@ -55,7 +55,7 @@ EcoSystem system;
     public void populateTable(){
        //connect from database -- query
          try{
-        String sql ="select * from vaccine";
+        String sql ="select pat_id,pat_name,doctor_id,doctor_name,date,vaccine_type from vaccine_status where date_of_vaccination='" +"NA"+ "'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -78,7 +78,7 @@ EcoSystem system;
      public void populateResultTable(){
        //connect from database -- query
          try{
-        String sql ="select * from vaccine_status";
+        String sql ="select * from vaccine_status where NOT date_of_vaccination='" +"NA"+ "'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
@@ -115,7 +115,7 @@ EcoSystem system;
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnVaccinatedStatus = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -187,14 +187,14 @@ EcoSystem system;
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("VACCINE REQUESTS");
 
-        jButton2.setText("Vaccination Status");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVaccinatedStatus.setText("Vaccination Status");
+        btnVaccinatedStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVaccinatedStatusActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending", "Done " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Done " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,22 +205,21 @@ EcoSystem system;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSubmit))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(29, 29, 29)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(389, 389, 389)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(250, 250, 250)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVaccinatedStatus))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(326, 326, 326)
+                        .addComponent(btnSubmit)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(209, 209, 209)
+                .addGap(155, 155, 155)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -229,33 +228,48 @@ EcoSystem system;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(43, 43, 43)
                         .addComponent(jLabel6)
-                        .addGap(53, 53, 53)
+                        .addGap(51, 51, 51)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
                         .addComponent(btnSubmit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(87, 87, 87)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVaccinatedStatus)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(248, 248, 248)
                         .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVaccinatedStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinatedStatusActionPerformed
         // TODO add your handling code here:
         try{
             //            int seat=Integer.parseInt(jTextField1.getText());
             //            String model=jTextField2.getText();
             //            String name=jComboBox1.getSelectedItem().toString();
+            int selectedRow = jTable2.getSelectedRow();
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "Please select row from above table");
+                return;
+            }
+            String id = (String)jTable2.getValueAt(selectedRow,0);
             String result=jComboBox1.getSelectedItem().toString();
-            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+a+"'";
+            
+            String temp_org = (String)jTable2.getValueAt(selectedRow,8);
+            
+            if(!temp_org.equals(org)) {
+                JOptionPane.showMessageDialog(null,org + " cannot update " +temp_org+ " clients details");
+                return;
+            }
+            
+            System.out.println("Result = " + result);
+            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+id+"'";
             pst = conn.prepareStatement(sql);
 
             pst.execute();
@@ -273,7 +287,7 @@ EcoSystem system;
 
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVaccinatedStatusActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -319,38 +333,45 @@ EcoSystem system;
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
-
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+           Date date = new Date();  
+           String date_time= formatter.format(date);
+           System.out.println("da"+date_time);
+           String acc="Pending";
+//            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql1 = "update vaccine_status set status ='" +acc+ "', date_of_vaccination='" + date_time+
+                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";
             pst = conn.prepareStatement(sql1);
             
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-            Date date = new Date();  
-           String date_time= formatter.format(date);
-            System.out.println("da"+date_time);
+//           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+//           Date date = new Date();  
+//           String date_time= formatter.format(date);
+//           System.out.println("da"+date_time);
             
-            String acc="Pending";
+//            String acc="Pending";
            
 
-            System.out.println("Date " + date);
-            System.out.println("A"+a);
-            pst.setString(1,a );
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7, acc);
-             pst.setString(8, "NA");
-             pst.setString(9, org);
-            pst.setString(10, location);
-            pst.setString(11, net);
-            pst.setString(12, enter);
+//            System.out.println("Date " + date);
+//            System.out.println("A"+a);
+//            pst.setString(1,a );
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7, acc);
+//             pst.setString(8, "NA");
+//             pst.setString(9, org);
+//            pst.setString(10, location);
+//            pst.setString(11, net);
+//            pst.setString(12, enter);
            
            
 
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Test Added in Queue successfuly");
             populateResultTable();
+            populateTable();
            // populateWorkTable();
 
         }catch (SQLException ex) {
@@ -368,7 +389,7 @@ EcoSystem system;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVaccinatedStatus;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
