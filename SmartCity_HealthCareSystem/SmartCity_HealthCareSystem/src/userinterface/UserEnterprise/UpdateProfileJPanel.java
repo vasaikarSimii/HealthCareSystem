@@ -34,6 +34,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    ImageIcon imageIcon;
    
 
     
@@ -79,8 +80,8 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         txtWeight.setText(weight);
         txtHeight.setText(height);
         txtHeight1.setText(age);
-//        ImageIcon imageIcon = (ImageIcon) finalfile;
-//        pic1Lbl.setIcon();
+        imageIcon = new ImageIcon(new ImageIcon(finalfile).getImage().getScaledInstance(160, 180, Image.SCALE_DEFAULT));
+        pic1Lbl.setIcon(imageIcon);
         boxBloodGroup.setSelectedItem(blood);
     }
 

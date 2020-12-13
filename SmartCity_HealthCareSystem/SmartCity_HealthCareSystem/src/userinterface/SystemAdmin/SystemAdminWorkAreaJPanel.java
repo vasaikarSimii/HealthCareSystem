@@ -11,10 +11,15 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import userinterface.dbConn;
 
 
 /**
@@ -28,16 +33,28 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer) {
+    
+    Connection conn = dbConn.getConn();
+    ResultSet rs1 = null;
+    PreparedStatement pst1 = null;
+    
+    ResultSet rs2 = null;
+    PreparedStatement pst2 = null;
+    
+    ResultSet rs3 = null;
+    PreparedStatement pst3 = null;
+    
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer) throws SQLException {
         initComponents();
         
         this.ecosystem=ecosystem;
-     //   populateTree();
+        populateTree();
         
     }
     
-//    public void populateTree(){
-//        DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
+    
+    public void populateTree() throws SQLException{
+        DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
 //        ArrayList<Network> networkList=ecosystem.getNetworkList();
 //        ArrayList<Enterprise> enterpriseList;
 //        ArrayList<Organization> organizationList;
@@ -45,16 +62,16 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 //        Network network;
 //        Enterprise enterprise;
 //        Organization organization;
-//        
-//        DefaultMutableTreeNode networks=new DefaultMutableTreeNode("Networks");
-//        DefaultMutableTreeNode root=(DefaultMutableTreeNode)model.getRoot();
-//        root.removeAllChildren();
-//        root.insert(networks, 0);
-//        
-//        DefaultMutableTreeNode networkNode;
-//        DefaultMutableTreeNode enterpriseNode;
-//        DefaultMutableTreeNode organizationNode;
-//        
+        
+        DefaultMutableTreeNode networks=new DefaultMutableTreeNode("Networks");
+        DefaultMutableTreeNode root=(DefaultMutableTreeNode)model.getRoot();
+        root.removeAllChildren();
+        root.insert(networks, 0);
+        
+        DefaultMutableTreeNode networkNode;
+        DefaultMutableTreeNode enterpriseNode;
+        DefaultMutableTreeNode organizationNode;
+        
 //        for(int i=0;i<networkList.size();i++){
 //            network=networkList.get(i);
 //            networkNode=new DefaultMutableTreeNode(network.getName());
@@ -74,8 +91,30 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 //                }
 //            }
 //        }
-//        model.reload();
-//    }
+        
+        String sql = "select * from network";
+        pst1=conn.prepareStatement(sql);
+        rs1=pst1.executeQuery();
+        int i = 0;
+         while (rs1.next()) {  
+             String str1 = rs1.getString("net_name");
+             networkNode=new DefaultMutableTreeNode(str1);
+             networks.insert(networkNode,i);
+             i++;
+             String sql2 = "select * from manage_enter where network_name='" + str1 + "'";
+             pst2=conn.prepareStatement(sql2);
+             rs2=pst2.executeQuery();
+             int j = 0;
+             while(rs2.next()) {
+                 String str2 = rs2.getString("name");
+                 enterpriseNode=new DefaultMutableTreeNode(str2);
+                 networkNode.insert(enterpriseNode,j);
+                 j++;
+             }
+ }
+        
+        model.reload();
+    }
     
 
     /**

@@ -36,6 +36,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     
      Connection conn = dbConn.getConn();
     ResultSet rs = null;
+    ResultSet rs1 = null;
     PreparedStatement pst = null;
     /**
      * Creates new form ManageEnterpriseAdminJPanel
@@ -79,12 +80,12 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         try{
         String sql ="select * from network";
         pst=conn.prepareStatement(sql);
-        rs=pst.executeQuery();
+        rs1=pst.executeQuery();
             System.out.println("*************");
-         while (rs.next()) {  
+         while (rs1.next()) {  
              System.out.println("77777777777");
-        networkJComboBox.addItem(rs.getString("net_name"));  
-             System.out.println(rs.getString("net_name"));
+        networkJComboBox.addItem(rs1.getString("net_name"));  
+             System.out.println(rs1.getString("net_name"));
              System.out.println("555555555555555");
  }
        
@@ -106,16 +107,26 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     }
     
     public void populateEnterprise(){
+        System.out.println("Inside null if");
        enterpriseJComboBox.removeAllItems();
+       System.out.println("Inside null if0");
+       if(networkJComboBox.getSelectedItem() == null) {
+           System.out.println("Inside null if1");
+           return;
+       }
+       System.out.println("Before String n_name");
         String n_name=networkJComboBox.getSelectedItem().toString();
-        
+        System.out.println("Name " + n_name);
            try{
+               
         String sql ="select * from manage_enter where network_name='"+n_name+"'";
+        
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
          while (rs.next()) {  
-
-        enterpriseJComboBox.addItem(rs.getString("enter_type"));  
+            System.out.println("Inside Quesry 0" + rs.getString("name"));
+        enterpriseJComboBox.addItem(rs.getString("name")); 
+        System.out.println("Inside Quesry 1" + rs.getString("name"));
                 }
        
     }
@@ -222,6 +233,12 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 networkJComboBoxMouseClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                networkJComboBoxMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                networkJComboBoxMousePressed(evt);
+            }
         });
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,50 +319,61 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_submitJButtonActionPerformed
 
-    private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_networkJComboBoxActionPerformed
-
     private void networkJComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_networkJComboBoxItemStateChanged
         // TODO add your handling code here:
+//        populateEnterprise();
     }//GEN-LAST:event_networkJComboBoxItemStateChanged
 
     private void enterpriseJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterpriseJComboBoxActionPerformed
         // TODO add your handling code here:
-        System.out.println("00000000000000");
-        String n_name=networkJComboBox.getSelectedItem().toString();
-        
-           try{
-        String sql ="select * from manage_enter where network_name='"+n_name+"'";
-        pst=conn.prepareStatement(sql);
-        rs=pst.executeQuery();
-         while (rs.next()) {  
-
-        enterpriseJComboBox.addItem(rs.getString("name"));  
-                }
-       
-    }
-    catch(Exception e){
-    JOptionPane.showMessageDialog(null, e);
-    }
-    finally {
-            
-            try{
-                rs.close();
-                pst.close();
-                
-            }
-            catch(Exception e){
-                
-            }
-        }
+//        System.out.println("00000000000000");
+//        String n_name=networkJComboBox.getSelectedItem().toString();
+//        
+//           try{
+//        String sql ="select * from manage_enter where network_name='"+n_name+"'";
+//        pst=conn.prepareStatement(sql);
+//        rs=pst.executeQuery();
+//         while (rs.next()) {  
+//
+//        enterpriseJComboBox.addItem(rs.getString("name"));  
+//                }
+//       
+//    }
+//    catch(Exception e){
+//    JOptionPane.showMessageDialog(null, e);
+//    }
+//    finally {
+//            
+//            try{
+//                rs.close();
+//                pst.close();
+//                
+//            }
+//            catch(Exception e){
+//                
+//            }
+//        }
     }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
 
     private void networkJComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkJComboBoxMouseClicked
         // TODO add your handling code here:
-        populateEnterprise();
+//        populateEnterprise();
     }//GEN-LAST:event_networkJComboBoxMouseClicked
+
+    private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
+        // TODO add your handling code here:
+        populateEnterprise();
+    }//GEN-LAST:event_networkJComboBoxActionPerformed
+
+    private void networkJComboBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkJComboBoxMousePressed
+        // TODO add your handling code here:
+//        populateEnterprise();
+    }//GEN-LAST:event_networkJComboBoxMousePressed
+
+    private void networkJComboBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkJComboBoxMouseExited
+        // TODO add your handling code here:
+//        populateEnterprise();
+    }//GEN-LAST:event_networkJComboBoxMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
