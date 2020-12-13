@@ -78,7 +78,7 @@ EcoSystem system;
      public void populateResultTable(){
        //connect from database -- query
          try{
-        String sql ="select * from vaccine_status where NOT date_of_vaccination='" +"NA"+ "'";
+        String sql ="select * from vaccine_status where NOT date_of_vaccination='" +"NA" + "' AND organisation = '" + org + "'" ;
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
@@ -259,6 +259,7 @@ EcoSystem system;
                 return;
             }
             String id = (String)jTable2.getValueAt(selectedRow,0);
+            
             String result=jComboBox1.getSelectedItem().toString();
             
             String temp_org = (String)jTable2.getValueAt(selectedRow,8);
@@ -338,6 +339,15 @@ EcoSystem system;
            String date_time= formatter.format(date);
            System.out.println("da"+date_time);
            String acc="Pending";
+           
+           int selectedRow = jTable1.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table");
+            return;
+        }
+        
+           
 //            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1 = "update vaccine_status set status ='" +acc+ "', date_of_vaccination='" + date_time+
                     "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";

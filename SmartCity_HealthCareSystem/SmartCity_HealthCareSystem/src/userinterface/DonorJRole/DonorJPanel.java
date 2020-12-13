@@ -266,7 +266,17 @@ public class DonorJPanel extends javax.swing.JPanel {
             //            String model=jTextField2.getText();
             //            String name=jComboBox1.getSelectedItem().toString();
             //String result=jComboBox1.getSelectedItem().toString();
-            String sql = "update donor_request set status='" + "Accepted" + "' where username='"+a+"'";
+            
+             int selectedRow = jTable1.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select row first");
+            return;
+        }
+        
+        String temp_org = (String) jTable1.getValueAt(selectedRow,11);
+            
+            String sql = "update donor_request set status='" + "Accepted" + "' where username='"+a+"' AND donor_org ='" + temp_org +"'";
             pst = conn.prepareStatement(sql);
 
             pst.execute();

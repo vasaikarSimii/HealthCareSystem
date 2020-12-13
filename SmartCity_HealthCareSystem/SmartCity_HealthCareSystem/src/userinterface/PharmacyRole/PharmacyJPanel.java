@@ -61,13 +61,14 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         this.net=net;
         this.enter=enter;
         populateTable();
+        updateTable();
     }
 
     
     public void populateTable(){
        //connect from database -- query
          try{
-        String sql ="select * from prescription";
+        String sql ="select b_id,b_name,do_id,do_name,do_enter,drug,quantity,dose,duration,instruction from pharmacy_status where request ='"+"NA"+"'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -87,6 +88,29 @@ public class PharmacyJPanel extends javax.swing.JPanel {
             }
         }
    }
+    
+    public void updateTable() {
+        try{
+        String sql ="select * from pharmacy_status where NOT request='" +"NA" + "' AND p_id = '" + org + "'" ;
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -245,41 +269,51 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            pst = conn.prepareStatement(sql1);
-            
+//            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
             Date date = new Date();  
-           String date_time= formatter.format(date);
+            String date_time= formatter.format(date);
             System.out.println("da"+date_time);
             
             String acc="Denied";
-           
-
-            System.out.println("Date " + date);
-
-              pst.setString(1,a );
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7, g);
-            pst.setString(8, h);
-            pst.setString(9, i);
-            pst.setString(10, j);
-           // pst.setString(11, k);
-            //pst.setString(12, l);
-            pst.setString(11, date_time);
-            pst.setString(12, acc);
-            pst.setString(13, org);
-            pst.setString(14, username);
+            
+            int selectedRow = jTable1.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table");
+            return;
+        }
+        
+        String id = (String) jTable1.getValueAt(selectedRow, 0);
+            
+            String sql1 = "update pharmacy_status set request ='" + acc + "', date_time = '" + date_time+ "', p_id = '" 
+                    + org + "', p_org = '" + username + "' where b_id = '" + id + "'";
+            pst = conn.prepareStatement(sql1);
+            
+//            System.out.println("Date " + date);
+//
+//              pst.setString(1,a );
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7, g);
+//            pst.setString(8, h);
+//            pst.setString(9, i);
+//            pst.setString(10, j);
+//           // pst.setString(11, k);
+//            //pst.setString(12, l);
+//            pst.setString(11, date_time);
+//            pst.setString(12, acc);
+//            pst.setString(13, org);
+//            pst.setString(14, username);
 
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
            // populateWorkTable();
-
+           populateTable();
+           updateTable();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
@@ -296,41 +330,61 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            pst = conn.prepareStatement(sql1);
-            
+//            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//
+//            pst = conn.prepareStatement(sql1);
+//            
+//            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+//            Date date = new Date();  
+//           String date_time= formatter.format(date);
+//            System.out.println("da"+date_time);
+//            
+//            String acc="Accepted";
+           
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
             Date date = new Date();  
-           String date_time= formatter.format(date);
+            String date_time= formatter.format(date);
             System.out.println("da"+date_time);
             
             String acc="Accepted";
-           
+            
+            int selectedRow = jTable1.getSelectedRow();
+             if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table");
+            return;
+        }
+        
+        String id = (String) jTable1.getValueAt(selectedRow, 0);
+            
+            String sql1 = "update pharmacy_status set request ='" + acc + "', date_time = '" + date_time+ "', p_id = '" 
+                    + org + "', p_org = '" + username + "' where b_id = '" + id + "'";
+            pst = conn.prepareStatement(sql1);
 
             System.out.println("Date " + date);
 
-            pst.setString(1,a );
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7, g);
-            pst.setString(8, h);
-            pst.setString(9, i);
-            pst.setString(10, j);
-           // pst.setString(11, k);
-            //pst.setString(12, l);
-            pst.setString(11, date_time);
-            pst.setString(12, acc);
-            pst.setString(13, org);
-            pst.setString(14, username);
+//            pst.setString(1,a );
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7, g);
+//            pst.setString(8, h);
+//            pst.setString(9, i);
+//            pst.setString(10, j);
+//           // pst.setString(11, k);
+//            //pst.setString(12, l);
+//            pst.setString(11, date_time);
+//            pst.setString(12, acc);
+//            pst.setString(13, org);
+//            pst.setString(14, username);
 
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
            // populateWorkTable();
 
+           populateTable();
+           updateTable();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {

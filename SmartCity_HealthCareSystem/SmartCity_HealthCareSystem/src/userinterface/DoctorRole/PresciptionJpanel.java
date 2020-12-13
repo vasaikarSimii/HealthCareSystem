@@ -82,7 +82,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
     public void populateTable(){
        //connect from database -- query
        try{
-        String sql ="select * from prescription where do_id='"+name+"' ";//AND b_id='"+b+"'
+        String sql ="select b_id,b_name,do_id,do_name,do_enter,drug,quantity,dose,duration,instruction from pharmacy_status where do_id='"+name+"' ";//AND b_id='"+b+"'
         //b_name,do_name,do_enter,drug,quantity,dose,duration,instruction
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
@@ -128,7 +128,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         jTextField6 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
@@ -222,13 +222,13 @@ public class PresciptionJpanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 750, 159));
 
-        jButton1.setText("Submit Prescription");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSubmit.setText("Submit Prescription");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSubmitActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -286,7 +286,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here: prescription
         String drug=jTextField1.getText();
         String quantity=jTextField2.getText();
@@ -295,7 +295,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         String ins=jTextArea1.getText();
         try{
             
-        String sql1 = " insert into prescription values(?,?,?,?,?,?,?,?,?,?)";
+        String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
@@ -313,8 +313,10 @@ public class PresciptionJpanel extends javax.swing.JPanel {
             pst.setString(8,dose);
             pst.setString(9,duration);
             pst.setString(10,ins);
-            
-            
+            pst.setString(11,"NA");
+            pst.setString(12,"NA");
+            pst.setString(13,"NA");
+            pst.setString(14,"NA");
 
          
 
@@ -332,7 +334,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -434,7 +436,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

@@ -555,8 +555,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
             String test=testingjComboBox.getSelectedItem().toString();
         try{
            
-            String sql1 = " insert into testing values(?,?,?,?,?,?)";
-
+//            String sql1 = " insert into testing values(?,?,?,?,?,?)";
+            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(sql1);
 
             String acc="Accepted";
@@ -569,6 +569,12 @@ public class DoctorJPanel extends javax.swing.JPanel {
             pst.setString(2, a);
             pst.setString(3,name );
             pst.setString(4,doc_name);
+            pst.setString(7, "NA");
+             pst.setString(8, "NA");
+             pst.setString(9, "NA");
+            pst.setString(10, "NA");
+            pst.setString(11, "NA");
+            pst.setString(12, "NA");
 
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Testing Request Generated successfuly");

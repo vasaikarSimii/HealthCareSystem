@@ -383,7 +383,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
-        if (pic1Lbl.getIcon()==null) {
+        if (finalfile==null) {
             JOptionPane.showMessageDialog(null, "Please upload photo");
             return;
         }
@@ -413,7 +413,7 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 pst.setString(12, age);
                 pst.setBytes(13, finalfile);
                 //add image to Db
-               //pst.setBlob(13, i1);
+//               pst.setBlob(13, pic1Lbl);
                 
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "User Added successfuly");

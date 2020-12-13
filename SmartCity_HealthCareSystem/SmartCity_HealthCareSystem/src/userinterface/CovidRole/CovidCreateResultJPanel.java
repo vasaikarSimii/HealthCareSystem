@@ -77,7 +77,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
     }
     public void Update_table(){
         try{
-        String sql ="select * from covid_care_result where covid_center='"+covid_enter+"' AND request_status='"+"Accepted"+"'";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select * from covid_care_result where covid_center='"+covid_enter+"' AND request_status='"+"Accepted"+"' AND ( NOT test_result='" +"Null"+ "')";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
@@ -293,7 +293,9 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
             return;
         }
         
-        
+            
+            String temp_test_type = (String) jTable1.getValueAt(selectedRow,6);
+            String center = (String) jTable1.getValueAt(selectedRow,7);
         
         
     String result=    jComboBox1.getSelectedItem().toString();
@@ -302,7 +304,7 @@ public class CovidCreateResultJPanel extends javax.swing.JPanel {
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
 //            String type=jComboBox2.getSelectedItem().toString();
-                String sql = "update covid_care_result set test_result='" + result + "' where patient_i='"+p+"'";
+                String sql = "update covid_care_result set test_result='" + result + "' where patient_i='"+p+"' AND test_type = '" + temp_test_type+ "' AND covid_center = '" +center+ "'";
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
