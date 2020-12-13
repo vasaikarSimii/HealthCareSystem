@@ -102,7 +102,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnSendAmbulance = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
@@ -114,14 +114,14 @@ public class AmbulanceRole extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 153));
-        jButton1.setText("Send Ambulance");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSendAmbulance.setBackground(new java.awt.Color(0, 153, 153));
+        btnSendAmbulance.setText("Send Ambulance");
+        btnSendAmbulance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSendAmbulanceActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
+        add(btnSendAmbulance, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
 
         jTable2.setBackground(new java.awt.Color(204, 255, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -191,7 +191,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, 420));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSendAmbulanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendAmbulanceActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
             Date date = new Date();  
@@ -203,12 +203,23 @@ public class AmbulanceRole extends javax.swing.JPanel {
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
 //            String type=jComboBox2.getSelectedItem().toString();
-        String sql = "update ambulance_report set time_of_response='" + date_time + "',contact_ambulance='" + contact + "',network='" + net + "',ambulance_name='" + ambulance_name + "' where informer_id='"+a+"'";
+
+        int selectedRow = jTable4.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table");
+            return;
+        }
+        
+        String location = (String) jTable4.getValueAt(selectedRow, 3);
+       
+        String sql = "update ambulance_report set time_of_response='" + date_time + "',contact_ambulance='" + contact + "',network='" + net + "',ambulance_name='" + ambulance_name + "' where informer_id='"+a+"' AND loaction ='" + location + "'";
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Upadted successfuly");
                 Update_table();
+                populateTable();
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -222,7 +233,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
                 }
             }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSendAmbulanceActionPerformed
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
@@ -243,7 +254,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSendAmbulance;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

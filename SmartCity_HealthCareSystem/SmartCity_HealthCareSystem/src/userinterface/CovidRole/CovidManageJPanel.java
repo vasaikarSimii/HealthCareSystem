@@ -301,8 +301,17 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          try{
             
-//        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
-            String sql1 = "update covid_care_result set request_status='" + "Accepted"+ "'";
+            int selectedRow = jTable1.getSelectedRow();
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(null,"Please select row from the table");
+                return;
+            }
+            
+            String temp_test_type = (String) jTable1.getValueAt(selectedRow,6);
+            String center = (String) jTable1.getValueAt(selectedRow,7);
+            
+//            String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+            String sql1 = "update covid_care_result set request_status='" + "Accepted"+ "' where test_type = '" + temp_test_type+ "' AND covid_center = '" +center+ "'";
             pst = conn.prepareStatement(sql1);
 
 //          String request="Accepted";
@@ -380,25 +389,33 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
             
-        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
-
+             int selectedRow = jTable1.getSelectedRow();
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(null,"Please select row from the table");
+                return;
+            }
+            
+            String temp_test_type = (String) jTable1.getValueAt(selectedRow,6);
+            String center = (String) jTable1.getValueAt(selectedRow,7);
+//        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+          String sql1 = "update covid_care_result set request_status='" + "Declined"+ "' where test_type = '" + temp_test_type+ "' AND covid_center = '" +center+ "'";
             pst = conn.prepareStatement(sql1);
 
-          String request="Declined";
-          String result="Null";
-             System.out.println("878787"+a);
-         
-          
-            pst.setString(1, a);
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7,g );
-            pst.setString(8,h);
-            pst.setString(9, request);
-            pst.setString(10, result);
+//          String request="Declined";
+//          String result="Null";
+//             System.out.println("878787"+a);
+//         
+//          
+//            pst.setString(1, a);
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7,g );
+//            pst.setString(8,h);
+//            pst.setString(9, request);
+//            pst.setString(10, result);
             
             
             
@@ -408,7 +425,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateStatusTable();
-           
+           populateTable();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {

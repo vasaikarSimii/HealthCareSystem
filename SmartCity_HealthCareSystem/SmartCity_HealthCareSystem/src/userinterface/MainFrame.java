@@ -415,8 +415,9 @@ public class MainFrame extends javax.swing.JFrame {
                     String height=rs.getString("height");
                     String username=rs.getString("username");
                     String age=rs.getString("age");
+                    byte[] finalfile = rs.getBytes("image");
 
-                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile);
                     container.add("ur",ur);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);

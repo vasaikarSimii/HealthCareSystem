@@ -121,9 +121,9 @@ public class EmergencyJPanel extends javax.swing.JPanel {
         txtTotalInjury = new javax.swing.JTextField();
         btnConfirm = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPhoneNumber = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
@@ -152,9 +152,9 @@ public class EmergencyJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Location");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtLocationActionPerformed(evt);
             }
         });
 
@@ -167,6 +167,11 @@ public class EmergencyJPanel extends javax.swing.JPanel {
         jLabel7.setText("EMERGENCY SERVICES");
 
         jCheckBox1.setText("Yes");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Notify Fire Dept");
 
@@ -254,11 +259,11 @@ public class EmergencyJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel8))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox2)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtTotalInjury)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                                        .addComponent(txtLocation)
+                                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                                    .addComponent(jCheckBox2)
                                     .addComponent(jCheckBox1)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(263, 263, 263)
@@ -294,19 +299,19 @@ public class EmergencyJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(jCheckBox2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jCheckBox1))
                         .addGap(18, 18, 18)
                         .addComponent(btnConfirm))
                     .addGroup(layout.createSequentialGroup()
@@ -329,15 +334,20 @@ public class EmergencyJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtLocationActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
+        if(txtLocation.getText().isEmpty() || txtTotalInjury.getText().isEmpty() || txtPhoneNumber.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
         String injury=txtTotalInjury.getText();
-        String incident_location=jTextField1.getText();
-        String mobile=jTextField2.getText();
+        String incident_location=txtLocation.getText();
+        String mobile=txtPhoneNumber.getText();
         if(jCheckBox1.isSelected())
         {
              try{
@@ -361,12 +371,11 @@ public class EmergencyJPanel extends javax.swing.JPanel {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Incident Reported successfuly");
             populateTable();
-            populateTable1();
-            jTextField1.setText("");
-            jTextField2.setText("");
+            txtLocation.setText("");
+            txtPhoneNumber.setText("");
             txtTotalInjury.setText("");
             jCheckBox1.setSelected(false);
-            jCheckBox2.setSelected(false);
+//            jCheckBox2.setSelected(false);
             
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -405,11 +414,12 @@ public class EmergencyJPanel extends javax.swing.JPanel {
             pst.setString(4, incident_location);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Incident Reported ti Fire Departmwnt successfuly");
-            jTextField1.setText("");
+            JOptionPane.showMessageDialog(null, "Incident Reported to Fire Departmwnt successfuly");
+            txtLocation.setText("");
             populateTable();
-            jTextField2.setText("");
+            txtPhoneNumber.setText("");
             txtTotalInjury.setText("");
+            jCheckBox2.setSelected(false);
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
@@ -426,7 +436,14 @@ public class EmergencyJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Incident Reported NOT reported to Fire Department ");
         }
         
+        populateTable();
+        populateTable1();
+        
     }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -447,8 +464,8 @@ public class EmergencyJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtLocation;
+    private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtTotalInjury;
     // End of variables declaration//GEN-END:variables
 }

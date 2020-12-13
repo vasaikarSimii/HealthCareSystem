@@ -54,7 +54,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     /**
      * Creates new form MedicalServicesJPanel
      */
-    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
+    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
@@ -70,6 +70,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         this.height=height;
         this.username=username;
         this.age=age;
+        this.finalfile = finalfile;
         txtFirstName.setText(f_name);
         txtLastName.setText(l_name);
         txtAddress.setText(address);
@@ -78,7 +79,8 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         txtWeight.setText(weight);
         txtHeight.setText(height);
         txtHeight1.setText(age);
-        
+//        ImageIcon imageIcon = (ImageIcon) finalfile;
+//        pic1Lbl.setIcon();
         boxBloodGroup.setSelectedItem(blood);
     }
 

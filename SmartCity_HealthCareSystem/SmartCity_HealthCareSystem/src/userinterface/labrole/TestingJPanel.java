@@ -63,7 +63,7 @@ Connection conn = dbConn.getConn();
      public void populateTable(){
        //connect from database -- query
          try{
-        String sql ="select * from testing";
+        String sql ="select pat_id,pat_name,doctor_id,doctor_name,doctor_date,test_type from testing_status where reporting_date ='" +"NA"+ "'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
@@ -86,7 +86,7 @@ Connection conn = dbConn.getConn();
      public void populateResultTable(){
        //connect from database -- query
          try{
-        String sql ="select * from testing_status";
+        String sql ="select * from testing_status where organisation ='" + org + "' AND (NOT reporting_date ='" +"NA"+ "')";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -119,11 +119,11 @@ Connection conn = dbConn.getConn();
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        btnUpdateStatus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -157,13 +157,13 @@ Connection conn = dbConn.getConn();
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 840, 166));
 
-        jButton1.setText("Confirm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setText("Confirm");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
+        add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -196,13 +196,13 @@ Connection conn = dbConn.getConn();
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Positive", "Negative" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 90, -1));
 
-        jButton2.setText("Update Status");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateStatus.setText("Update Status");
+        btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnUpdateStatusActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, -1));
+        add(btnUpdateStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -212,13 +212,11 @@ Connection conn = dbConn.getConn();
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 490, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            pst = conn.prepareStatement(sql1);
+//            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
             Date date = new Date();  
@@ -226,22 +224,25 @@ Connection conn = dbConn.getConn();
             System.out.println("da"+date_time);
             
             String acc="Pending";
+            
+            String sql1 = "update testing_status set result ='" +acc+ "', reporting_date='" + date_time+
+                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";
            
-
-            System.out.println("Date " + date);
-            System.out.println("A"+a);
-            pst.setString(1,a );
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7, date_time);
-             pst.setString(8, acc);
-             pst.setString(9, org);
-            pst.setString(10, location);
-            pst.setString(11, net);
-            pst.setString(12, enter);
+            pst = conn.prepareStatement(sql1);
+//            System.out.println("Date " + date);
+//            System.out.println("A"+a);
+//            pst.setString(1,a );
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7, date_time);
+//             pst.setString(8, acc);
+//             pst.setString(9, org);
+//            pst.setString(10, location);
+//            pst.setString(11, net);
+//            pst.setString(12, enter);
            
            
 
@@ -260,7 +261,7 @@ Connection conn = dbConn.getConn();
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
@@ -284,7 +285,7 @@ Connection conn = dbConn.getConn();
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
         // TODO add your handling code here:
         try{
 //            int seat=Integer.parseInt(jTextField1.getText());
@@ -310,7 +311,7 @@ Connection conn = dbConn.getConn();
 
                 }
             }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -331,8 +332,8 @@ Connection conn = dbConn.getConn();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnConfirm;
+    private javax.swing.JButton btnUpdateStatus;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;

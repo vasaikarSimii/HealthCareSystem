@@ -195,10 +195,6 @@ public class FireRole extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        if(jTable4.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null,"Please select a row from table");
-            return;
-        }
         
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
             Date date = new Date();  
@@ -210,7 +206,17 @@ public class FireRole extends javax.swing.JPanel {
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
 //            String type=jComboBox2.getSelectedItem().toString();
-        String sql = "update fire_report set time_of_response='" + date_time + "',contact_fire='" + contact + "',network='" + net + "',fire_name='" + ambulance_name + "' where informer_id='"+a+"'";
+
+        int selectedRow = jTable4.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table");
+            return;
+        }
+        
+        String location = (String) jTable4.getValueAt(selectedRow, 3);
+        
+        String sql = "update fire_report set time_of_response='" + date_time + "',contact_fire='" + contact + "',network='" + net + "',fire_name='" + ambulance_name + "' where informer_id='"+a+"' and loaction = '" + location + "'";
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
