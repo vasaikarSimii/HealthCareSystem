@@ -120,6 +120,10 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblNetwork);
+        if (tblNetwork.getColumnModel().getColumnCount() > 0) {
+            tblNetwork.getColumnModel().getColumn(0).setResizable(false);
+            tblNetwork.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 94, 541, 112));
 
@@ -163,12 +167,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         
         
         
-        if(name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter Network name");
-            return;
-        }
-        else if(state.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter State name");
+        if(name.isEmpty() || state.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Text Fields cannot be empty");
             return;
         }
        try {
@@ -184,7 +184,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 txtStateName.setText("");
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null,"State Name already exist");
         }finally{
             try {
               //  rs.close();

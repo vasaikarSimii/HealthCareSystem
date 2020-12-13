@@ -176,7 +176,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -185,6 +185,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         });
         enterpriseJTable.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(enterpriseJTable);
+        enterpriseJTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 94, 523, 95));
 
@@ -215,6 +216,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         networkJComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 networkJComboBoxItemStateChanged(evt);
+            }
+        });
+        networkJComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                networkJComboBoxMouseClicked(evt);
             }
         });
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +260,12 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         String u_name=usernameJTextField.getText();
         String pass=passwordJPasswordField.getText();
         String name=nameJTextField.getText();
+        
+        if(u_name.isEmpty() || pass.isEmpty() || name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Text Fields cannot be empty");
+            return;
+        }
+        
         try {
         String sql = " insert into manage_logins values(?,?,?,?,?)";
 
@@ -272,7 +284,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 passwordJPasswordField.setText("");
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Username must be different from others");
         }finally{
             try {
               //  rs.close();
@@ -329,6 +341,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
+
+    private void networkJComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_networkJComboBoxMouseClicked
+        // TODO add your handling code here:
+        populateEnterprise();
+    }//GEN-LAST:event_networkJComboBoxMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

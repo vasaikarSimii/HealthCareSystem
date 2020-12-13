@@ -9,6 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.proteanit.sql.DbUtils;
@@ -39,6 +45,11 @@ public class CovidManageJPanel extends javax.swing.JPanel {
     String f=null;
     String g=null;
     String h=null;
+    String p = null;
+    String patName = null;
+    String coviCenter = null;
+    String patStatus = null;
+    
     
     
     public CovidManageJPanel(JPanel userProcessContainer,String name,String pass,String covid_net,String covid_enter) {
@@ -53,7 +64,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
     }
     private void populateTable(){
         try{
-        String sql ="select * from covid_booking where covid_center='"+covid_enter+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center from covid_care_result where covid_center='"+covid_enter+"' AND request_status='" + "Null" + "'";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -75,7 +86,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
     }
     public void populateStatusTable(){
         try{
-        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center,request_status from covid_care_result where covid_center='"+covid_enter+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select patient_i,patient_n,patient_add,patient_age,patient_phone,patient_email,test_type,covid_center,request_status from covid_care_result where covid_center='"+covid_enter+"' AND  (request_status='" +"Accepted" + "' OR request_status='" +"Declined"+ "')";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
@@ -107,11 +118,14 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAccept = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnDecline = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        btnEmail = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -151,10 +165,10 @@ public class CovidManageJPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
 
-        jButton1.setText("Accept Patient");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAccept.setText("Accept Patient");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAcceptActionPerformed(evt);
             }
         });
 
@@ -164,10 +178,10 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("COVID CARE ORGANIZATION");
 
-        jButton2.setText("Decline Patient");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnDecline.setText("Decline Patient");
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnDeclineActionPerformed(evt);
             }
         });
 
@@ -191,6 +205,11 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
@@ -200,6 +219,21 @@ public class CovidManageJPanel extends javax.swing.JPanel {
             jTable2.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        btnEmail.setText("Email");
+        btnEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("COVID CARE ORGANIZATION DATABSE");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/HealthCamp.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,66 +241,94 @@ public class CovidManageJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(383, 383, 383)
+                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(384, 384, 384)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(183, 183, 183)
                         .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(471, 471, 471)
-                            .addComponent(jButton2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(147, 147, 147)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(389, Short.MAX_VALUE))
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(395, 395, 395)
+                            .addComponent(btnDecline)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAccept))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(78, 78, 78)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel6)
-                .addGap(52, 52, 52)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(97, 97, 97)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                    .addComponent(btnDecline)
+                    .addComponent(btnAccept))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnEmail)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(42, 42, 42))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         // TODO add your handling code here:
          try{
             
-        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
-
+            int selectedRow = jTable1.getSelectedRow();
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(null,"Please select row from the table");
+                return;
+            }
+            
+            String temp_test_type = (String) jTable1.getValueAt(selectedRow,6);
+            String center = (String) jTable1.getValueAt(selectedRow,7);
+            
+//            String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+            String sql1 = "update covid_care_result set request_status='" + "Accepted"+ "' where test_type = '" + temp_test_type+ "' AND covid_center = '" +center+ "'";
             pst = conn.prepareStatement(sql1);
 
-          String request="Accepted";
-          String result="Null";
-             System.out.println("878787"+a);
-         
-          
-            pst.setString(1, a);
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7,g );
-            pst.setString(8,h);
-            pst.setString(9, request);
-            pst.setString(10, result);
+//          String request="Accepted";
+//          String result="Null";
+//             System.out.println("878787"+a);
+//         
+//          
+//            pst.setString(1, a);
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7,g );
+//            pst.setString(8,h);
+//            pst.setString(9, request);
+//            pst.setString(10, result);
             
             
             
@@ -276,7 +338,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateStatusTable();
-           
+           populateTable();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
@@ -287,7 +349,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int selectedRow = jTable1.getSelectedRow();
@@ -323,29 +385,37 @@ public class CovidManageJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
         // TODO add your handling code here:
         try{
             
-        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
-
+             int selectedRow = jTable1.getSelectedRow();
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(null,"Please select row from the table");
+                return;
+            }
+            
+            String temp_test_type = (String) jTable1.getValueAt(selectedRow,6);
+            String center = (String) jTable1.getValueAt(selectedRow,7);
+//        String sql1 = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+          String sql1 = "update covid_care_result set request_status='" + "Declined"+ "' where test_type = '" + temp_test_type+ "' AND covid_center = '" +center+ "'";
             pst = conn.prepareStatement(sql1);
 
-          String request="Declined";
-          String result="Null";
-             System.out.println("878787"+a);
-         
-          
-            pst.setString(1, a);
-            pst.setString(2, b);
-            pst.setString(3,c );
-            pst.setString(4,d);
-            pst.setString(5, e);
-            pst.setString(6, f);
-            pst.setString(7,g );
-            pst.setString(8,h);
-            pst.setString(9, request);
-            pst.setString(10, result);
+//          String request="Declined";
+//          String result="Null";
+//             System.out.println("878787"+a);
+//         
+//          
+//            pst.setString(1, a);
+//            pst.setString(2, b);
+//            pst.setString(3,c );
+//            pst.setString(4,d);
+//            pst.setString(5, e);
+//            pst.setString(6, f);
+//            pst.setString(7,g );
+//            pst.setString(8,h);
+//            pst.setString(9, request);
+//            pst.setString(10, result);
             
             
             
@@ -355,7 +425,7 @@ public class CovidManageJPanel extends javax.swing.JPanel {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateStatusTable();
-           
+           populateTable();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
@@ -366,14 +436,66 @@ public class CovidManageJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnDeclineActionPerformed
+
+    private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
+        // TODO add your handling code here:
+        
+        if(jTable2.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null,"Please select row from above table");
+            return;
+        }
+        
+        String receiver = p;
+        final String sender = "healthcaresystemaed@gmail.com";
+        final String password = "healthcaresystem";
+        String Subjects = "Result";
+        String msg = "Hello " + patName + "\n\n" + "Your covid test from Covid Center " + coviCenter + " is " + patStatus + 
+                "\n\nThank you" ;
+                
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                return new javax.mail.PasswordAuthentication(sender,password);
+            }
+        });
+//        
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(Subjects);
+            message.setText(msg);
+            Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
+    }//GEN-LAST:event_btnEmailActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTable2.getSelectedRow();
+        if (selectedRow>=0){
+            p = (String) jTable2.getValueAt(selectedRow,5);
+            patName = (String) jTable2.getValueAt(selectedRow,1);
+            coviCenter = (String) jTable2.getValueAt(selectedRow,7);
+            patStatus = (String) jTable2.getValueAt(selectedRow,8);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnDecline;
+    private javax.swing.JButton btnEmail;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

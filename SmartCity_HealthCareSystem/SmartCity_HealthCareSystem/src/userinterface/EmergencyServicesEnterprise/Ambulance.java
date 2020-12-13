@@ -11,7 +11,14 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -27,19 +34,79 @@ public class Ambulance extends javax.swing.JPanel {
     EcoSystem system;
     UserAccount account;
     OrganizationDirectory directory;
+    String net_name=null;
+     Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
  /**
      * Creates new form CommunityServicesWorkAreaJPanel
      */
-    Ambulance(JPanel userProcessContainer) {
+    Ambulance(JPanel userProcessContainer,String net_name) {
         this.userProcessContainer = userProcessContainer;
          initComponents();
+         this.net_name=net_name;
          populateTable();
+         populateNameComboBox();
         
     }
+
+//    Ambulance(JPanel rightPanel, String net_name) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
      public void populateTable(){
-       //connect from database -- query
+       //connect from database -- query  
+         try{
+         String sql ="select * from manage_ambulance where net='"+net_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        tblCovidCare.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
    }
-   
+       public void populateNameComboBox(){
+               jComboBox1.removeAllItems();
+        try{
+        String sql ="select * from manage_emerg where org_type='"+"Ambulance"+"' AND org_net='"+net_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+            System.out.println("*************");
+         while (rs.next()) {  
+             System.out.println("77777777777");
+        jComboBox1.addItem(rs.getString("org_name"));  
+            // System.out.println(rs.getString("net_name"));
+             System.out.println("555555555555555");
+ }
+       
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+       }
    
 //    Ambulance(JPanel userProcessContainer, EcoSystem system, Organization organization, Network network, Enterprise enterprise, UserAccount account) {
 //       initComponents();
@@ -70,7 +137,6 @@ public class Ambulance extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCovidCare = new javax.swing.JTable();
@@ -81,6 +147,7 @@ public class Ambulance extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         txtLocation2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -114,7 +181,15 @@ public class Ambulance extends javax.swing.JPanel {
             new String [] {
                 "Ambulance Company Name", "Location", "Contact Details"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCovidCare);
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -142,10 +217,14 @@ public class Ambulance extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnSubmit)
+                                .addGap(178, 178, 178))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(284, 284, 284)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -157,19 +236,16 @@ public class Ambulance extends javax.swing.JPanel {
                                             .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel8))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtLocation2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(35, 35, 35))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnSubmit)
-                                .addGap(178, 178, 178)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtLocation2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(35, 35, 35)))
                         .addComponent(jLabel7)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -183,19 +259,18 @@ public class Ambulance extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtLocation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtLocation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -217,6 +292,68 @@ public class Ambulance extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         //add code to store all data in database
+        
+        String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
+        String contact = txtLocation2.getText();
+        String location = txtLocation.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        
+        if(name.isEmpty() || contact.isEmpty() || location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
+        try {
+        String sql = " insert into manage_ambulance values(?,?,?,?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setString(2, contact);
+                pst.setString(3, location);
+                pst.setString(4, username);
+                pst.setString(5, password);
+                pst.setString(6, net_name);
+                //pst.setString(7, emer_name);
+                
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Organisation Added successfuly");
+                populateTable();
+                txtLocation.setText("");
+                txtPassword.setText("");
+                txtLocation2.setText("");
+                txtUsername.setText("");
+                
+        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Organization must be unique");
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
+        
+      
+        
+        //JOptionPane.showMessageDialog(null, "Doctor Organization Created..!!");
+        
+        populateTable();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -226,6 +363,7 @@ public class Ambulance extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -238,8 +376,11 @@ public class Ambulance extends javax.swing.JPanel {
     private javax.swing.JTable tblCovidCare;
     private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtLocation2;
-    private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+//    private void initComponents() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }

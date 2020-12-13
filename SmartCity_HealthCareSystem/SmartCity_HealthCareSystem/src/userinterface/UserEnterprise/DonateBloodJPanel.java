@@ -6,7 +6,15 @@
 package userinterface.UserEnterprise;
 
 import Business.EcoSystem;
+import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -16,16 +24,71 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
 
     JPanel userProcessInterface;
     EcoSystem ecosystem;
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+     String a=null;
+    String b=null;
+     String c=null;
+    String d=null;
+    String e=null;
+    String f=null;
+    String f_name=null;
+            String l_name=null;
+            String gender=null;
+            String address=null;
+            String email=null;
+            String phone=null;
+            String blood=null;
+            String weight=null;
+            String height=null;
+            String username=null;
+            String age=null;
     /**
      * Creates new form DonateBloodJPanel
      */
-    public DonateBloodJPanel(JPanel userProcessInterface, EcoSystem ecosystem) {
+    public DonateBloodJPanel(JPanel userProcessInterface, String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
         this.userProcessInterface = userProcessInterface;
-        this.ecosystem = ecosystem;
+   //     this.ecosystem = ecosystem;
+        this.f_name=f_name;
+        this.l_name=l_name;
+        this.gender=gender;
+        this.address=address;
+        this.email=email;
+        this.phone=phone;
+        this.blood=blood;
+        this.weight=weight;
+        this.height=height;
+        this.username=username;
+        this.age=age;
+        this.userProcessInterface = userProcessInterface;
+        populateTable();
         
     }
-
+    public void populateTable(){
+       //connect from database -- query
+         try{
+        String sql ="select donor_org,donor_location,donor_net,donor_enter from manage_donor";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        tblNearestHospital.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,16 +120,26 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblNearestHospital.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNearestHospitalMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblNearestHospital);
 
         btnGenerateRequest.setText("Send Request");
+        btnGenerateRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateRequestActionPerformed(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -78,6 +151,11 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/bloodDonateUser.gif"))); // NOI18N
 
         btnBack1.setText("<<Back");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,6 +198,81 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblNearestHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNearestHospitalMouseClicked
+        // TODO add your handling code here:
+        System.out.println("EEEEEEEEEE");
+        int selectedRow = tblNearestHospital.getSelectedRow();
+        System.out.println("FFFFFFFFFFFFFFF");
+        if (selectedRow>=0){
+            System.out.println("GGGGGGGGG");
+            a= (String) tblNearestHospital.getValueAt(selectedRow,0);
+            System.out.println("");
+            b= (String) tblNearestHospital.getValueAt(selectedRow,1);
+            c=(String) tblNearestHospital.getValueAt(selectedRow,2);
+            d= (String) tblNearestHospital.getValueAt(selectedRow,3);
+//            e=(String) tblNearestHospital.getValueAt(selectedRow,4);
+//            f= (String) tblNearestHospital.getValueAt(selectedRow,5);
+            
+          //  k=(String) jTable1.getValueAt(selectedRow,10);
+         //   l= (String) jTable1.getValueAt(selectedRow,11);
+            System.out.println(selectedRow+"  "+a);
+            System.out.println(selectedRow+"  "+f);
+        }
+    }//GEN-LAST:event_tblNearestHospitalMouseClicked
+
+    private void btnGenerateRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateRequestActionPerformed
+        // TODO add your handling code here:
+        try {
+        String sql = " insert into donor_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, f_name);
+                pst.setString(2, l_name);
+                pst.setString(3, gender);
+                pst.setString(4, address);
+                pst.setString(5, email);
+                pst.setString(6, phone);
+                pst.setString(7, blood);
+                pst.setString(8, weight);
+                pst.setString(9, height);
+                pst.setString(10, username);
+               // pst.setString(11, password);
+                pst.setString(11, age);
+                pst.setString(12, a);
+                pst.setString(13, b);
+                pst.setString(14, c);
+                pst.setString(15, d);
+                pst.setString(16, "Pending");
+                //add image to Db
+               //pst.setBlob(13, i1);
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Request Sent successfuly");
+                
+                
+                
+        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
+
+    }//GEN-LAST:event_btnGenerateRequestActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here:
+        userProcessInterface.remove(this);
+        CardLayout layout = (CardLayout) userProcessInterface.getLayout();
+        layout.previous(userProcessInterface);
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

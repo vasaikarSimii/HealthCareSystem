@@ -87,7 +87,7 @@
               <Table columnCount="3" rowCount="4">
                 <Column editable="false" title="Donor Camp Name" type="java.lang.Object"/>
                 <Column editable="false" title="Requirement" type="java.lang.Object"/>
-                <Column editable="true" title="null" type="java.lang.Object"/>
+                <Column editable="false" title="null" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -113,6 +113,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblNearestHospitalMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -120,6 +123,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Send Request"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerateRequestActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -148,6 +154,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;&lt;Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBack1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -21,11 +21,16 @@ import userinterface.EmergencyServicesEnterprise.EmergencyServicesWorkAreaJPanel
  */
 public class EmergencyAdminRole extends Role{
 
-   @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
-        //System.out.println(userProcessContainer.getComponents());
-        return new EmergencyServicesWorkAreaJPanel(userProcessContainer,enterprise);
-        }
+    @Override
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Network network, EcoSystem business, OrganizationDirectory organizationDirectory) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+//   @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise,Network network, EcoSystem system,OrganizationDirectory organizationDirectory) {
+//        //System.out.println(userProcessContainer.getComponents());
+//        return new EmergencyServicesWorkAreaJPanel(userProcessContainer,enterprise);
+//        }
     
     
 }

@@ -9,7 +9,9 @@ import Business.EcoSystem;
 import Business.Population.PeopleDirectory;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,10 +49,12 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
             String height=null;
             String username=null;
             String age=null;
+            private String filename = null;
+            byte[] finalfile = null;
     /**
      * Creates new form MedicalServicesJPanel
      */
-    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
+    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
@@ -66,6 +70,18 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         this.height=height;
         this.username=username;
         this.age=age;
+        this.finalfile = finalfile;
+        txtFirstName.setText(f_name);
+        txtLastName.setText(l_name);
+        txtAddress.setText(address);
+        txtPhoneNumber.setText(phone);
+        txtEmail.setText(email);
+        txtWeight.setText(weight);
+        txtHeight.setText(height);
+        txtHeight1.setText(age);
+//        ImageIcon imageIcon = (ImageIcon) finalfile;
+//        pic1Lbl.setIcon();
+        boxBloodGroup.setSelectedItem(blood);
     }
 
     @SuppressWarnings("unchecked")
@@ -94,7 +110,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         txtHeight = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         boxBloodGroup = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -181,21 +196,13 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         jLabel12.setText("cms");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
-        btnSubmit.setText("Submit");
+        btnSubmit.setText("Update");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
             }
         });
         add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, -1));
-
-        btnBack.setText("<<Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         boxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
         add(boxBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 60, -1));
@@ -205,7 +212,11 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
 
         jLabel14.setText("Username:");
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
+
+        txtUsername.setEditable(false);
         add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 180, -1));
+
+        txtPassword.setEditable(false);
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 180, -1));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
@@ -278,6 +289,8 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //All fields will be necessary
 
+        
+     //   txtPassword.setText(pas);
         if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtAddress.getText().isEmpty() ||
             txtEmail.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtHeight.getText().isEmpty() ||
             txtWeight.getText().isEmpty() || (rBtnFemale.isSelected() == false && rBtnMale.isSelected() == false
@@ -412,7 +425,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         String age=txtHeight1.getText();
 
         try {
-            String sql = " insert into user_data values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "update user_data set first_name=?,last_name=?,gender=?,address=?,email=?,phone=?,blood=?,weight=?,height=?,age=?,image=? where username='"+username+"'";
 
             pst = conn.prepareStatement(sql);
             pst.setString(1, firstName);
@@ -424,14 +437,15 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
             pst.setString(7, bloodGroup);
             pst.setString(8, weight);
             pst.setString(9, height);
-            pst.setString(10, userName);
-            pst.setString(11, password);
-            pst.setString(12, age);
+          //  pst.setString(10, userName);
+           // pst.setString(11, password);
+            pst.setString(10, age);
+           pst.setBytes(11, finalfile);
             //add image to Db
             //pst.setBlob(13, i1);
 
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "User Added successfuly");
+            JOptionPane.showMessageDialog(null, "User Data Updated successfuly");
 
             txtAddress.setText("");
             txtPassword.setText("");
@@ -461,15 +475,34 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        userProcessContainer.remove(this);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void BroswePic1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BroswePic1BtnActionPerformed
         // TODO add your handling code here:
+JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        try {
+             filename = f.getAbsolutePath();
+        } catch (Exception e) {
+        }
 
-        addImage();
+        ImageIcon imageicon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(pic1Lbl.getWidth(), pic1Lbl.getHeight(), Image.SCALE_DEFAULT));
+        pic1Lbl.setIcon(imageicon);
+        File image = null;
+        try {
+            image = new File(filename);
+            
+            FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[16777215];
+            for (int num; (num = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, num);
+
+            }
+            finalfile = bos.toByteArray();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no image selected");
+        }
+        
 
     }//GEN-LAST:event_BroswePic1BtnActionPerformed
 public void addImage(){
@@ -487,7 +520,6 @@ public void addImage(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BroswePic1Btn;
     private javax.swing.JComboBox<String> boxBloodGroup;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

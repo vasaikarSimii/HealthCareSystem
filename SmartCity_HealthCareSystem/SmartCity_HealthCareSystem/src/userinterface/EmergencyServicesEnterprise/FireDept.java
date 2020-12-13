@@ -5,7 +5,14 @@
  */
 package userinterface.EmergencyServicesEnterprise;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -17,15 +24,75 @@ public class FireDept extends javax.swing.JPanel {
      * Creates new form FireDept
      */
     
-
-    FireDept(JPanel userProcessContainer) {
+    String net_name=null;
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    FireDept(JPanel userProcessContainer,String net_name) {
         initComponents();
+        this.net_name=net_name;
          populateTable();
+         populateNameComboBox();
+         
         
     }
+
+    
 public void populateTable(){
        //connect from database -- query
+    try{
+         String sql ="select * from manage_fire where net='"+net_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        tblCovidCare.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
    }
+
+ public void populateNameComboBox(){
+               jComboBox1.removeAllItems();
+        try{
+        String sql ="select * from manage_emerg where org_type='"+"Fire Department"+"' AND org_net='"+net_name+"'";
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+            System.out.println("*************");
+         while (rs.next()) {  
+             System.out.println("77777777777");
+        jComboBox1.addItem(rs.getString("org_name"));  
+            // System.out.println(rs.getString("net_name"));
+             System.out.println("555555555555555");
+ }
+       
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+       }
     
 
     /**
@@ -43,17 +110,17 @@ public void populateTable(){
         jLabel4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtLocation2 = new javax.swing.JTextField();
+        txtContact = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCovidCare = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -96,7 +163,15 @@ public void populateTable(){
             new String [] {
                 "Fire Dept Station Name", "Location", "Contact Details", "Username"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCovidCare);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -117,7 +192,7 @@ public void populateTable(){
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +210,7 @@ public void populateTable(){
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtLocation2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -158,10 +233,10 @@ public void populateTable(){
                 .addComponent(jLabel6)
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -173,7 +248,7 @@ public void populateTable(){
                             .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLocation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,7 +265,7 @@ public void populateTable(){
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(btnSubmit)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -210,6 +285,68 @@ public void populateTable(){
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         //add code to store all data in database
+        
+       String name = null;
+        
+        try {
+            if(jComboBox1.getSelectedItem().toString() != null) {
+               name=jComboBox1.getSelectedItem().toString(); 
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Create Doctor Organization First");
+            return;
+        }
+        
+        String contact = txtContact.getText();
+        String location = txtLocation.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        
+        if(contact.isEmpty() || location.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
+        try {
+        String sql = " insert into manage_fire values(?,?,?,?,?,?)";
+
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setString(2, contact);
+                pst.setString(3, location);
+                pst.setString(4, username);
+                pst.setString(5, password);
+                pst.setString(6, net_name);
+                //pst.setString(7, emer_name);
+                
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Organisation Added successfuly");
+                populateTable();
+                txtLocation.setText("");
+                txtPassword.setText("");
+                txtContact.setText("");
+                txtUsername.setText("");
+                
+        }
+        catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Organization must be unique");
+        }finally{
+            try {
+              //  rs.close();
+                pst.close();
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+            }
+        
+      
+        
+        //JOptionPane.showMessageDialog(null, "Doctor Organization Created..!!");
+        
+        populateTable();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -219,6 +356,7 @@ public void populateTable(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -230,9 +368,8 @@ public void populateTable(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCovidCare;
+    private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtLocation;
-    private javax.swing.JTextField txtLocation2;
-    private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

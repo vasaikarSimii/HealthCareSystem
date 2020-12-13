@@ -20,12 +20,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+//import userinterface.Ambulancerole.AmbulanceRole;
+import userinterface.Ambulancerole.AmbulanceRole;
 import userinterface.CovidRole.CovidWorkAreaJPanel;
 import userinterface.DoctorRole.DoctorJPanel;
+import userinterface.DonorJRole.DonorJPanel;
+import userinterface.EmergencyServicesEnterprise.EmergencyServicesWorkAreaJPanel;
+import userinterface.FireRole.FireRole;
 import userinterface.HospitalEnterprise.HospitalWorkAreaJPanel;
+import userinterface.InsuranceRole.InsuranceJPanel;
+import userinterface.MedicalServicesEnterprise.MedicalServicesWorkArea;
+import userinterface.PharmacyRole.PharmacyJPanel;
 import userinterface.SystemAdmin.SystemAdminWorkAreaJPanel;
 import userinterface.UserEnterprise.UserRoleWorkAreaJPanel;
 import userinterface.UserRegistration.CreateUserAccountJPanel;
+import userinterface.labrole.LabRoleWorkArea;
 
 /**
  *
@@ -187,7 +196,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel14.setText("Category:");
         jLabel14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "System Admin", "End User", "Hospital Enterprise", "Doctor", "Covid Care" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "System Admin", "End User", "Hospital Enterprise", "Doctor", "Covid Care", "Medical Services", "Pharmacy", "Laboratory", "Blood Donation", "Insurance", "Emergency", "Ambulance", "Fire Department" }));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Mainframe.gif"))); // NOI18N
 
@@ -376,6 +385,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         String name=txtUsername.getText();
         String pass=txtPassword.getText();
+        
+        if(name.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username and Password cannot be empty");
+            return;
+        }
 
         String choice=jComboBox1.getSelectedItem().toString();
 
@@ -401,13 +415,20 @@ public class MainFrame extends javax.swing.JFrame {
                     String height=rs.getString("height");
                     String username=rs.getString("username");
                     String age=rs.getString("age");
+                    byte[] finalfile = rs.getBytes("image");
 
-                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile);
                     container.add("ur",ur);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    return;
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -428,6 +449,7 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e);
                 }
             }
+            break;
             case "Doctor":
 
             try {
@@ -450,8 +472,324 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("dp",dp);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    return;
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+                
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            break;
+            case "Laboratory":
+
+            try {
+                sql = "select * from manage_lab where phamacy_username='"+name+"' and phamacy_pass='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String org=rs.getString("phamacy_org");
+                    String location=rs.getString("phamacy_location");
+                    String username=rs.getString("phamacy_username");
+                    String net=rs.getString("phamacy_net");
+                    String enter=rs.getString("phamacy_enter");
+                    //  String =rs.getString("doc_enter");
+
+                    LabRoleWorkArea lab=new LabRoleWorkArea(container,org,location,username,net,enter);
+                    container.add("lab",lab);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    return;
+                }
+                
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            
+            case "Blood Donation":
+
+            try {
+                sql = "select * from manage_donor where donor_username='"+name+"' and donor_pass='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String org=rs.getString("donor_org");
+                    String location=rs.getString("donor_location");
+                    String username=rs.getString("donor_username");
+                    String net=rs.getString("donor_net");
+                    String enter=rs.getString("donor_enter");
+                    //  String =rs.getString("doc_enter");
+
+                    DonorJPanel donor=new DonorJPanel(container,org,location,username,net,enter);
+                    container.add("donor",donor);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            
+            case "Insurance":
+
+            try {
+                sql = "select * from insurance where company_id='"+name+"' and pass='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String company=rs.getString("company_name");
+                    String id=rs.getString("company_id");
+                   // String username=rs.getString("donor_username");
+                    
+                    //  String =rs.getString("doc_enter");
+
+                    InsuranceJPanel in=new InsuranceJPanel(container,company,id);
+                    container.add("in",in);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            
+            case "Pharmacy":
+
+            try {
+                sql = "select * from manage_phamacy where phamacy_username='"+name+"' and phamacy_pass='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String phamacy_org=rs.getString("phamacy_org");
+                    String phamacy_location=rs.getString("phamacy_location");
+                    String phamacy_username=rs.getString("phamacy_username");
+                    String phamacy_password=rs.getString("phamacy_pass");
+                    String phamacy_enter=rs.getString("phamacy_enter");
+                    //  String =rs.getString("doc_enter");
+
+                    PharmacyJPanel pj=new PharmacyJPanel(container,phamacy_org,phamacy_location,phamacy_username,phamacy_password,phamacy_password,phamacy_enter);
+                    container.add("pl",pj);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+           
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            
+            case "Ambulance":
+
+            try {
+                sql = "select * from manage_ambulance where usern='"+name+"' and passw='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String ambulance_name=rs.getString("ambulance_name");
+                    String contact=rs.getString("contact");
+                    String net=rs.getString("net");
+//                    String phamacy_password=rs.getString("phamacy_pass");
+//                    String phamacy_enter=rs.getString("phamacy_enter");
+                    //  String =rs.getString("doc_enter");
+
+                    AmbulanceRole ar=new AmbulanceRole(container,ambulance_name,contact,net);
+                    container.add("ar",ar);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                    
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.close();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            
+            case "Fire Department":
+
+            try {
+                sql = "select * from manage_fire where usern='"+name+"' and passw='"+pass+"'";
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                System.out.println("0000000000000");
+                while(rs.next())
+                {
+                    System.out.println("5555555555");
+                    String fire_name=rs.getString("fire_name");
+                    String contact=rs.getString("contact");
+                    String net=rs.getString("net");
+//                    String phamacy_password=rs.getString("phamacy_pass");
+//                    String phamacy_enter=rs.getString("phamacy_enter");
+                    //  String =rs.getString("doc_enter");
+
+                    FireRole ar=new FireRole(container,fire_name,contact,net);
+                    container.add("ar",ar);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                    
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
 
             } catch (SQLException ex) {
@@ -490,8 +828,15 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("hw",hw);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -510,6 +855,96 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e);
                 }
             }
+              case "Medical Services":
+            sql = "select * from manage_logins where username='"+name+"' and password='"+pass+"'";
+
+            try {
+
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                while(rs.next())
+                {
+                    String net_name=rs.getString("n_name");
+                    String emer_name=rs.getString("e_name");
+
+                    MedicalServicesWorkArea mswa=new MedicalServicesWorkArea(container,net_name, emer_name);
+                    container.add("mswa",mswa);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.c   lose();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+              
+              case "Emergency":
+            sql = "select * from manage_logins where username='"+name+"' and password='"+pass+"'";
+
+            try {
+                System.out.println("EMEMEMEMEMEM");
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+                
+                while(rs.next())
+                {
+                    System.out.println("DCDCDCDCDCDCD");
+                    String net_name=rs.getString("n_name");
+                    String emer_name=rs.getString("e_name");
+
+                    EmergencyServicesWorkAreaJPanel em=new EmergencyServicesWorkAreaJPanel(container,net_name, emer_name);
+                    container.add("em",em);
+                    CardLayout layout=(CardLayout)container.getLayout();
+                    layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                   
+                }
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }finally{
+                try {
+                    if (rs!=null) {
+                        rs.close();
+                    }
+                    if (pst!=null) {
+                        pst.close();
+                    }
+                    //                    if (conn!=null) {
+                        //                      pst.c   lose();
+                        //                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+            
             case "System Admin":
             if(name.equals("sysadmin")&&pass.equals("sysadmin"))
             {
@@ -518,10 +953,16 @@ public class MainFrame extends javax.swing.JFrame {
                 CardLayout layout=(CardLayout)container.getLayout();
                 layout.next(container);
                 JOptionPane.showMessageDialog(null, "Login successful");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
+                
             }
             else{
-                JOptionPane.showMessageDialog(null, "Login Failed");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                break;
             }
             case "Covid Care":
             sql = "select * from manage_covid where covid_username='"+name+"' and covid_pass='"+pass+"'";
@@ -540,8 +981,15 @@ public class MainFrame extends javax.swing.JFrame {
                     container.add("covid",covid);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);
+                    JOptionPane.showMessageDialog(null, "Login successful");
+                    txtUsername.setText("");
+                txtPassword.setText("");
+                return;
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Login successful");
+                JOptionPane.showMessageDialog(null, "Login failed");
+                txtUsername.setText("");
+                txtPassword.setText("");
                 break;
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());

@@ -6,11 +6,13 @@
 
 package userinterface.UserEnterprise;
 
+import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import userinterface.dbConn;
 
@@ -35,11 +37,12 @@ public class covidtestbooking extends javax.swing.JPanel {
             Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    JPanel userProcessContainer;
             
     /**
      * Creates new form covidtestbooking
      */
-    public covidtestbooking(String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
+    public covidtestbooking(JPanel userProcessContainer ,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
         initComponents();
          this.f_name=f_name;
         this.l_name=l_name;
@@ -52,6 +55,7 @@ public class covidtestbooking extends javax.swing.JPanel {
         this.height=height;
         this.username=username;
         this.age=age;
+        this.userProcessContainer = userProcessContainer;
         full_name=f_name+" "+l_name;
         jTextField1.setText(phone);
         jTextField2.setText(email);
@@ -111,8 +115,9 @@ public class covidtestbooking extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnBook = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -152,23 +157,32 @@ public class covidtestbooking extends javax.swing.JPanel {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Book Test");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBook.setText("Book Test");
+        btnBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBookActionPerformed(evt);
             }
         });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/covidcaree.jpg"))); // NOI18N
+
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(68, 68, 68)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 720, Short.MAX_VALUE))
+                .addGap(0, 651, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(194, 194, 194)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -194,7 +208,7 @@ public class covidtestbooking extends javax.swing.JPanel {
                             .addComponent(jTextField2)
                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                            .addComponent(btnBook))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(231, 231, 231))
@@ -202,9 +216,11 @@ public class covidtestbooking extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel6)
-                .addGap(33, 33, 33)
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(btnBack))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,7 +251,7 @@ public class covidtestbooking extends javax.swing.JPanel {
                             .addComponent(jLabel7)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
-                        .addComponent(jButton1))
+                        .addComponent(btnBook))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -251,33 +267,52 @@ public class covidtestbooking extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
         // TODO add your handling code here:
         try {
             String type=jComboBox1.getSelectedItem().toString();
             String center=jComboBox2.getSelectedItem().toString();
-        String sql = " insert into covid_booking values(?,?,?,?,?,?,?,?)";
+//        String sql = " insert into covid_booking values(?,?,?,?,?,?,?,?)";
+//
+//                pst = conn.prepareStatement(sql);
+//                pst.setString(1, username);
+//                pst.setString(2, full_name);
+//                pst.setString(3, address);
+//                pst.setString(4, age);
+//                pst.setString(5, phone);
+//                pst.setString(6, email);
+//                pst.setString(7, type);
+//                pst.setString(8, center);
+//                
+//            String sql3 = "select test_result from covid_care_result where patient_i='" +username + "'";
+//            pst = conn.prepareStatement(sql3);
+//            if(sql3.equals("Null")) {
+//                JOptionPane.showMessageDialog(null, "First Complete earlier test");
+//                return;
+//            }
 
-                pst = conn.prepareStatement(sql);
-                pst.setString(1, username);
-                pst.setString(2, full_name);
-                pst.setString(3, address);
-                pst.setString(4, age);
-                pst.setString(5, phone);
-                pst.setString(6, email);
-                pst.setString(7, type);
-                pst.setString(8, center);
-                
-                
-                
-                pst.executeUpdate();
+            String sql = " insert into covid_care_result values(?,?,?,?,?,?,?,?,?,?)";
+            pst = conn.prepareStatement(sql);
+            String status = "Null";
+            String result = "Null";
+            pst.setString(1, username);
+            pst.setString(2, full_name);
+            pst.setString(3, address);
+            pst.setString(4, age);
+            pst.setString(5, phone);
+            pst.setString(6, email);
+            pst.setString(7, type);
+            pst.setString(8, center); 
+            pst.setString(9, status);
+            pst.setString(10, result);
+            pst.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Booking Done successfuly");
                 
                 
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Please select another test or another covid center");
         }finally{
             try {
               //  rs.close();
@@ -288,11 +323,19 @@ public class covidtestbooking extends javax.swing.JPanel {
             }
             }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBookActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBook;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

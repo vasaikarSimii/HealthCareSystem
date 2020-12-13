@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Git/FINALPROJECTGIT/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/labrole/TestingJPanel.java</file>
-            <file>file:/C:/Git/FINALPROJECTGIT/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/labrole/VaccineJPanel.java</file>
-            <file>file:/C:/Git/FINALPROJECTGIT/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/labrole/LabRoleWorkArea.java</file>
+            <file>file:/C:/Users/jshar/OneDrive/Desktop/AED_New_Final/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/FireRole/FireRole.java</file>
+            <file>file:/C:/Users/jshar/OneDrive/Desktop/AED_New_Final/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/DoctorRole/DoctorJPanel.java</file>
+            <file>file:/C:/Users/jshar/OneDrive/Desktop/AED_New_Final/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/labrole/VaccineJPanel.java</file>
+            <file>file:/C:/Users/jshar/OneDrive/Desktop/AED_New_Final/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/DoctorRole/PresciptionJpanel.java</file>
+            <file>file:/C:/Users/jshar/OneDrive/Desktop/AED_New_Final/HealthCareSystem/SmartCity_HealthCareSystem/SmartCity_HealthCareSystem/src/userinterface/PharmacyRole/PharmacyJPanel.java</file>
         </group>
     </open-files>
 </project-private>

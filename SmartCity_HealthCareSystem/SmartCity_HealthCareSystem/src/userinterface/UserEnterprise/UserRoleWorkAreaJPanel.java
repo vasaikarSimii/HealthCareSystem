@@ -27,10 +27,11 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
             String height=null;
             String username=null;
             String age=null;
+            byte[] finalfile = null;
     /**
      * Creates new form UserMainPanel
      */
-    public UserRoleWorkAreaJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age) {
+    public UserRoleWorkAreaJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile) {
         initComponents();
 
         this.ecosystem = ecosystem;
@@ -45,6 +46,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         this.height=height;
         this.username=username;
         this.age=age;
+        this.finalfile = finalfile;
     }
 
     /**
@@ -160,11 +162,15 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void EmergencyServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyServicesBtnActionPerformed
         // TODO add your handling code here:
+        System.out.println("AAAAAAAAAAAAAA");
         EmergencyJPanel EmergencyJPanel=new EmergencyJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        System.out.println("BBBBBBBBB");
         rightPanel.add("EmergencyJPanel",EmergencyJPanel);
+        System.out.println("CCCCCCCCCCC");
         CardLayout layout=(CardLayout)rightPanel.getLayout();
+        System.out.println("DDDDDDDDDDDDDD");
         layout.next(rightPanel);
-
+        System.out.println("EEEEEEEEEEEEE");
     }//GEN-LAST:event_EmergencyServicesBtnActionPerformed
 
     private void HospitalServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalServicesBtnActionPerformed
@@ -185,7 +191,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void UpdateUserProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserProfileBtnActionPerformed
         // TODO add your handling code here:
-        UpdateProfileJPanel UpdateProfileJPanel=new UpdateProfileJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age);
+        UpdateProfileJPanel UpdateProfileJPanel=new UpdateProfileJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile);
         rightPanel.add("UpdateProfileJPanel",UpdateProfileJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);

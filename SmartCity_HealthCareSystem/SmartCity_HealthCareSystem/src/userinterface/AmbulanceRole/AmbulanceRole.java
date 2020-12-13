@@ -4,7 +4,18 @@
  * and open the template in the editor.
  */
 
-package userinterface.Ambuancerole;
+package userinterface.Ambulancerole;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import net.proteanit.sql.DbUtils;
+import userinterface.dbConn;
 
 /**
  *
@@ -15,9 +26,72 @@ public class AmbulanceRole extends javax.swing.JPanel {
     /**
      * Creates new form AmbulanceRole
      */
-    public AmbulanceRole() {
+    String ambulance_name=null;
+    String contact=null;
+    String net=null;
+    Connection conn = dbConn.getConn();
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    String a=null;
+    
+    public AmbulanceRole(JPanel container, String ambulance_name, String contact, String net) {
         initComponents();
+        this.ambulance_name=ambulance_name;
+        this.contact=contact;
+        this.net=net;
+        populateTable();
+        Update_table();
+        
     }
+    
+    private void populateTable(){
+        try{
+        String sql ="select * from ambulance_report where contact_ambulance='"+"NA"+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable4.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
+    public void Update_table(){
+        try{
+        String sql ="select * from ambulance_report where contact_ambulance='"+contact+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        pst=conn.prepareStatement(sql);
+        rs=pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    catch(Exception e){
+    JOptionPane.showMessageDialog(null, e);
+    }
+    finally {
+            
+            try{
+                rs.close();
+                pst.close();
+                
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }
+
+//    public AmbulanceRole(JPanel container, String ambulance_name, String contact, String net) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +102,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnSendAmbulance = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
@@ -40,14 +114,14 @@ public class AmbulanceRole extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 153));
-        jButton1.setText("Send Ambulance");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSendAmbulance.setBackground(new java.awt.Color(0, 153, 153));
+        btnSendAmbulance.setText("Send Ambulance");
+        btnSendAmbulance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSendAmbulanceActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
+        add(btnSendAmbulance, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
 
         jTable2.setBackground(new java.awt.Color(204, 255, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -60,10 +134,18 @@ public class AmbulanceRole extends javax.swing.JPanel {
             new String [] {
                 "User Name", "Location", "Number of people injured", "Alternate Phone Number", "Time of Response"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 700, 105));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 700, 105));
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
         jButton3.setText("refresh");
@@ -80,10 +162,23 @@ public class AmbulanceRole extends javax.swing.JPanel {
             new String [] {
                 "User Name", "Location", "Number of people injured", "Alternate Phone Number"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable4);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 690, 105));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 700, 105));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -96,13 +191,70 @@ public class AmbulanceRole extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, 420));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSendAmbulanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendAmbulanceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+            Date date = new Date();  
+           String date_time= formatter.format(date);
+            System.out.println("da"+date_time);
+           // String result=    jComboBox1.getSelectedItem().toString();
+    try{
+//            int seat=Integer.parseInt(jTextField1.getText());
+//            String model=jTextField2.getText();
+//            String name=jComboBox1.getSelectedItem().toString();
+//            String type=jComboBox2.getSelectedItem().toString();
+
+        int selectedRow = jTable4.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table");
+            return;
+        }
+        
+        String location = (String) jTable4.getValueAt(selectedRow, 3);
+       
+        String sql = "update ambulance_report set time_of_response='" + date_time + "',contact_ambulance='" + contact + "',network='" + net + "',ambulance_name='" + ambulance_name + "' where informer_id='"+a+"' AND loaction ='" + location + "'";
+                pst = conn.prepareStatement(sql);
+                
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Upadted successfuly");
+                Update_table();
+                populateTable();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            } finally {
+                       
+
+                try {
+
+                } catch (Exception e) {
+
+                }
+            }
+        
+    }//GEN-LAST:event_btnSendAmbulanceActionPerformed
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTable4.getSelectedRow();
+        if (selectedRow>=0){
+            a= (String) jTable4.getValueAt(selectedRow,0);
+//            b= (String) jTable1.getValueAt(selectedRow,1);
+//            c=(String) jTable1.getValueAt(selectedRow,2);
+//            d= (String) jTable1.getValueAt(selectedRow,3);
+//            e=(String) jTable1.getValueAt(selectedRow,4);
+//            f= (String) jTable1.getValueAt(selectedRow,5);
+//            g=(String) jTable1.getValueAt(selectedRow,6);
+//            h= (String) jTable1.getValueAt(selectedRow,7);
+            System.out.println(selectedRow+"  "+a);
+           // System.out.println(selectedRow+"  "+h);
+        }
+    }//GEN-LAST:event_jTable4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSendAmbulance;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

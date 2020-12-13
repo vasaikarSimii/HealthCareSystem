@@ -12,7 +12,11 @@ import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JPanel;
+import userinterface.dbConn;
 
 /**
  *
@@ -26,6 +30,9 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem system;
     UserAccount account;
     OrganizationDirectory directory;
+    Connection conn= dbConn.getConn();
+    PreparedStatement pst =null;
+    ResultSet rs= null;
     
     /**
      * Creates new form CommunityServicesWorkAreaJPanel
@@ -42,15 +49,19 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 //        populateTable();
 //        
 //    }
-//    
+        String net_name=null;
+        String emer_name=null;
     
-    public EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    public EmergencyServicesWorkAreaJPanel(JPanel userProcessContainer, String net_name, String emer_name) {
         initComponents();  
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+        this.net_name=net_name;
+        this.emer_name=emer_name;
         populateTable();
     }
-    
+
+   
     public void populateTable(){
        //connect from database -- query
    }
@@ -156,7 +167,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
     private void ManageOrganizationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageOrganizationBtnActionPerformed
         // TODO add your handling code here:
 
-        Ambulance ambulance=new Ambulance(rightPanel);
+        Ambulance ambulance=new Ambulance(rightPanel,net_name);
         rightPanel.add("Ambulance",ambulance);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -168,7 +179,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 
         // CreateDoctorJPanel = new CreateDoctorJPanel(rightPanel,system, organization,  network, enterprise, account);
 
-        FireDept fireDept = new FireDept(rightPanel);
+        FireDept fireDept = new FireDept(rightPanel,net_name);
         rightPanel.add("FireDept",fireDept);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);
@@ -176,7 +187,10 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrganizationActionPerformed
         // TODO add your handling code here:
-        
+        ManageOrganizationJPanel man = new ManageOrganizationJPanel(rightPanel,net_name);
+        rightPanel.add("man",man);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_btnOrganizationActionPerformed
 
 

@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -281,6 +281,12 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         String type = organizationJComboBox.getSelectedItem().toString();
         String id=jTextField2.getText();
         String name=jTextField1.getText();
+        
+        if(id.isEmpty() || name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            return;
+        }
+        
        try {
         String sql = " insert into manage_hospital values(?,?,?,?,?)";
 
@@ -301,7 +307,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "Ordanization ID must be unique");
         }finally{
             try {
               //  rs.close();
