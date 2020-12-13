@@ -158,7 +158,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
         btnAccept = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkArea = new javax.swing.JTable();
-        btnEmail = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1400, 700));
@@ -354,13 +353,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblWorkArea);
 
-        btnEmail.setText("Send Email");
-        btnEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmailActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -384,9 +376,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(161, Short.MAX_VALUE))
@@ -407,9 +396,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
                     .addComponent(btnDeny))
                 .addGap(81, 81, 81)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnEmail)
-                .addGap(342, 342, 342))
+                .addGap(402, 402, 402))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -654,64 +641,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_btnVaccineRequestActionPerformed
 
-    private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
-        // TODO add your handling code here:
-//        int selectedRow = tblWorkArea.getSelectedRow();
-//        String name = (String)tblWorkArea.getValueAt(selectedRow,0);
-//        String email =  null;
-//       
-//       try {
-//            String sql2 = "select email from user_data where username="+name;
-//            pst = conn.prepareStatement(sql2);
-//            rs = pst.executeQuery();
-//            while(rs.next()) {
-//                pst.setString(4,email);
-//            }
-//       } catch (SQLException ex) {
-//           Logger.getLogger(DoctorJPanel.class.getName()).log(Level.SEVERE, null, ex);
-//       }
-//       finally {
-//            
-//            try{
-//                rs.close();
-//                pst.close();
-//                
-//            }
-//            catch(Exception e){
-//                
-//            }
-//        }
-//       
-//        String receiver = email;
-//        final String sender = "healthcaresystemaed@gmail.com";
-//        final String password = "healthcaresystem";
-//        String Subjects = "Result";
-//        String msg = "Hello " + patName + "\n\n" + "Your Doctor Appointment is "  + " is " + patResult + 
-//                "\n\nThank you" ;
-//                
-//        Properties properties = new Properties();
-//        properties.put("mail.smtp.auth","true");
-//        properties.put("mail.smtp.starttls.enable","true");
-//        properties.put("mail.smtp.host","smtp.gmail.com");
-//        properties.put("mail.smtp.port","587");
-//        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
-//            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-//                return new javax.mail.PasswordAuthentication(sender,password);
-//            }
-//        });
-////        
-//        try{
-//            MimeMessage message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(sender));
-//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-//            message.setSubject(Subjects);
-//            message.setText(msg);
-//            Transport.send(message);
-//        }catch(Exception ex){
-//            System.out.println(""+ex);
-//        }
-    }//GEN-LAST:event_btnEmailActionPerformed
-
     private void tblWorkAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWorkAreaMouseClicked
         // TODO add your handling code here:
         int selectedRow = tblWorkArea.getSelectedRow();
@@ -729,7 +658,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> VaccinejComboBox;
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnDeny;
-    private javax.swing.JButton btnEmail;
     private javax.swing.JButton btnGenerate;
     private javax.swing.JButton btnVaccineRequest;
     private javax.swing.JButton jButton3;
