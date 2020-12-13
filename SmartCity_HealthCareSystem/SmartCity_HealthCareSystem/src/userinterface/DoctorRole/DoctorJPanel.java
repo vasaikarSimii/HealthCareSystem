@@ -151,7 +151,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
         testingjComboBox = new javax.swing.JComboBox<>();
         btnGenerate = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnVaccineRequest = new javax.swing.JButton();
         Testingtxt = new javax.swing.JLabel();
         vaccinetxt = new javax.swing.JLabel();
         btnDeny = new javax.swing.JButton();
@@ -239,10 +239,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Confirm Request");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVaccineRequest.setText("Confirm Request");
+        btnVaccineRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVaccineRequestActionPerformed(evt);
             }
         });
 
@@ -287,7 +287,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3)
-                            .addComponent(jButton2)))
+                            .addComponent(btnVaccineRequest)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnGenerate))))
@@ -313,7 +313,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox5)
                     .addComponent(VaccinejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
+                    .addComponent(btnVaccineRequest)
                     .addComponent(vaccinetxt))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -368,28 +368,27 @@ public class DoctorJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(46, 46, 46)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
                                 .addComponent(btnDeny, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(95, 95, 95)
-                                .addComponent(btnAccept)
-                                .addGap(188, 188, 188))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(46, 46, 46)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(36, 36, 36)))
+                                .addGap(104, 104, 104)
+                                .addComponent(btnAccept)))
+                        .addGap(36, 36, 36)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(209, 209, 209)
+                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -406,11 +405,11 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept)
                     .addComponent(btnDeny))
-                .addGap(48, 48, 48)
+                .addGap(81, 81, 81)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(btnEmail)
-                .addGap(375, 375, 375))
+                .addGap(342, 342, 342))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -592,7 +591,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
          }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineRequestActionPerformed
         // TODO add your handling code here:
         if(jCheckBox5.isSelected())
             {
@@ -600,20 +599,33 @@ public class DoctorJPanel extends javax.swing.JPanel {
             String vaccine=VaccinejComboBox.getSelectedItem().toString();
         try{
            
-            String sql1 = " insert into vaccine values(?,?,?,?,?,?)";
-
+//            String sql1 = " insert into vaccine values(?,?,?,?,?,?)";
+            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(sql1);
 
            // String acc="Accepted";
-            pst.setString(5,date );
-             pst.setString(6, vaccine);
+//            pst.setString(5,date );
+//             pst.setString(6, vaccine);
+//
+//            System.out.println("Date " + date);
+//
+//            pst.setString(1, b);
+//            pst.setString(2, a);
+//            pst.setString(3,name );
+//            pst.setString(4,doc_name);
 
-            System.out.println("Date " + date);
-
-            pst.setString(1, b);
+              pst.setString(1,b);
             pst.setString(2, a);
-            pst.setString(3,name );
+            pst.setString(3,name);
             pst.setString(4,doc_name);
+            pst.setString(5, date);
+            pst.setString(6, vaccine);
+            pst.setString(7, "NA");
+             pst.setString(8, "NA");
+             pst.setString(9, "NA");
+            pst.setString(10, "NA");
+            pst.setString(11, "NA");
+            pst.setString(12, "NA");
 
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Vaccine Request Generated successfuly");
@@ -634,7 +646,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
          else{
               JOptionPane.showMessageDialog(null, "Tick Vaccine BOX to continue");
          }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVaccineRequestActionPerformed
 
     private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
         // TODO add your handling code here:
@@ -713,7 +725,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDeny;
     private javax.swing.JButton btnEmail;
     private javax.swing.JButton btnGenerate;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVaccineRequest;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;

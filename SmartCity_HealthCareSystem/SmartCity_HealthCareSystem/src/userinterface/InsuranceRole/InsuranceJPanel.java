@@ -232,6 +232,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Upadted successfuly");
                 
+                populateStatusTable();
                 Update_table();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
