@@ -43,6 +43,12 @@ public class DoctorJPanel extends javax.swing.JPanel {
      Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    ResultSet rs1 = null;
+    PreparedStatement pst1 = null;
+    
+    ResultSet rs2 = null;
+    PreparedStatement pst2 = null;
 
     /**
      *
@@ -61,6 +67,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
     String patResult = null;
     String patEmail = null;
     String patDate = null;
+    String sym = null;
+    String age = null;
+    String enter = null;
     
     public DoctorJPanel(JPanel userProcessContainer,String doc_name,String special,String location,String doc_net,String doc_enter,String name) {
         initComponents();
@@ -74,13 +83,14 @@ public class DoctorJPanel extends javax.swing.JPanel {
        this.name=name;
        jXDatePicker1.setVisible(false);
         jLabel2.setVisible(false);
+        boxSlot.setVisible(false);
        populateTable();
        populateWorkTable();
     }
     public void populateTable(){
        //connect from database -- query
        try{
-        String sql ="select p_name,p_id,p_age,p_sym from appointment where d_id='"+name+"'";
+        String sql ="select p_name,p_id,p_age,p_sym,d_enter from appointment where d_id='"+name+"' AND status='" + "NA"+ "'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblPatientProfile.setModel(DbUtils.resultSetToTableModel(rs));
@@ -105,7 +115,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
     public void populateWorkTable(){
        //connect from database -- query
        try{
-        String sql ="select pat_name, appointment, date from appoint_status where doctor_id='"+name+"'";
+        String sql ="select * from appoint_status where doctor_id='"+name+"'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblWorkArea.setModel(DbUtils.resultSetToTableModel(rs));
@@ -150,14 +160,18 @@ public class DoctorJPanel extends javax.swing.JPanel {
         VaccinejComboBox = new javax.swing.JComboBox<>();
         testingjComboBox = new javax.swing.JComboBox<>();
         btnGenerate = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnTest = new javax.swing.JButton();
         btnVaccineRequest = new javax.swing.JButton();
         Testingtxt = new javax.swing.JLabel();
         vaccinetxt = new javax.swing.JLabel();
+        boxSlot = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         btnDeny = new javax.swing.JButton();
         btnAccept = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkArea = new javax.swing.JTable();
+        btnComplete = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1400, 700));
@@ -231,10 +245,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Confirm Request");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnTest.setText("Confirm Request");
+        btnTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnTestActionPerformed(evt);
             }
         });
 
@@ -253,11 +267,18 @@ public class DoctorJPanel extends javax.swing.JPanel {
         vaccinetxt.setText("Vaccines");
         vaccinetxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        boxSlot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", " " }));
+
+        jLabel1.setText("DIAGNOSIS DETAILS");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jCheckBox1)
@@ -265,6 +286,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(boxSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
@@ -285,7 +308,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
                             .addComponent(vaccinetxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
+                            .addComponent(btnTest)
                             .addComponent(btnVaccineRequest)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -298,16 +321,22 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxSlot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Testingtxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCheckBox2)
                         .addComponent(testingjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)))
+                        .addComponent(btnTest)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox5)
@@ -328,7 +357,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAccept.setText("Complete Appointment");
+        btnAccept.setText("Accept Appointment");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptActionPerformed(evt);
@@ -352,6 +381,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblWorkArea);
+
+        btnComplete.setText("Complete Appointment");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -377,7 +410,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(253, 253, 253)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnComplete))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -396,7 +435,11 @@ public class DoctorJPanel extends javax.swing.JPanel {
                     .addComponent(btnDeny))
                 .addGap(81, 81, 81)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(402, 402, 402))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnComplete)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(342, 342, 342))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -407,8 +450,12 @@ public class DoctorJPanel extends javax.swing.JPanel {
             if (selectedRow>=0){
                 a= (String) tblPatientProfile.getValueAt(selectedRow,0);
                 b= (String) tblPatientProfile.getValueAt(selectedRow,1);
+                sym = (String) tblPatientProfile.getValueAt(selectedRow,3);
+                age = (String) tblPatientProfile.getValueAt(selectedRow,2);
+                enter = (String) tblPatientProfile.getValueAt(selectedRow,4);
                 System.out.println(selectedRow+"  "+a);
                 System.out.println(selectedRow+"  "+b);
+                
 
                 String sql = "select * from manage_doc where doc_name ='" + a + "' AND special='" + b + "'";
                 pst = conn.prepareStatement(sql);
@@ -439,23 +486,59 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into appoint_status values(?,?,?,?,?)";
+            String sql1 = " insert into appoint_status values(?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
             String acc="Accepted";
-            pst.setString(5,date );
+            
+            String slot = boxSlot.getSelectedItem().toString();
 
             System.out.println("Date " + date);
+//            System.out.println("1");
+//            String sql2 = "if exists (select 1 from appoint_status where date='" + date + "' AND time_slot ='" + slot + "')";
+//             System.out.println("2");
+//            pst1 = conn.prepareStatement(sql1);
+//             System.out.println("3");
+//            rs1 = pst1.executeQuery();
+//             System.out.println("4");
+//            if (rs1.next()) {
+//                     System.out.println("5");
+//                    JOptionPane.showMessageDialog(null,"Date and Time slot must be different");
+//                    return;
+//                }
+//            
+//            
+            
+//            IF EXISTS(SELECT 1 FROM sys.columns 
+//          WHERE Name = N'AddressID'
+//          AND Object_ID = Object_ID(N'Person.Address'))
+//    PRINT 'Column Exists'
+//ELSE
+//    PRINT 'Column doesn''t Exists'
+            
+            
 
             pst.setString(1, b);
             pst.setString(2, a);
             pst.setString(3,name );
             pst.setString(4,acc);
-
+            pst.setString(5,date );
+            pst.setString(6, slot);
+            pst.setString(7, sym);
+            pst.setString(8, age);
+            pst.setString(9, enter);
             pst.executeUpdate();
+            
+            String acc1 = "True";
+            
+//            String sql3 = "update appointment set status='" +acc1+"' where p_id='" +a+ "' AND p_sym='" +sym+ "'";
+//            pst2 = conn.prepareStatement(sql3);
+//            pst2.execute();
+           
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateWorkTable();
+            populateTable();
 
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -474,28 +557,50 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         jXDatePicker1.setVisible(true);
         jLabel2.setVisible(true);
+        boxSlot.setVisible(true);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void btnDenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenyActionPerformed
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into appoint_status values(?,?,?,?,?)";
+//            String sql1 = " insert into appoint_status values(?,?,?,?,?)";
+//            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?)";
+//            pst = conn.prepareStatement(sql1);
+//
+//            String acc="Denied";
+//            date="NA";
+//            pst.setString(5,date );
+//
+//            pst.setString(1, b);
+//            pst.setString(2, a);
+//            pst.setString(3,name );
+//            pst.setString(4,acc);
+
+            String sql1 = " insert into appoint_status values(?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
             String acc="Denied";
-            date="NA";
-            pst.setString(5,date );
+
+            System.out.println("Date " + date);
 
             pst.setString(1, b);
             pst.setString(2, a);
             pst.setString(3,name );
             pst.setString(4,acc);
+            pst.setString(5,date );
+            pst.setString(6, "NA");
+            pst.setString(7, sym);
+            pst.setString(8, age);
+            pst.setString(9, enter);
 
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateWorkTable();
+            
+            
+            
 
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -513,7 +618,17 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(jCheckBox3.isSelected())
         {
-        PresciptionJpanel pj=new PresciptionJpanel(userProcessContainer,doc_name,doc_net,doc_enter,name,b,a);
+         int selectedRow = tblWorkArea.getSelectedRow();
+                
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please select a row..!!");
+                    return;
+                }
+                
+                String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
+                String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);   
+            
+        PresciptionJpanel pj=new PresciptionJpanel(userProcessContainer,doc_name,doc_net,doc_enter,name,temp_id,temp_name);
         userProcessContainer.add("pj",pj);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -534,12 +649,23 @@ public class DoctorJPanel extends javax.swing.JPanel {
         System.out.println(date);
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestActionPerformed
         // TODO add your handling code here:
+        
+        
          if(jCheckBox2.isSelected())
             {
+                int selectedRow = tblWorkArea.getSelectedRow();
                 
-            String test=testingjComboBox.getSelectedItem().toString();
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please select a row..!!");
+                    return;
+                }
+                
+                String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
+                String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);
+                
+                String test=testingjComboBox.getSelectedItem().toString();
         try{
            
 //            String sql1 = " insert into testing values(?,?,?,?,?,?)";
@@ -547,13 +673,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
             pst = conn.prepareStatement(sql1);
 
             String acc="Accepted";
-            pst.setString(5,date );
+            pst.setString(5,date);
              pst.setString(6, test);
 
             System.out.println("Date " + date);
 
-            pst.setString(1, b);
-            pst.setString(2, a);
+            pst.setString(1, temp_id);
+            pst.setString(2, temp_name);
             pst.setString(3,name );
             pst.setString(4,doc_name);
             pst.setString(7, "NA");
@@ -582,12 +708,22 @@ public class DoctorJPanel extends javax.swing.JPanel {
          else{
               JOptionPane.showMessageDialog(null, "Tick Testing BOX to continue");
          }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnTestActionPerformed
 
     private void btnVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineRequestActionPerformed
         // TODO add your handling code here:
         if(jCheckBox5.isSelected())
             {
+              
+                int selectedRow = tblWorkArea.getSelectedRow();
+                
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please select a row..!!");
+                    return;
+                }
+                
+                String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
+                String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);
                 
             String vaccine=VaccinejComboBox.getSelectedItem().toString();
         try{
@@ -607,8 +743,8 @@ public class DoctorJPanel extends javax.swing.JPanel {
 //            pst.setString(3,name );
 //            pst.setString(4,doc_name);
 
-              pst.setString(1,b);
-            pst.setString(2, a);
+              pst.setString(1,temp_id);
+            pst.setString(2, temp_name);
             pst.setString(3,name);
             pst.setString(4,doc_name);
             pst.setString(5, date);
@@ -656,15 +792,19 @@ public class DoctorJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Testingtxt;
     private javax.swing.JComboBox<String> VaccinejComboBox;
+    private javax.swing.JComboBox<String> boxSlot;
     private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnComplete;
     private javax.swing.JButton btnDeny;
     private javax.swing.JButton btnGenerate;
+    private javax.swing.JButton btnTest;
     private javax.swing.JButton btnVaccineRequest;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

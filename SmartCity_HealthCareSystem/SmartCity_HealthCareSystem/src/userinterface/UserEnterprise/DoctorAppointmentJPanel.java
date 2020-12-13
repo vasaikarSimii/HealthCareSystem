@@ -226,7 +226,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
             String symp=jTextField1.getText();
-        String sql1 = " insert into appointment values(?,?,?,?,?,?,?)";
+        String sql1 = " insert into appointment values(?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
@@ -238,6 +238,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
             pst.setString(2, username);
             pst.setString(3,age );
             pst.setString(4, symp);
+            pst.setString(8,"NA");
             
             
 
