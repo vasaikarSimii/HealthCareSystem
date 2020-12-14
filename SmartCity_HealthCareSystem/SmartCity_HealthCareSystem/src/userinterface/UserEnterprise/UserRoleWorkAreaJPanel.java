@@ -28,10 +28,11 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
             String username=null;
             String age=null;
             byte[] finalfile = null;
+            String pass = null;
     /**
      * Creates new form UserMainPanel
      */
-    public UserRoleWorkAreaJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile) {
+    public UserRoleWorkAreaJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile,String pass) {
         initComponents();
 
         this.ecosystem = ecosystem;
@@ -47,6 +48,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
         this.username=username;
         this.age=age;
         this.finalfile = finalfile;
+        this.pass = pass;
     }
 
     /**
@@ -191,7 +193,7 @@ public class UserRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void UpdateUserProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserProfileBtnActionPerformed
         // TODO add your handling code here:
-        UpdateProfileJPanel UpdateProfileJPanel=new UpdateProfileJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile);
+        UpdateProfileJPanel UpdateProfileJPanel=new UpdateProfileJPanel(rightPanel,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile,pass);
         rightPanel.add("UpdateProfileJPanel",UpdateProfileJPanel);
         CardLayout layout=(CardLayout)rightPanel.getLayout();
         layout.next(rightPanel);

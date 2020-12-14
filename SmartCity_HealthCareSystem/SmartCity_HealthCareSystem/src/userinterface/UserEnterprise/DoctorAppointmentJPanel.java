@@ -225,7 +225,14 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
     private void btnConfirmAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmAppointmentActionPerformed
         // TODO add your handling code here:
         try{
+            
+            
             String symp=jTextField1.getText();
+            
+            if(symp.isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+                return;
+            }
         String sql1 = " insert into appointment values(?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
