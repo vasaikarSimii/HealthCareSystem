@@ -288,11 +288,13 @@ public class PresciptionJpanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here: prescription
+        System.out.println("1");
         String drug=jTextField1.getText();
         String quantity=jTextField2.getText();
         String dose=jTextField3.getText();
         String duration=jTextField4.getText();
         String ins=jTextArea1.getText();
+        System.out.println("Drug" + drug);
         try{
             
         String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -321,6 +323,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
          
 
             pst.executeUpdate();
+            System.out.println("Drug1111" + drug);
             JOptionPane.showMessageDialog(null, "Prescription Added successfuly");
             populateTable();
            

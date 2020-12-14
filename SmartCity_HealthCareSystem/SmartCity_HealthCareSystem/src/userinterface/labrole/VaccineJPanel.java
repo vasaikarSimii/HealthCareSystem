@@ -12,6 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.proteanit.sql.DbUtils;
@@ -258,25 +264,65 @@ EcoSystem system;
                 JOptionPane.showMessageDialog(null, "Please select row from above table");
                 return;
             }
-            String id = (String)jTable2.getValueAt(selectedRow,0);
+            String patID = (String) jTable2.getValueAt(selectedRow,0);
+            String docID = (String) jTable2.getValueAt(selectedRow,2);
+            String tempDate = (String) jTable2.getValueAt(selectedRow,4);
+            String testType = (String)  jTable2.getValueAt(selectedRow,5);
             
             String result=jComboBox1.getSelectedItem().toString();
             
-            String temp_org = (String)jTable2.getValueAt(selectedRow,8);
-            
-            if(!temp_org.equals(org)) {
-                JOptionPane.showMessageDialog(null,org + " cannot update " +temp_org+ " clients details");
-                return;
-            }
-            
-            System.out.println("Result = " + result);
-            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+id+"'";
+//            String temp_org = (String)jTable2.getValueAt(selectedRow,8);
+//            
+//            if(!temp_org.equals(org)) {
+//                JOptionPane.showMessageDialog(null,org + " cannot update " +temp_org+ " clients details");
+//                return;
+//            }
+//            
+//            System.out.println("Result = " + result);
+            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+patID+"' AND doctor_id ='" + docID + "' AND date = '" + tempDate+ "' AND vaccine_type ='" + testType + "'";
             pst = conn.prepareStatement(sql);
 
             pst.execute();
             JOptionPane.showMessageDialog(null, "Vaccine Data Updated successfuly");
             populateResultTable();
             populateTable();
+            
+            String sql5 = "select email from user_data where username ='" + patID+ "'";
+                pst = conn.prepareStatement(sql5);
+                rs=pst.executeQuery();
+                
+                String emailID = null; 
+                if(rs.next()) {
+                    emailID = rs.getString("email");
+                }
+                
+                String receiver = emailID;
+        final String sender = "healthcaresystemaed@gmail.com";
+        final String password = "healthcaresystem";
+        String Subjects = "Result";
+        String msg = "Hello \n\n" + "Your have been completed your vaccination for '" + testType + "'\n\nThank you" ;
+                
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                return new javax.mail.PasswordAuthentication(sender,password);
+            }
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(Subjects);
+            message.setText(msg);
+            Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
+            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -350,7 +396,8 @@ EcoSystem system;
            
 //            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1 = "update vaccine_status set status ='" +acc+ "', date_of_vaccination='" + date_time+
-                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";
+                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+
+                    "' AND doctor_id ='" + c + "' AND date = '" + e+ "' AND vaccine_type ='" + f+ "'";
             pst = conn.prepareStatement(sql1);
             
 //           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -382,6 +429,8 @@ EcoSystem system;
             JOptionPane.showMessageDialog(null, "Test Added in Queue successfuly");
             populateResultTable();
             populateTable();
+            
+            
            // populateWorkTable();
 
         }catch (SQLException ex) {

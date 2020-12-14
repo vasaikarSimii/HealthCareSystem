@@ -120,7 +120,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDeny = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -131,13 +130,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        btnDeny.setText("Deny Request");
-        btnDeny.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDenyActionPerformed(evt);
-            }
-        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,11 +206,9 @@ public class PharmacyJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
                             .addGap(466, 466, 466)
-                            .addComponent(btnDeny)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAccept))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(42, 42, 42)
@@ -246,9 +236,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                         .addGap(76, 76, 76)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDeny)
-                            .addComponent(btnAccept))
+                        .addComponent(btnAccept)
                         .addGap(51, 51, 51)
                         .addComponent(jLabel6)
                         .addGap(28, 28, 28)
@@ -264,67 +252,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                     .addContainerGap(632, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenyActionPerformed
-        // TODO add your handling code here:
-        try{
-
-//            String sql1 = " insert into pharmacy_status values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-            Date date = new Date();  
-            String date_time= formatter.format(date);
-            System.out.println("da"+date_time);
-            
-            String acc="Denied";
-            
-            int selectedRow = jTable1.getSelectedRow();
-        
-        if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please select a row from the table");
-            return;
-        }
-        
-        String id = (String) jTable1.getValueAt(selectedRow, 0);
-            
-            String sql1 = "update pharmacy_status set request ='" + acc + "', date_time = '" + date_time+ "', p_id = '" 
-                    + org + "', p_org = '" + username + "' where b_id = '" + id + "'";
-            pst = conn.prepareStatement(sql1);
-            
-//            System.out.println("Date " + date);
-//
-//              pst.setString(1,a );
-//            pst.setString(2, b);
-//            pst.setString(3,c );
-//            pst.setString(4,d);
-//            pst.setString(5, e);
-//            pst.setString(6, f);
-//            pst.setString(7, g);
-//            pst.setString(8, h);
-//            pst.setString(9, i);
-//            pst.setString(10, j);
-//           // pst.setString(11, k);
-//            //pst.setString(12, l);
-//            pst.setString(11, date_time);
-//            pst.setString(12, acc);
-//            pst.setString(13, org);
-//            pst.setString(14, username);
-
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
-           // populateWorkTable();
-           populateTable();
-           updateTable();
-        }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        } finally {
-            try {
-                pst.close();
-                rs.close();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-    }//GEN-LAST:event_btnDenyActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         // TODO add your handling code here:
@@ -355,9 +282,12 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         }
         
         String id = (String) jTable1.getValueAt(selectedRow, 0);
+        String docID = (String) jTable1.getValueAt(selectedRow, 2);
+        String drug = (String) jTable1.getValueAt(selectedRow, 5);
+        
             
             String sql1 = "update pharmacy_status set request ='" + acc + "', date_time = '" + date_time+ "', p_id = '" 
-                    + org + "', p_org = '" + username + "' where b_id = '" + id + "' ";
+                    + org + "', p_org = '" + username + "' where b_id = '" + id + "' AND do_id ='" + docID+ "' AND drug ='" + drug + "'";
             pst = conn.prepareStatement(sql1);
 
             System.out.println("Date " + date);
@@ -437,7 +367,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
-    private javax.swing.JButton btnDeny;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
