@@ -289,11 +289,32 @@ public class PresciptionJpanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here: prescription
         System.out.println("1");
+        
+        
+        boolean flag = false;
         String drug=jTextField1.getText();
         String quantity=jTextField2.getText();
         String dose=jTextField3.getText();
         String duration=jTextField4.getText();
         String ins=jTextArea1.getText();
+        
+        if(drug.isEmpty() || quantity.isEmpty() || dose.isEmpty() || duration.isEmpty() || ins.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields caanot be empty");
+            return;
+        }
+        
+        flag = quantity.matches("^[0-9]+$");
+        if(!flag) {
+            JOptionPane.showMessageDialog(null, "Quantity must have digits only");
+            return;
+        }
+        
+        flag = duration.matches("^[0-9]+$");
+        if(!flag) {
+            JOptionPane.showMessageDialog(null, "Duration must have digits only");
+            return;
+        }
+        
         System.out.println("Drug" + drug);
         try{
             
