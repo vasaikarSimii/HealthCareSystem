@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -46,6 +47,11 @@ public void populateTable(){
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblCovidCare.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Fire Name","Contact","Location","Username","Password","Network"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = tblCovidCare.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);

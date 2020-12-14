@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -58,6 +59,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         enterpriseJTable.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Network Name","Enterprise Name","Username","Password","Manager Name"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = enterpriseJTable.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -198,7 +204,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(enterpriseJTable);
         enterpriseJTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 94, 523, 95));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 94, 720, 95));
 
         submitJButton.setText("Submit");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {

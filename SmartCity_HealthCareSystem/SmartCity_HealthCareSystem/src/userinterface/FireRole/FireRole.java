@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -47,10 +48,15 @@ public class FireRole extends javax.swing.JPanel {
     
     private void populateTable(){
         try{
-        String sql ="select * from fire_report where contact_fire='"+"NA"+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select informer_id,informer_name,total_injured,loaction,contact from fire_report where contact_fire='"+"NA"+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable4.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Informer ID","Informer Name","Total Injured","Location","Contact Number"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable4.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -69,10 +75,15 @@ public class FireRole extends javax.swing.JPanel {
     }
     public void Update_table(){
         try{
-        String sql ="select * from fire_report where contact_fire='"+contact+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select informer_id,informer_name,total_injured,loaction,contact,time_of_response,network, fire_name from fire_report where contact_fire='"+contact+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Informer ID","Informer Name","Total Injured","Location","Contact Number","Response Time","Organisation Name"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable2.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -106,11 +117,11 @@ public class FireRole extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,7 +133,7 @@ public class FireRole extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, -1));
 
         jTable2.setBackground(new java.awt.Color(204, 255, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -146,11 +157,7 @@ public class FireRole extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 700, 105));
-
-        jButton3.setBackground(new java.awt.Color(0, 153, 153));
-        jButton3.setText("refresh");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, -1, -1));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 1100, 105));
 
         jTable4.setBackground(new java.awt.Color(204, 255, 204));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -179,17 +186,24 @@ public class FireRole extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 690, 105));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1090, 105));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText(" MANAGE FIRE DEPARTMENT");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
+        jLabel6.setText("FIRE DEPARTMENT DATABASE");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 490, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/ambulance.gif"))); // NOI18N
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, 420));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, 420));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText(" MANAGE FIRE DEPARTMENT");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -258,9 +272,9 @@ public class FireRole extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;

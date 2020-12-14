@@ -24,6 +24,7 @@ import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -87,6 +88,11 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Enterprise","Drug","Quantity","Dose","Duration,","Instruction"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -142,18 +148,18 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Drug Name");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
 
         jLabel4.setText("Drug Quantity");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 97, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 97, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 100, -1));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 100, -1));
 
         jLabel5.setText("MG");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
@@ -173,18 +179,18 @@ public class PresciptionJpanel extends javax.swing.JPanel {
         add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 86, -1));
 
         jLabel8.setText("Patient Name");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 64, -1));
+        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 160, 30));
 
         jLabel9.setText("Doctor Name");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 89, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 160, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,7 +226,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 750, 159));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 1110, 159));
 
         btnSubmit.setText("Submit Prescription");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +234,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -245,25 +251,25 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 51, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("PRESCRIPTION DATABASE");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 560, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 560, -1));
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 0));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("MANAGE PRESCRIPTIONS");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 560, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 890, -1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/pharmacy.gif"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 210, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 480, -1));
 
         jButton3.setText("Print Prescription");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +277,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, -1, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 630, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

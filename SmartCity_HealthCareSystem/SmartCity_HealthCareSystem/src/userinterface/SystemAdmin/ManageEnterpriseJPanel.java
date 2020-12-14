@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -51,6 +52,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         enterpriseJTable.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Network Name","Enterprise Type","Enterprise Name"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = enterpriseJTable.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
