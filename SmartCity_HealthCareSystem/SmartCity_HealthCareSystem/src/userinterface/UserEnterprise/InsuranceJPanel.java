@@ -361,7 +361,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "User already have health Insurance");
         }finally{
             try {
               //  rs.close();

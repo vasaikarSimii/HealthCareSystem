@@ -357,7 +357,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         String id = (String) jTable1.getValueAt(selectedRow, 0);
             
             String sql1 = "update pharmacy_status set request ='" + acc + "', date_time = '" + date_time+ "', p_id = '" 
-                    + org + "', p_org = '" + username + "' where b_id = '" + id + "'";
+                    + org + "', p_org = '" + username + "' where b_id = '" + id + "' ";
             pst = conn.prepareStatement(sql1);
 
             System.out.println("Date " + date);

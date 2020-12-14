@@ -215,7 +215,12 @@ Connection conn = dbConn.getConn();
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
         try{
-
+             int selectedRow = jTable2.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            } 
 //            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -291,6 +296,13 @@ Connection conn = dbConn.getConn();
 //            int seat=Integer.parseInt(jTextField1.getText());
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
+
+            int selectedRow = jTable1.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
             String result=jComboBox1.getSelectedItem().toString();
         String sql = "update testing_status set result='" + result + "' where pat_id='"+a+"'";
                 pst = conn.prepareStatement(sql);

@@ -463,16 +463,22 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         }
 
         String userName = txtUsername.getText();
+        
         String password = txtPassword.getText();
+        
+        System.out.println("Pass" + password);
         String age=txtHeight1.getText();
 
         try {
-            String sql = "update user_data set first_name='" + firstName+ "',last_name='" + lastName+ "', gender='" + gender + 
+            String sql = "update user_data set first_name='" + firstName+ "',password='"+ password + "',last_name='" + lastName+ "', gender='" + gender + 
                     "',address='" + address + "',email='" + email + "',phone='" + phoneNumber + "',blood='" + bloodGroup + 
-                    "',weight='" + weight + "',height='" + height + "',age='" + age + "',image=? where username='"+username+"'";
+                    "',weight='" + weight + "',height='" + height + "',age='" + age + "',image=? where username='"+userName+"'";
             
+            System.out.println("Pass111" + password);
             pst = conn.prepareStatement(sql);
+            System.out.println("Pass222" + password);
             pst.setBytes(1,finalfile);
+            System.out.println("Pass333" + password);
 //            pst.setString(1, firstName);
 //            pst.setString(2, lastName);
 //            pst.setString(3, gender);
@@ -490,6 +496,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
 //            //pst.setBlob(13, i1);
 
             pst.executeUpdate();
+            System.out.println("Pass444" + password);
             JOptionPane.showMessageDialog(null, "User Data Updated successfuly");
 
 //            txtAddress.setText("");
