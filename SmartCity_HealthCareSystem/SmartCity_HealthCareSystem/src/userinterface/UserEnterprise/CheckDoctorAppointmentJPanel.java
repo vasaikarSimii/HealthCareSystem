@@ -70,9 +70,9 @@ public class CheckDoctorAppointmentJPanel extends javax.swing.JPanel {
         try {
             
             
-            String sql="SELECT appointment.p_id,IFNULL(appoint_status.appointment,'In Progress'),IFNULL(appoint_status.date,'N/A') ,manage_doc.doc_name,manage_doc.special,manage_doc.doc_enter \n" +
+            String sql="SELECT appointment.p_id,IFNULL(appoint_status.appointment,'In Progress'),IFNULL(appoint_status.date,'N/A') ,IFNULL(appoint_status.time_slot,'N/A'),manage_doc.doc_name,manage_doc.special,manage_doc.doc_enter \n" +
 "FROM appointment \n" +
-"LEFT JOIN appoint_status on (appointment.p_id = appoint_status.pat_id AND appointment.p_sym = appoint_status.p_sym)\n" + 
+"LEFT JOIN appoint_status on (appointment.p_id = appoint_status.pat_id AND appointment.p_sym = appoint_status.p_sym AND appointment.d_id = appoint_status.doctor_id)\n" + 
 "LEFT JOIN manage_doc ON appointment.d_id=manage_doc.usern \n" +
 "WHERE appointment.p_id ='"+username+"'";
             //  String sql ="select *  from manage_doc where usern=(select doctor_id from appoint_status where pat_id='"+username+"'";
@@ -80,7 +80,7 @@ public class CheckDoctorAppointmentJPanel extends javax.swing.JPanel {
             pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-            String[] stringlist = {"Patient ID","Appointment","Date","Doctor Name","Specialization","Enterprise"};
+            String[] stringlist = {"Patient ID","Appointment","Date","Time Slot","Doctor Name","Specialization","Enterprise"};
             for(int i = 0; i < stringlist.length; i++) {
                 TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
                 column1.setHeaderValue(stringlist[i]);

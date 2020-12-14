@@ -507,6 +507,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
             
             String slot = boxSlot.getSelectedItem().toString();
             
+            int selectedRow = tblPatientProfile.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
+            
             String sql2 = "select 1 from appoint_status where date='" + date + "' AND time_slot ='" + slot + "' AND doctor_id='" + name + "'";
             pst1=conn.prepareStatement(sql2);
             rs1 = pst1.executeQuery();
@@ -538,7 +545,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
             
 
             
-            
+            if(date == null) {
+                JOptionPane.showMessageDialog(null,"User must select Date and Time Slot");
+                return;
+            }
 
             pst.setString(1, b);
             pst.setString(2, a);
@@ -605,6 +615,14 @@ public class DoctorJPanel extends javax.swing.JPanel {
 //            pst.setString(3,name );
 //            pst.setString(4,acc);
 
+
+            int selectedRow = tblPatientProfile.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
+            
             String sql1 = " insert into appoint_status values(?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
@@ -624,9 +642,22 @@ public class DoctorJPanel extends javax.swing.JPanel {
             pst.setString(9, enter);
 
             pst.executeUpdate();
+            
+             String acc1 = "False";
+            System.out.println("ID" + b);
+            System.out.println("Symptom" + sym);
+            String sql3 = "update appointment set status='" +acc1+"' where p_id='" + b + "' AND p_sym='" +sym+ "'";
+            pst2 = conn.prepareStatement(sql3);
+            if(pst2.execute()) {
+                System.out.println("Working");
+            }
+            else {
+                System.out.println("NOt Working");
+            }
+            
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateWorkTable();
-            
+            populateTable();
             
             
 
@@ -690,6 +721,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
                     return;
                 }
                 
+                String slot = (String) tblWorkArea.getValueAt(selectedRow, 5);
+                String date2 = (String) tblWorkArea.getValueAt(selectedRow, 4);
+                
                 String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
                 String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);
                 
@@ -701,7 +735,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             pst = conn.prepareStatement(sql1);
 
             String acc="Accepted";
-            pst.setString(5,date);
+            pst.setString(5,date2+ " " + slot);
              pst.setString(6, test);
 
             System.out.println("Date " + date);

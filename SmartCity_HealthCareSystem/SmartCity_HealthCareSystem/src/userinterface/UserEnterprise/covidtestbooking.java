@@ -129,6 +129,7 @@ public class covidtestbooking extends javax.swing.JPanel {
 
         jLabel4.setText("Patient Name:");
 
+        jTextField3.setEditable(false);
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -137,6 +138,7 @@ public class covidtestbooking extends javax.swing.JPanel {
 
         jLabel1.setText("Patient Age:");
 
+        jTextField4.setEditable(false);
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -145,7 +147,11 @@ public class covidtestbooking extends javax.swing.JPanel {
 
         jLabel2.setText("Patient Phone Number:");
 
+        jTextField1.setEditable(false);
+
         jLabel3.setText("Patient Email Address:");
+
+        jTextField2.setEditable(false);
 
         jLabel5.setText("Type:");
 
@@ -154,6 +160,8 @@ public class covidtestbooking extends javax.swing.JPanel {
         jLabel7.setText("Covid Center:");
 
         jLabel8.setText("Patient Address:");
+
+        jTextField5.setEditable(false);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
