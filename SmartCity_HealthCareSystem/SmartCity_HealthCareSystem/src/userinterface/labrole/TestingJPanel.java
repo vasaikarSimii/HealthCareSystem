@@ -13,6 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.proteanit.sql.DbUtils;
@@ -221,6 +227,8 @@ Connection conn = dbConn.getConn();
                 JOptionPane.showMessageDialog(this, "Please select row from the table");
                 return;
             } 
+            
+            
 //            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -231,7 +239,8 @@ Connection conn = dbConn.getConn();
             String acc="Pending";
             
             String sql1 = "update testing_status set result ='" +acc+ "', reporting_date='" + date_time+
-                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";
+                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ 
+                    "' AND doctor_id ='" + c + "' AND doctor_date = '" + e+ "' AND test_type ='" + f+ "'";
            
             pst = conn.prepareStatement(sql1);
 //            System.out.println("Date " + date);
@@ -254,6 +263,7 @@ Connection conn = dbConn.getConn();
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Test Added in Queue successfuly");
             populateResultTable();
+            populateTable();
            // populateWorkTable();
 
         }catch (SQLException ex) {
@@ -303,14 +313,62 @@ Connection conn = dbConn.getConn();
                 JOptionPane.showMessageDialog(this, "Please select row from the table");
                 return;
             }
+            
+            String patID = (String) jTable1.getValueAt(selectedRow,0);
+            String docID = (String) jTable1.getValueAt(selectedRow,2);
+            String tempDate = (String) jTable1.getValueAt(selectedRow,4);
+            String testType = (String)  jTable1.getValueAt(selectedRow,5);
+            
+            
             String result=jComboBox1.getSelectedItem().toString();
-        String sql = "update testing_status set result='" + result + "' where pat_id='"+a+"'";
+        String sql = "update testing_status set result='" + result + "' where pat_id='"+patID+"' AND doctor_id ='" + docID + "' AND doctor_date = '" + tempDate+ "' AND test_type ='" + testType + "'"; 
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Result Updated successfuly");
                 populateResultTable();
                 populateTable();
+                
+                String sql5 = "select email from user_data where username ='" + patID+ "'";
+                pst = conn.prepareStatement(sql5);
+                rs=pst.executeQuery();
+                
+                String emailID = null; 
+                if(rs.next()) {
+                    emailID = rs.getString("email");
+                }
+                
+                
+                
+        
+        
+        String receiver = emailID;
+        final String sender = "healthcaresystemaed@gmail.com";
+        final String password = "healthcaresystem";
+        String Subjects = "Result";
+        String msg = "Hello \n\n" + "Your have been resulted " + result + " for '" + testType + "'\n\nThank you" ;
+                
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                return new javax.mail.PasswordAuthentication(sender,password);
+            }
+        });
+//        
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(Subjects);
+            message.setText(msg);
+            Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -323,6 +381,8 @@ Connection conn = dbConn.getConn();
 
                 }
             }
+        
+        
     }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

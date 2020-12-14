@@ -787,6 +787,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
                 String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);
                 
+                String slot = (String) tblWorkArea.getValueAt(selectedRow, 5);
+                String date2 = (String) tblWorkArea.getValueAt(selectedRow, 4);
+                
             String vaccine=VaccinejComboBox.getSelectedItem().toString();
         try{
            
@@ -809,7 +812,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             pst.setString(2, temp_name);
             pst.setString(3,name);
             pst.setString(4,doc_name);
-            pst.setString(5, date);
+           pst.setString(5,date2+ " " + slot);
             pst.setString(6, vaccine);
             pst.setString(7, "NA");
              pst.setString(8, "NA");

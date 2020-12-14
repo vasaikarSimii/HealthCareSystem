@@ -247,7 +247,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
                 return;
             }
             
-           String sql5 = "select time_slot, date from appoint_status where pat_id = '"+ username + "' AND doctor_id='" + id + "' ORDER BY date,time_slot LIMIT 1";
+           String sql5 = "select time_slot, date from appoint_status where pat_id = '"+ username + "' AND doctor_id='" + id + "' ORDER BY date,time_slot DESC LIMIT 1";
             pst1 = conn.prepareStatement(sql5);
             rs=pst1.executeQuery();
             
