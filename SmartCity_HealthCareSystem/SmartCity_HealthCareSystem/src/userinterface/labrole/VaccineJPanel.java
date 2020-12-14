@@ -12,8 +12,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -59,6 +66,11 @@ EcoSystem system;
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Date","Test type"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -82,6 +94,11 @@ EcoSystem system;
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Date","Test type","Status","Vaccination Time","Organisation","Network","Enterprise","Location"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable2.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -113,10 +130,10 @@ EcoSystem system;
         btnSubmit = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnVaccinatedStatus = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,8 +196,6 @@ EcoSystem system;
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/Vaccineation.gif"))); // NOI18N
-
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
@@ -196,6 +211,12 @@ EcoSystem system;
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Done " }));
 
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("VACCINE DATABASE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,47 +224,45 @@ EcoSystem system;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(389, 389, 389)
+                        .addGap(306, 306, 306)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(63, 63, 63)
                         .addComponent(btnVaccinatedStatus))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(326, 326, 326)
+                        .addGap(93, 93, 93)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(401, 401, 401)
                         .addComponent(btnSubmit)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel6)
-                        .addGap(51, 51, 51)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnSubmit)
-                        .addGap(87, 87, 87)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVaccinatedStatus)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(94, 94, 94)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSubmit)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVaccinatedStatus))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,25 +277,65 @@ EcoSystem system;
                 JOptionPane.showMessageDialog(null, "Please select row from above table");
                 return;
             }
-            String id = (String)jTable2.getValueAt(selectedRow,0);
+            String patID = (String) jTable2.getValueAt(selectedRow,0);
+            String docID = (String) jTable2.getValueAt(selectedRow,2);
+            String tempDate = (String) jTable2.getValueAt(selectedRow,4);
+            String testType = (String)  jTable2.getValueAt(selectedRow,5);
             
             String result=jComboBox1.getSelectedItem().toString();
             
-            String temp_org = (String)jTable2.getValueAt(selectedRow,8);
-            
-            if(!temp_org.equals(org)) {
-                JOptionPane.showMessageDialog(null,org + " cannot update " +temp_org+ " clients details");
-                return;
-            }
-            
-            System.out.println("Result = " + result);
-            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+id+"'";
+//            String temp_org = (String)jTable2.getValueAt(selectedRow,8);
+//            
+//            if(!temp_org.equals(org)) {
+//                JOptionPane.showMessageDialog(null,org + " cannot update " +temp_org+ " clients details");
+//                return;
+//            }
+//            
+//            System.out.println("Result = " + result);
+            String sql = "update vaccine_status set status='" + result + "' where pat_id='"+patID+"' AND doctor_id ='" + docID + "' AND date = '" + tempDate+ "' AND vaccine_type ='" + testType + "'";
             pst = conn.prepareStatement(sql);
 
             pst.execute();
             JOptionPane.showMessageDialog(null, "Vaccine Data Updated successfuly");
             populateResultTable();
             populateTable();
+            
+            String sql5 = "select email from user_data where username ='" + patID+ "'";
+                pst = conn.prepareStatement(sql5);
+                rs=pst.executeQuery();
+                
+                String emailID = null; 
+                if(rs.next()) {
+                    emailID = rs.getString("email");
+                }
+                
+                String receiver = emailID;
+        final String sender = "healthcaresystemaed@gmail.com";
+        final String password = "healthcaresystem";
+        String Subjects = "Result";
+        String msg = "Hello \n\n" + "Your have been completed your vaccination for '" + testType + "'\n\nThank you" ;
+                
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                return new javax.mail.PasswordAuthentication(sender,password);
+            }
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(Subjects);
+            message.setText(msg);
+            Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
+            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -350,7 +409,8 @@ EcoSystem system;
            
 //            String sql1 = " insert into vaccine_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1 = "update vaccine_status set status ='" +acc+ "', date_of_vaccination='" + date_time+
-                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";
+                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+
+                    "' AND doctor_id ='" + c + "' AND date = '" + e+ "' AND vaccine_type ='" + f+ "'";
             pst = conn.prepareStatement(sql1);
             
 //           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -382,6 +442,8 @@ EcoSystem system;
             JOptionPane.showMessageDialog(null, "Test Added in Queue successfuly");
             populateResultTable();
             populateTable();
+            
+            
            // populateWorkTable();
 
         }catch (SQLException ex) {
@@ -401,8 +463,8 @@ EcoSystem system;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnVaccinatedStatus;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

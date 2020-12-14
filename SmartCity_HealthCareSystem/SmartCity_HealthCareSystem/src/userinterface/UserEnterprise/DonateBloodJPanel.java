@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -73,6 +74,11 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblNearestHospital.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Organization Name","Location","Network","Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = tblNearestHospital.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -224,6 +230,13 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
     private void btnGenerateRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateRequestActionPerformed
         // TODO add your handling code here:
         try {
+            
+            int selectedRow = tblNearestHospital.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
         String sql = " insert into donor_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 pst = conn.prepareStatement(sql);
@@ -254,7 +267,7 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "You have already donated blood to this organisation");
         }finally{
             try {
               //  rs.close();

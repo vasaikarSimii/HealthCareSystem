@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -64,19 +66,28 @@ public class CheckDoctorAppointmentJPanel extends javax.swing.JPanel {
       try{
         
         
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         try {
             
             
-            String sql="SELECT appoint_status.pat_id,appoint_status.appointment,appoint_status.date ,manage_doc.doc_name,manage_doc.special,manage_doc.doc_enter \n" +
-"FROM appoint_status \n" +
-"LEFT JOIN manage_doc ON appoint_status.doctor_id=manage_doc.usern \n" +
-"WHERE appoint_status.pat_id ='"+username+"'";
+            String sql="SELECT appointment.p_id,IFNULL(appoint_status.appointment,'In Progress'),IFNULL(appoint_status.date,'N/A') ,IFNULL(appoint_status.time_slot,'N/A'),manage_doc.doc_name,manage_doc.special,manage_doc.doc_enter \n" +
+"FROM appointment \n" +
+"LEFT JOIN appoint_status on (appointment.p_id = appoint_status.pat_id AND appointment.p_sym = appoint_status.p_sym AND appointment.d_id = appoint_status.doctor_id)\n" + 
+"LEFT JOIN manage_doc ON appointment.d_id=manage_doc.usern \n" +
+"WHERE appointment.p_id ='"+username+"'";
             //  String sql ="select *  from manage_doc where usern=(select doctor_id from appoint_status where pat_id='"+username+"'";
             System.out.println("878787");
             pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
-        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            String[] stringlist = {"Patient ID","Appointment","Date","Time Slot","Doctor Name","Specialization","Enterprise"};
+            for(int i = 0; i < stringlist.length; i++) {
+                TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+                column1.setHeaderValue(stringlist[i]);
+            }
+            
+//            TableModel model = DbUtils.resultSetToTableModel(rs);
+            
 //            while (rs.next()) {
 //                System.out.println("12212121");
 //                model.addRow(new Object[]{rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6), rs.getString(7), rs.getString(8)});
@@ -161,27 +172,27 @@ public class CheckDoctorAppointmentJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(187, 187, 187))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(btnBack)
-                        .addGap(35, 35, 35)
+                        .addGap(162, 162, 162)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(592, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(187, 187, 187))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(jLabel6))
                 .addGap(26, 26, 26)

@@ -99,6 +99,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(1400, 800));
@@ -416,8 +417,9 @@ public class MainFrame extends javax.swing.JFrame {
                     String username=rs.getString("username");
                     String age=rs.getString("age");
                     byte[] finalfile = rs.getBytes("image");
+             
 
-                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile);
+                    UserRoleWorkAreaJPanel ur=new UserRoleWorkAreaJPanel(container,f_name,l_name,gender,address,email,phone,blood,weight,height,username,age,finalfile,pass);
                     container.add("ur",ur);
                     CardLayout layout=(CardLayout)container.getLayout();
                     layout.next(container);

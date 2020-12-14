@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -67,10 +68,15 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
      public void populateTable(){
        //connect from database -- query
          try{
-        String sql ="select * from manage_lab where lab_enter='"+emer_name+"'";
+        String sql ="select * from manage_lab where phamacy_enter='"+emer_name+"'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Organisation","Location","Username","Password","Network","Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);

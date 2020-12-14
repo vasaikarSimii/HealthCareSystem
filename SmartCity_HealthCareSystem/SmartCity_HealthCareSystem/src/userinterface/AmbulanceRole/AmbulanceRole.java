@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -46,10 +47,15 @@ public class AmbulanceRole extends javax.swing.JPanel {
     
     private void populateTable(){
         try{
-        String sql ="select * from ambulance_report where contact_ambulance='"+"NA"+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select informer_id,informer_name,total_injured,loaction,contact from ambulance_report where contact_ambulance='"+"NA"+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable4.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Informer ID","Informer Name","Total Injured","Location","Contact Number"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable4.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -68,10 +74,15 @@ public class AmbulanceRole extends javax.swing.JPanel {
     }
     public void Update_table(){
         try{
-        String sql ="select * from ambulance_report where contact_ambulance='"+contact+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
+        String sql ="select informer_id,informer_name,total_injured,loaction,contact, time_of_response, ambulance_name, network from ambulance_report where contact_ambulance='"+contact+"' ";//patient_n,patient_add,patient_age,patient_phone,patient_email,test_type from covid_booking
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Informer ID","Informer Name","Total Injured","Location","Contact Number","Response Time","Ambulance Name","Network"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable2.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -105,11 +116,11 @@ public class AmbulanceRole extends javax.swing.JPanel {
         btnSendAmbulance = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,7 +132,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
                 btnSendAmbulanceActionPerformed(evt);
             }
         });
-        add(btnSendAmbulance, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 178, -1, -1));
+        add(btnSendAmbulance, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 260, -1, -1));
 
         jTable2.setBackground(new java.awt.Color(204, 255, 204));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,11 +156,7 @@ public class AmbulanceRole extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 700, 105));
-
-        jButton3.setBackground(new java.awt.Color(0, 153, 153));
-        jButton3.setText("refresh");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 1340, 160));
 
         jTable4.setBackground(new java.awt.Color(204, 255, 204));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -178,17 +185,25 @@ public class AmbulanceRole extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 700, 105));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 1120, 160));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText(" MANAGE AMBULANCE ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        jLabel6.setText(" AMBULANCE DATABASE");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 470, -1, -1));
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/ambulance.gif"))); // NOI18N
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, 420));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 800, 420));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText(" MANAGE AMBULANCE ");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendAmbulanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendAmbulanceActionPerformed
@@ -255,9 +270,9 @@ public class AmbulanceRole extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendAmbulance;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;

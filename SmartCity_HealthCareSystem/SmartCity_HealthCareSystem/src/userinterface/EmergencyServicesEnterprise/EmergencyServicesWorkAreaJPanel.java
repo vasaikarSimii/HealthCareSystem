@@ -147,7 +147,7 @@ public class EmergencyServicesWorkAreaJPanel extends javax.swing.JPanel {
         rightPanel.setLayout(new java.awt.CardLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/EmergencyServ.gif"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/Icon/EmergencyServices.gif"))); // NOI18N
         rightPanel.add(jLabel1, "card2");
 
         jSplitPane1.setRightComponent(rightPanel);

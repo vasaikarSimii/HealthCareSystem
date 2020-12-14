@@ -378,7 +378,7 @@ public class EmergencyJPanel extends javax.swing.JPanel {
 //            jCheckBox2.setSelected(false);
             
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "You have already informed Ambulance for this location");
         } finally {
             try {
                 pst.close();
@@ -421,7 +421,7 @@ public class EmergencyJPanel extends javax.swing.JPanel {
             txtTotalInjury.setText("");
             jCheckBox2.setSelected(false);
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "You have already informed Fire Department for this location");
         } finally {
             try {
                 pst.close();
@@ -433,7 +433,7 @@ public class EmergencyJPanel extends javax.swing.JPanel {
         }
          else
         {
-             JOptionPane.showMessageDialog(null, "Incident Reported NOT reported to Fire Department ");
+             JOptionPane.showMessageDialog(null, "Incident NOT reported to Fire Department ");
         }
         
         populateTable();

@@ -38,6 +38,8 @@ public class InsuranceJPanel extends javax.swing.JPanel {
     ResultSet rs = null;
     PreparedStatement pst = null;
     
+    PreparedStatement pst1 = null;
+    
     /**
      * Creates new form InsuranceJPanel
      */
@@ -332,6 +334,26 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         
         float amount=Integer.parseInt(txtAmountToBePay.getText());
         try {
+            
+         String sql4 = "select 1 from insure_request where username = '" + username + "' AND status = 'Requested'";
+         pst1 = conn.prepareStatement(sql4);
+         rs=pst1.executeQuery();
+         
+         if(rs.next()) {
+                JOptionPane.showMessageDialog(null,"User has already requested for the Health Insurance");
+                return;
+            }
+         
+         String sql5 = "select 1 from insure_request where username = '" + username + "' AND status = 'Accepted'";
+         pst1 = conn.prepareStatement(sql5);
+         rs=pst1.executeQuery();
+         
+         if(rs.next()) {
+                JOptionPane.showMessageDialog(null,"User has already have Health Insuranceve");
+                return;
+            }
+            
+            
         String sql = " insert into insure_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 pst = conn.prepareStatement(sql);
@@ -361,7 +383,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                 
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, "User already have health Insurance");
         }finally{
             try {
               //  rs.close();

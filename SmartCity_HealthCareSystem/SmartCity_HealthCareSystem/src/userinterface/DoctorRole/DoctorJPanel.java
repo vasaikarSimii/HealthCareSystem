@@ -30,6 +30,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 /**
@@ -43,6 +44,12 @@ public class DoctorJPanel extends javax.swing.JPanel {
      Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    ResultSet rs1 = null;
+    PreparedStatement pst1 = null;
+    
+    ResultSet rs2 = null;
+    PreparedStatement pst2 = null;
 
     /**
      *
@@ -61,6 +68,9 @@ public class DoctorJPanel extends javax.swing.JPanel {
     String patResult = null;
     String patEmail = null;
     String patDate = null;
+    String sym = null;
+    String age = null;
+    String enter = null;
     
     public DoctorJPanel(JPanel userProcessContainer,String doc_name,String special,String location,String doc_net,String doc_enter,String name) {
         initComponents();
@@ -74,16 +84,22 @@ public class DoctorJPanel extends javax.swing.JPanel {
        this.name=name;
        jXDatePicker1.setVisible(false);
         jLabel2.setVisible(false);
+        boxSlot.setVisible(false);
        populateTable();
        populateWorkTable();
     }
     public void populateTable(){
        //connect from database -- query
        try{
-        String sql ="select p_name,p_id,p_age,p_sym from appointment where d_id='"+name+"'";
+        String sql ="select p_name,p_id,p_age,p_sym,d_enter from appointment where d_id='"+name+"' AND status='" + "NA"+ "'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblPatientProfile.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient Name","Patient ID","Patient Age","Symptoms","Doctor Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = tblPatientProfile.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -105,10 +121,15 @@ public class DoctorJPanel extends javax.swing.JPanel {
     public void populateWorkTable(){
        //connect from database -- query
        try{
-        String sql ="select pat_name, appointment, date from appoint_status where doctor_id='"+name+"'";
+        String sql ="select * from appoint_status where doctor_id='"+name+"'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblWorkArea.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Appointment","Date","Time Slot","Symptoms","Age","Doctor Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = tblWorkArea.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -140,9 +161,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPatientProfile = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
-        jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
@@ -150,23 +168,32 @@ public class DoctorJPanel extends javax.swing.JPanel {
         VaccinejComboBox = new javax.swing.JComboBox<>();
         testingjComboBox = new javax.swing.JComboBox<>();
         btnGenerate = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnTest = new javax.swing.JButton();
         btnVaccineRequest = new javax.swing.JButton();
         Testingtxt = new javax.swing.JLabel();
         vaccinetxt = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         btnDeny = new javax.swing.JButton();
         btnAccept = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkArea = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        boxSlot = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1400, 700));
+        setVerifyInputWhenFocusTarget(false);
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("MANAGE DOCTOR ROLE");
+        jLabel6.setText("DOCTOR DATABASE");
 
         tblPatientProfile.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,21 +224,6 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("DIAGNOSIS DETAILS"));
 
-        jCheckBox1.setText("Give Appointment");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDatePicker1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Date:");
-
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         jCheckBox3.setText("Pharmacy");
@@ -231,10 +243,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Confirm Request");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnTest.setText("Confirm Request");
+        btnTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnTestActionPerformed(evt);
             }
         });
 
@@ -257,15 +269,10 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jCheckBox1)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -285,7 +292,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
                             .addComponent(vaccinetxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
+                            .addComponent(btnTest)
                             .addComponent(btnVaccineRequest)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -294,20 +301,20 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Testingtxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCheckBox2)
                         .addComponent(testingjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)))
+                        .addComponent(btnTest)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox5)
@@ -328,7 +335,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAccept.setText("Complete Appointment");
+        btnAccept.setText("Accept Appointment");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptActionPerformed(evt);
@@ -353,51 +360,125 @@ public class DoctorJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblWorkArea);
 
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+
+        jCheckBox1.setText("Give Appointment");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Date:");
+
+        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker1ActionPerformed(evt);
+            }
+        });
+
+        boxSlot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", " " }));
+
+        jLabel3.setText("APPOINTMENT DETAILS");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jCheckBox1)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(boxSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxSlot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(51, 51, 51))
+        );
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("MANAGE DOCTOR ROLE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(46, 46, 46)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(btnDeny, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(104, 104, 104)
-                                .addComponent(btnAccept)))
-                        .addGap(36, 36, 36)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addComponent(btnDeny)
+                        .addGap(62, 62, 62)
+                        .addComponent(btnAccept)
+                        .addGap(0, 186, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(617, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(112, 112, 112)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept)
                     .addComponent(btnDeny))
-                .addGap(81, 81, 81)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(402, 402, 402))
+                .addGap(113, 113, 113)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(286, 286, 286))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(72, 72, 72)
+                    .addComponent(jLabel7)
+                    .addContainerGap(881, Short.MAX_VALUE)))
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("APPOINTMENT DETAILS");
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblPatientProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPatientProfileMouseClicked
@@ -407,8 +488,12 @@ public class DoctorJPanel extends javax.swing.JPanel {
             if (selectedRow>=0){
                 a= (String) tblPatientProfile.getValueAt(selectedRow,0);
                 b= (String) tblPatientProfile.getValueAt(selectedRow,1);
+                sym = (String) tblPatientProfile.getValueAt(selectedRow,3);
+                age = (String) tblPatientProfile.getValueAt(selectedRow,2);
+                enter = (String) tblPatientProfile.getValueAt(selectedRow,4);
                 System.out.println(selectedRow+"  "+a);
                 System.out.println(selectedRow+"  "+b);
+                
 
                 String sql = "select * from manage_doc where doc_name ='" + a + "' AND special='" + b + "'";
                 pst = conn.prepareStatement(sql);
@@ -439,23 +524,80 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into appoint_status values(?,?,?,?,?)";
+            String acc="Accepted";
+            
+            String slot = boxSlot.getSelectedItem().toString();
+            
+            int selectedRow = tblPatientProfile.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
+            
+            String sql2 = "select 1 from appoint_status where date='" + date + "' AND time_slot ='" + slot + "' AND doctor_id='" + name + "'";
+            pst1=conn.prepareStatement(sql2);
+            rs1 = pst1.executeQuery();
+            
+            if(rs1.next()) {
+                JOptionPane.showMessageDialog(null,"Date and Time slot must be different");
+                return;
+            }
+            
+            
+            String sql1 = " insert into appoint_status values(?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
-            String acc="Accepted";
-            pst.setString(5,date );
 
             System.out.println("Date " + date);
+            System.out.println("1");
+//            String sql2 = "if exists (select 1 from appoint_status where date='" + date + "' AND time_slot ='" + slot + "' AND doctor_id='" + name + "')";
+             System.out.println("2");
+//             pst1 = conn.prepareStatement(sql2);
+             System.out.println("3");
+//            rs = pst.executeQuery();
+             System.out.println("4");
+//            if (rs.next()) {
+//                     System.out.println("5");
+//                    JOptionPane.showMessageDialog(null,"Date and Time slot must be different");
+//                    return;
+//                }
+            
+
+            
+            if(date == null) {
+                JOptionPane.showMessageDialog(null,"User must select Date and Time Slot");
+                return;
+            }
 
             pst.setString(1, b);
             pst.setString(2, a);
             pst.setString(3,name );
             pst.setString(4,acc);
-
+            pst.setString(5,date );
+            pst.setString(6, slot);
+            pst.setString(7, sym);
+            pst.setString(8, age);
+            pst.setString(9, enter);
             pst.executeUpdate();
+            
+            String acc1 = "True";
+            System.out.println("ID" + b);
+            System.out.println("Symptom" + sym);
+            String sql3 = "update appointment set status='" +acc1+"' where p_id='" + b + "' AND p_sym='" +sym+ "'";
+            pst2 = conn.prepareStatement(sql3);
+            if(pst2.execute()) {
+                System.out.println("Working");
+            }
+            else {
+                System.out.println("NOt Working");
+            }
+            
+           
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateWorkTable();
+            populateTable();
 
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -474,28 +616,71 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         jXDatePicker1.setVisible(true);
         jLabel2.setVisible(true);
+        boxSlot.setVisible(true);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void btnDenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenyActionPerformed
         // TODO add your handling code here:
         try{
 
-            String sql1 = " insert into appoint_status values(?,?,?,?,?)";
+//            String sql1 = " insert into appoint_status values(?,?,?,?,?)";
+//            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?)";
+//            pst = conn.prepareStatement(sql1);
+//
+//            String acc="Denied";
+//            date="NA";
+//            pst.setString(5,date );
+//
+//            pst.setString(1, b);
+//            pst.setString(2, a);
+//            pst.setString(3,name );
+//            pst.setString(4,acc);
+
+
+            int selectedRow = tblPatientProfile.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
+            
+            String sql1 = " insert into appoint_status values(?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
             String acc="Denied";
-            date="NA";
-            pst.setString(5,date );
+
+//            System.out.println("Date " + date);
 
             pst.setString(1, b);
             pst.setString(2, a);
             pst.setString(3,name );
             pst.setString(4,acc);
+            pst.setString(5,"NA");
+            pst.setString(6, "NA");
+            pst.setString(7, sym);
+            pst.setString(8, age);
+            pst.setString(9, enter);
 
             pst.executeUpdate();
+            
+             String acc1 = "False";
+            System.out.println("ID" + b);
+            System.out.println("Symptom" + sym);
+            String sql3 = "update appointment set status='" +acc1+"' where p_id='" + b + "' AND p_sym='" +sym+ "'";
+            pst2 = conn.prepareStatement(sql3);
+            if(pst2.execute()) {
+                System.out.println("Working");
+            }
+            else {
+                System.out.println("NOt Working");
+            }
+            
             JOptionPane.showMessageDialog(null, "Appointment Status Updated successfuly");
             populateWorkTable();
+            populateTable();
+            
+            
 
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -513,7 +698,17 @@ public class DoctorJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(jCheckBox3.isSelected())
         {
-        PresciptionJpanel pj=new PresciptionJpanel(userProcessContainer,doc_name,doc_net,doc_enter,name,b,a);
+         int selectedRow = tblWorkArea.getSelectedRow();
+                
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please select a row..!!");
+                    return;
+                }
+                
+                String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
+                String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);   
+            
+        PresciptionJpanel pj=new PresciptionJpanel(userProcessContainer,doc_name,doc_net,doc_enter,name,temp_id,temp_name);
         userProcessContainer.add("pj",pj);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -534,12 +729,26 @@ public class DoctorJPanel extends javax.swing.JPanel {
         System.out.println(date);
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestActionPerformed
         // TODO add your handling code here:
+        
+        
          if(jCheckBox2.isSelected())
             {
+                int selectedRow = tblWorkArea.getSelectedRow();
                 
-            String test=testingjComboBox.getSelectedItem().toString();
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please select a row..!!");
+                    return;
+                }
+                
+                String slot = (String) tblWorkArea.getValueAt(selectedRow, 5);
+                String date2 = (String) tblWorkArea.getValueAt(selectedRow, 4);
+                
+                String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
+                String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);
+                
+                String test=testingjComboBox.getSelectedItem().toString();
         try{
            
 //            String sql1 = " insert into testing values(?,?,?,?,?,?)";
@@ -547,13 +756,13 @@ public class DoctorJPanel extends javax.swing.JPanel {
             pst = conn.prepareStatement(sql1);
 
             String acc="Accepted";
-            pst.setString(5,date );
+            pst.setString(5,date2+ " " + slot);
              pst.setString(6, test);
 
             System.out.println("Date " + date);
 
-            pst.setString(1, b);
-            pst.setString(2, a);
+            pst.setString(1, temp_id);
+            pst.setString(2, temp_name);
             pst.setString(3,name );
             pst.setString(4,doc_name);
             pst.setString(7, "NA");
@@ -569,7 +778,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             
 
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "You have already sent request for this test");
         } finally {
             try {
                 pst.close();
@@ -582,12 +791,25 @@ public class DoctorJPanel extends javax.swing.JPanel {
          else{
               JOptionPane.showMessageDialog(null, "Tick Testing BOX to continue");
          }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnTestActionPerformed
 
     private void btnVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineRequestActionPerformed
         // TODO add your handling code here:
         if(jCheckBox5.isSelected())
             {
+              
+                int selectedRow = tblWorkArea.getSelectedRow();
+                
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please select a row..!!");
+                    return;
+                }
+                
+                String temp_name = (String) tblWorkArea.getValueAt(selectedRow, 1);
+                String temp_id =  (String) tblWorkArea.getValueAt(selectedRow, 0);
+                
+                String slot = (String) tblWorkArea.getValueAt(selectedRow, 5);
+                String date2 = (String) tblWorkArea.getValueAt(selectedRow, 4);
                 
             String vaccine=VaccinejComboBox.getSelectedItem().toString();
         try{
@@ -607,11 +829,11 @@ public class DoctorJPanel extends javax.swing.JPanel {
 //            pst.setString(3,name );
 //            pst.setString(4,doc_name);
 
-              pst.setString(1,b);
-            pst.setString(2, a);
+              pst.setString(1,temp_id);
+            pst.setString(2, temp_name);
             pst.setString(3,name);
             pst.setString(4,doc_name);
-            pst.setString(5, date);
+           pst.setString(5,date2+ " " + slot);
             pst.setString(6, vaccine);
             pst.setString(7, "NA");
              pst.setString(8, "NA");
@@ -626,7 +848,7 @@ public class DoctorJPanel extends javax.swing.JPanel {
             
 
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "You have allready send request for this vaccination");
         } finally {
             try {
                 pst.close();
@@ -656,18 +878,23 @@ public class DoctorJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Testingtxt;
     private javax.swing.JComboBox<String> VaccinejComboBox;
+    private javax.swing.JComboBox<String> boxSlot;
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnDeny;
     private javax.swing.JButton btnGenerate;
+    private javax.swing.JButton btnTest;
     private javax.swing.JButton btnVaccineRequest;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;

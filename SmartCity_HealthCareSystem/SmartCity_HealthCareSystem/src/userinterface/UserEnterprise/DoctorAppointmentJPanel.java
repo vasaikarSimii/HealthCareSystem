@@ -10,8 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -28,6 +31,9 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
     Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    PreparedStatement pst1 = null;
+    
      String f_name=null;
             String l_name=null;
             String gender=null;
@@ -66,6 +72,11 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblDoctorList.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Doctor Name","Specialization","Location","Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = tblDoctorList.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -170,23 +181,24 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
                         .addGap(49, 49, 49)
                         .addComponent(btnBack)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(114, 114, 114)
+                                .addGap(111, 111, 111)
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnConfirmAppointment)
-                                .addGap(242, 242, 242)))
-                        .addComponent(jLabel2)))
-                .addContainerGap(128, Short.MAX_VALUE))
+                                .addGap(230, 230, 230)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,21 +210,18 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(btnBack)))
-                .addGap(47, 47, 47)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
                         .addComponent(btnConfirmAppointment))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(237, 237, 237)
                         .addComponent(jLabel2)))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
@@ -225,8 +234,54 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
     private void btnConfirmAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmAppointmentActionPerformed
         // TODO add your handling code here:
         try{
+            
+            int selectedRow = tblDoctorList.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
+            
+            System.out.println("++++" + a);
+            System.out.println("++++" + username);
+            String sql4 = "select 1 from appointment where d_id = '" + id + "' AND status = 'NA' AND p_id ='" + username + "'";
+            pst1 = conn.prepareStatement(sql4);
+            rs=pst1.executeQuery();
+            
+            if(rs.next()) {
+                JOptionPane.showMessageDialog(null,"Already pending request by user for the same Doctor");
+                return;
+            }
+            
+           String sql5 = "select time_slot, date from appoint_status where pat_id = '"+ username + "' AND doctor_id='" + id + "' ORDER BY date,time_slot DESC LIMIT 1";
+            pst1 = conn.prepareStatement(sql5);
+            rs=pst1.executeQuery();
+            
+             
+            
+            if(rs.next()) {
+                String date = rs.getString("date") + " " + rs.getString("time_slot");
+                System.out.println("Date 1 " + date);
+                String pattern = "dd/MM/yyyy HH:mm";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+                String date1 = simpleDateFormat.format(new Date());
+                System.out.println("Date 2 " + date1);
+                if(date.compareTo(date1) > 0) {
+                    JOptionPane.showMessageDialog(null,"You already have a appointment with doctor on " + date);
+                    return;
+                }
+            }
+            
+            
+            
             String symp=jTextField1.getText();
-        String sql1 = " insert into appointment values(?,?,?,?,?,?,?)";
+            
+            if(symp.isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+                return;
+            }
+        String sql1 = " insert into appointment values(?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql1);
 
@@ -238,6 +293,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
             pst.setString(2, username);
             pst.setString(3,age );
             pst.setString(4, symp);
+            pst.setString(8,"NA");
             
             
 
@@ -247,7 +303,7 @@ public class DoctorAppointmentJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Appointment taken successfuly");
             jTextField1.setText("");
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null,ex);
         } finally {
             try {
                 pst.close();

@@ -13,8 +13,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -67,6 +74,11 @@ Connection conn = dbConn.getConn();
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Date","Test type"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable2.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -90,6 +102,11 @@ Connection conn = dbConn.getConn();
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Date","Test type","Reporting Time","Result","Organisation","Location","Network","Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -125,6 +142,7 @@ Connection conn = dbConn.getConn();
         jComboBox1 = new javax.swing.JComboBox();
         btnUpdateStatus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,7 +173,7 @@ Connection conn = dbConn.getConn();
         });
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 840, 166));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 990, 166));
 
         btnConfirm.setText("Confirm");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +181,7 @@ Connection conn = dbConn.getConn();
                 btnConfirmActionPerformed(evt);
             }
         });
-        add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
+        add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -191,10 +209,10 @@ Connection conn = dbConn.getConn();
         });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 50, 790, 166));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 790, 166));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Positive", "Negative" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 90, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 560, 90, -1));
 
         btnUpdateStatus.setText("Update Status");
         btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -202,20 +220,34 @@ Connection conn = dbConn.getConn();
                 btnUpdateStatusActionPerformed(evt);
             }
         });
-        add(btnUpdateStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, -1));
+        add(btnUpdateStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 560, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("TESTING REQUESTS");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 490, -1));
+        jLabel6.setText("TESTING DATABSE");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 490, -1));
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("TESTING REQUESTS");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 490, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
         try{
-
+             int selectedRow = jTable2.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            } 
+            
+            
 //            String sql1 = " insert into testing_status values(?,?,?,?,?,?,?,?,?,?,?,?)";
             
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -226,7 +258,8 @@ Connection conn = dbConn.getConn();
             String acc="Pending";
             
             String sql1 = "update testing_status set result ='" +acc+ "', reporting_date='" + date_time+
-                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ "'";
+                    "', organisation = '"+ org +"', network ='"+net+"', enterprise = '"+enter+"', location ='"+location+"' where pat_id ='" +a+ 
+                    "' AND doctor_id ='" + c + "' AND doctor_date = '" + e+ "' AND test_type ='" + f+ "'";
            
             pst = conn.prepareStatement(sql1);
 //            System.out.println("Date " + date);
@@ -249,6 +282,7 @@ Connection conn = dbConn.getConn();
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Test Added in Queue successfuly");
             populateResultTable();
+            populateTable();
            // populateWorkTable();
 
         }catch (SQLException ex) {
@@ -291,14 +325,69 @@ Connection conn = dbConn.getConn();
 //            int seat=Integer.parseInt(jTextField1.getText());
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
+
+            int selectedRow = jTable1.getSelectedRow();
+            
+            if(selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select row from the table");
+                return;
+            }
+            
+            String patID = (String) jTable1.getValueAt(selectedRow,0);
+            String docID = (String) jTable1.getValueAt(selectedRow,2);
+            String tempDate = (String) jTable1.getValueAt(selectedRow,4);
+            String testType = (String)  jTable1.getValueAt(selectedRow,5);
+            
+            
             String result=jComboBox1.getSelectedItem().toString();
-        String sql = "update testing_status set result='" + result + "' where pat_id='"+a+"'";
+        String sql = "update testing_status set result='" + result + "' where pat_id='"+patID+"' AND doctor_id ='" + docID + "' AND doctor_date = '" + tempDate+ "' AND test_type ='" + testType + "'"; 
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Result Updated successfuly");
                 populateResultTable();
                 populateTable();
+                
+                String sql5 = "select email from user_data where username ='" + patID+ "'";
+                pst = conn.prepareStatement(sql5);
+                rs=pst.executeQuery();
+                
+                String emailID = null; 
+                if(rs.next()) {
+                    emailID = rs.getString("email");
+                }
+                
+                
+                
+        
+        
+        String receiver = emailID;
+        final String sender = "healthcaresystemaed@gmail.com";
+        final String password = "healthcaresystem";
+        String Subjects = "Result";
+        String msg = "Hello \n\n" + "Your have been resulted " + result + " for '" + testType + "'\n\nThank you" ;
+                
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getDefaultInstance(properties,new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                return new javax.mail.PasswordAuthentication(sender,password);
+            }
+        });
+//        
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(Subjects);
+            message.setText(msg);
+            Transport.send(message);
+        }catch(Exception ex){
+            System.out.println(""+ex);
+        }
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -311,6 +400,8 @@ Connection conn = dbConn.getConn();
 
                 }
             }
+        
+        
     }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -336,6 +427,7 @@ Connection conn = dbConn.getConn();
     private javax.swing.JButton btnUpdateStatus;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

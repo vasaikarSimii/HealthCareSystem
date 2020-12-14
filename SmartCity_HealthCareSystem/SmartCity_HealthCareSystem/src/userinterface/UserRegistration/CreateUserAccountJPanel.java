@@ -431,7 +431,11 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
                 
                 txtWeight.setText("");
                 txtUsername.setText("");
+                rBtnMale.setSelected(false);
+                rBtnFemale.setSelected(false);
+                rBtnOthers.setSelected(false);
                 
+                boxBloodGroup.setSelectedIndex(0);
         }
         catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);

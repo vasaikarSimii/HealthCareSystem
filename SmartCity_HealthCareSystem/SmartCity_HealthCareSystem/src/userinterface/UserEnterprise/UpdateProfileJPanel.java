@@ -34,6 +34,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
     Connection conn = dbConn.getConn();
     ResultSet rs = null;
     PreparedStatement pst = null;
+    ImageIcon imageIcon;
    
 
     
@@ -51,37 +52,80 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
             String age=null;
             private String filename = null;
             byte[] finalfile = null;
+            String pass = null;
     /**
      * Creates new form MedicalServicesJPanel
      */
-    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile) {
+    public UpdateProfileJPanel(JPanel userProcessContainer,String f_name,String l_name,String gender,String address,String email,String phone,String blood,String weight,String height,String username,String age,byte[] finalfile,String pass) {
         initComponents();
+        
+        String sql = "select * from user_data where username='"+username+"'";
+
+            try {
+
+                pst =conn.prepareStatement(sql);
+                rs= pst.executeQuery();
+
+                while(rs.next())
+                {
+                    
+                    this.f_name=rs.getString("first_name");
+                    this.l_name=rs.getString("last_name");
+                    this.gender=rs.getString("gender");
+                    this.address=rs.getString("address");
+                    this.email=rs.getString("email");
+                    this.phone=rs.getString("phone");
+                    this.blood=rs.getString("blood");
+                    this.weight=rs.getString("weight");
+                    this.height=rs.getString("height");
+                    this.username=rs.getString("username");
+                    this.pass = rs.getString("password");
+                    this.age=rs.getString("age");
+                    this.finalfile = rs.getBytes("image");
+                }
+            } catch(SQLException ex) {
+                
+            }
+        
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
-        this.ecosystem = ecosystem;
-        this.f_name=f_name;
-        this.l_name=l_name;
-        this.gender=gender;
-        this.address=address;
-        this.email=email;
-        this.phone=phone;
-        this.blood=blood;
-        this.weight=weight;
-        this.height=height;
-        this.username=username;
-        this.age=age;
-        this.finalfile = finalfile;
-        txtFirstName.setText(f_name);
-        txtLastName.setText(l_name);
-        txtAddress.setText(address);
-        txtPhoneNumber.setText(phone);
-        txtEmail.setText(email);
-        txtWeight.setText(weight);
-        txtHeight.setText(height);
-        txtHeight1.setText(age);
-//        ImageIcon imageIcon = (ImageIcon) finalfile;
-//        pic1Lbl.setIcon();
-        boxBloodGroup.setSelectedItem(blood);
+//        this.ecosystem = ecosystem;
+//        this.ecosystem = ecosystem;
+//        this.f_name=f_name;
+//        this.l_name=l_name;
+//        this.gender=gender;
+//        this.address=address;
+//        this.email=email;
+//        this.phone=phone;
+//        this.blood=blood;
+//        this.weight=weight;
+//        this.height=height;
+//        this.username=username;
+//        this.age=age;
+//        this.finalfile = finalfile;
+//        this.pass = pass;
+        txtFirstName.setText(this.f_name);
+        txtLastName.setText(this.l_name);
+        if(this.gender.equals("Male")) {
+            rBtnMale.setSelected(true);
+        }
+        else if(this.gender.equals("Female")) {
+            rBtnFemale.setSelected(true);
+        }
+        else if(this.gender.equals("Others")) {
+            rBtnOthers.setSelected(true);
+        }
+        txtAddress.setText(this.address);
+        txtPhoneNumber.setText(this.phone);
+        txtEmail.setText(this.email);
+        txtWeight.setText(this.weight);
+        txtHeight.setText(this.height);
+        txtHeight1.setText(this.age);
+        txtUsername.setText(this.username);
+        txtPassword.setText(this.pass);
+        System.out.println("Image" + this.finalfile);
+        imageIcon = new ImageIcon(new ImageIcon(this.finalfile).getImage().getScaledInstance(160, 180, Image.SCALE_DEFAULT));
+        pic1Lbl.setIcon(imageIcon);
+        boxBloodGroup.setSelectedItem(this.blood);
     }
 
     @SuppressWarnings("unchecked")
@@ -215,8 +259,6 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
 
         txtUsername.setEditable(false);
         add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 180, -1));
-
-        txtPassword.setEditable(false);
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 180, -1));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
@@ -294,7 +336,7 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtAddress.getText().isEmpty() ||
             txtEmail.getText().isEmpty() || txtPhoneNumber.getText().isEmpty() || txtHeight.getText().isEmpty() ||
             txtWeight.getText().isEmpty() || (rBtnFemale.isSelected() == false && rBtnMale.isSelected() == false
-                && rBtnOthers.isSelected() == false) || boxBloodGroup.getSelectedIndex() == 0) {
+                && rBtnOthers.isSelected() == false) || boxBloodGroup.getSelectedIndex() == 0 || txtHeight1.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fields cannot be empty");
             return;
         }
@@ -421,44 +463,55 @@ public class UpdateProfileJPanel extends javax.swing.JPanel {
         }
 
         String userName = txtUsername.getText();
+        
         String password = txtPassword.getText();
+        
+        System.out.println("Pass" + password);
         String age=txtHeight1.getText();
 
         try {
-            String sql = "update user_data set first_name=?,last_name=?,gender=?,address=?,email=?,phone=?,blood=?,weight=?,height=?,age=?,image=? where username='"+username+"'";
-
+            String sql = "update user_data set first_name='" + firstName+ "',password='"+ password + "',last_name='" + lastName+ "', gender='" + gender + 
+                    "',address='" + address + "',email='" + email + "',phone='" + phoneNumber + "',blood='" + bloodGroup + 
+                    "',weight='" + weight + "',height='" + height + "',age='" + age + "',image=? where username='"+userName+"'";
+            
+            System.out.println("Pass111" + password);
             pst = conn.prepareStatement(sql);
-            pst.setString(1, firstName);
-            pst.setString(2, lastName);
-            pst.setString(3, gender);
-            pst.setString(4, address);
-            pst.setString(5, email);
-            pst.setString(6, phoneNumber);
-            pst.setString(7, bloodGroup);
-            pst.setString(8, weight);
-            pst.setString(9, height);
-          //  pst.setString(10, userName);
-           // pst.setString(11, password);
-            pst.setString(10, age);
-           pst.setBytes(11, finalfile);
-            //add image to Db
-            //pst.setBlob(13, i1);
+            System.out.println("Pass222" + password);
+            pst.setBytes(1,finalfile);
+            System.out.println("Pass333" + password);
+//            pst.setString(1, firstName);
+//            pst.setString(2, lastName);
+//            pst.setString(3, gender);
+//            pst.setString(4, address);
+//            pst.setString(5, email);
+//            pst.setString(6, phoneNumber);
+//            pst.setString(7, bloodGroup);
+//            pst.setString(8, weight);
+//            pst.setString(9, height);
+//          //  pst.setString(10, userName);
+//           // pst.setString(11, password);
+//            pst.setString(10, age);
+//           pst.setBytes(11, finalfile);
+//            //add image to Db
+//            //pst.setBlob(13, i1);
 
             pst.executeUpdate();
+            System.out.println("Pass444" + password);
             JOptionPane.showMessageDialog(null, "User Data Updated successfuly");
 
-            txtAddress.setText("");
-            txtPassword.setText("");
-            txtEmail.setText("");
-            txtFirstName.setText("");
-            txtHeight.setText("");
-            txtLastName.setText("");
-            txtPhoneNumber.setText("");
-            txtUsername.setText("");
-            pic1Lbl.setIcon(null);
-
-            txtWeight.setText("");
-            txtUsername.setText("");
+//            txtAddress.setText("");
+//            txtPassword.setText("");
+//            txtEmail.setText("");
+//            txtFirstName.setText("");
+//            txtHeight.setText("");
+//            txtLastName.setText("");
+//            txtPhoneNumber.setText("");
+//            txtUsername.setText("");
+//            pic1Lbl.setIcon(null);
+//
+//            txtWeight.setText("");
+//            txtUsername.setText("");
+//            txtPassword.setText("");
 
         }
         catch (SQLException ex) {
