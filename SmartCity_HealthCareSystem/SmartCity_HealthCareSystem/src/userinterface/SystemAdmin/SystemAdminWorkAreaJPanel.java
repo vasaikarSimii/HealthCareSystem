@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -33,56 +35,60 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    
+
     Connection conn = dbConn.getConn();
     ResultSet rs1 = null;
     PreparedStatement pst1 = null;
-    
+
     ResultSet rs2 = null;
     PreparedStatement pst2 = null;
-    
+
     ResultSet rs3 = null;
     PreparedStatement pst3 = null;
-    
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer) throws SQLException {
+
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
-        
+
         this.ecosystem=ecosystem;
-        populateTree();
-        
+        try {
+            populateTree();
+        } catch (SQLException ex) {
+            Logger.getLogger(SystemAdminWorkAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
-    
+
+
     public void populateTree() throws SQLException{
         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
 //        ArrayList<Network> networkList=ecosystem.getNetworkList();
 //        ArrayList<Enterprise> enterpriseList;
 //        ArrayList<Organization> organizationList;
-//        
+//
 //        Network network;
 //        Enterprise enterprise;
 //        Organization organization;
-        
+
         DefaultMutableTreeNode networks=new DefaultMutableTreeNode("Networks");
         DefaultMutableTreeNode root=(DefaultMutableTreeNode)model.getRoot();
         root.removeAllChildren();
         root.insert(networks, 0);
-        
+
         DefaultMutableTreeNode networkNode;
         DefaultMutableTreeNode enterpriseNode;
         DefaultMutableTreeNode organizationNode;
-        
+
 //        for(int i=0;i<networkList.size();i++){
 //            network=networkList.get(i);
 //            networkNode=new DefaultMutableTreeNode(network.getName());
 //            networks.insert(networkNode, i);
-//            
+//
 //            enterpriseList=network.getEnterpriseDirectory().getEnterpriseList();
 //            for(int j=0; j<enterpriseList.size();j++){
 //                enterprise=enterpriseList.get(j);
 //                enterpriseNode=new DefaultMutableTreeNode(enterprise.getName());
 //                networkNode.insert(enterpriseNode, j);
-//                
+//
 //                organizationList=enterprise.getOrganizationDirectory().getOrganizationList();
 //                for(int k=0;k<organizationList.size();k++){
 //                    organization=organizationList.get(k);
@@ -91,12 +97,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 //                }
 //            }
 //        }
-        
+
         String sql = "select * from network";
         pst1=conn.prepareStatement(sql);
         rs1=pst1.executeQuery();
         int i = 0;
-         while (rs1.next()) {  
+         while (rs1.next()) {
              String str1 = rs1.getString("net_name");
              networkNode=new DefaultMutableTreeNode(str1);
              networks.insert(networkNode,i);
@@ -110,12 +116,22 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                  enterpriseNode=new DefaultMutableTreeNode(str2);
                  networkNode.insert(enterpriseNode,j);
                  j++;
+                 String sql3 = "select * from manage_logins where n_name='" + str1 + "' AND e_name='" + str2+ "'";
+                 pst3=conn.prepareStatement(sql3);
+                 rs3=pst3.executeQuery();
+                 int k = 0;
+                 while(rs3.next()) {
+                     String str3 = rs3.getString("o_name");
+                     organizationNode=new DefaultMutableTreeNode(str3);
+                     enterpriseNode.insert(organizationNode,k);
+                     k++;
+                 }
              }
  }
-        
+
         model.reload();
     }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,6 +152,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jTree = new javax.swing.JTree();
         jLabel7 = new javax.swing.JLabel();
         jSeparator = new javax.swing.JSeparator();
+        btnRefresh = new javax.swing.JButton();
         rightSystemAdminPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -197,29 +214,40 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jSeparator.setBackground(new java.awt.Color(0, 51, 51));
         jSeparator.setForeground(new java.awt.Color(0, 0, 0));
 
+        btnRefresh.setBackground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setText("Refresh JTree");
+        btnRefresh.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, java.awt.Color.white));
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(manageNetworkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(manageEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(manageEnterpriseAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(lblSelectedNode1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
             .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(manageNetworkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageEnterpriseAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSelectedNode1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,12 +260,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(manageEnterpriseAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSelectedNode1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -291,7 +321,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         rightSystemAdminPanel.add("manageNetworkJPanel",manageNetworkJPanel);
         CardLayout layout=(CardLayout)rightSystemAdminPanel.getLayout();
         layout.next(rightSystemAdminPanel);
-        
+
 
     }//GEN-LAST:event_manageNetworkBtnActionPerformed
 
@@ -303,8 +333,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(rightSystemAdminPanel);
     }//GEN-LAST:event_manageEnterpriseBtnActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        try {
+            // TODO add your handling code here:
+            populateTree();
+        } catch (SQLException ex) {
+            Logger.getLogger(SystemAdminWorkAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;

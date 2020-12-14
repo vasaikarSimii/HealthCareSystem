@@ -269,7 +269,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         String name=jTextField1.getText();
         
         if(id.isEmpty() || name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "");
+            JOptionPane.showMessageDialog(null, "Fields caanot be empty");
+            return;
         }
         
        try {

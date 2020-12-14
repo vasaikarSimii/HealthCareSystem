@@ -67,7 +67,7 @@ public class CreateLaboratoryJPanel extends javax.swing.JPanel {
      public void populateTable(){
        //connect from database -- query
          try{
-        String sql ="select * from manage_lab where lab_enter='"+emer_name+"'";
+        String sql ="select * from manage_lab where phamacy_enter='"+emer_name+"'";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
