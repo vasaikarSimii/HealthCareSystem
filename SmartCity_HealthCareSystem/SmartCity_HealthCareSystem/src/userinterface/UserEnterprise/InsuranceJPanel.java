@@ -332,6 +332,8 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         
         float amount=Integer.parseInt(txtAmountToBePay.getText());
         try {
+            
+            
         String sql = " insert into insure_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 pst = conn.prepareStatement(sql);

@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -73,6 +74,11 @@ public class CheckDonorJPanel extends javax.swing.JPanel {
             pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"First Name","Last Name","Gender","Weight","Height","Organisation","Enterprise","Network","Status"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
             
         } catch (Exception e) {
         }
@@ -115,7 +121,7 @@ public class CheckDonorJPanel extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Blood Donation Camp Status");
+        jLabel6.setText("BLODD DONATION CAMP STATUS");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,28 +160,32 @@ public class CheckDonorJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(btnBack)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(308, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(155, 155, 155)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(jLabel6))
-                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btnBack)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(29, 29, 29)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addGap(72, 72, 72)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );

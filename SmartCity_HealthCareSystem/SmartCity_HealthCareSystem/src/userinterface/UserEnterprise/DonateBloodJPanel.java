@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -73,6 +74,11 @@ public class DonateBloodJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         tblNearestHospital.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Organization Name","Location","Network","Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = tblNearestHospital.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);

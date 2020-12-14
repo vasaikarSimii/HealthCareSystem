@@ -17,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -50,6 +51,11 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"First Name","Last Name","Gender","Address","Email","Phone","Blood","Weight","Height","Username","Age","Duration","Package Type","Amount","Status"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -72,6 +78,11 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"First Name","Last Name","Gender","Address","Email","Phone","Blood","Weight","Height","Username","Age","Duration","Package Type","Amount","Status"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable2.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -197,43 +208,42 @@ public class InsuranceJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDecline)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnAccept))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(538, 538, 538)
+                        .addComponent(btnDecline)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAccept)
+                        .addGap(0, 527, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(645, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(601, 601, 601))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel6)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDecline)
                     .addComponent(btnAccept))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addComponent(btnEmail)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGap(81, 81, 81))
         );
     }// </editor-fold>//GEN-END:initComponents
 

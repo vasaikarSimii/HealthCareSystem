@@ -21,6 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import userinterface.dbConn;
 
@@ -73,6 +74,11 @@ Connection conn = dbConn.getConn();
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Date","Test type"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable2.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -96,6 +102,11 @@ Connection conn = dbConn.getConn();
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        String[] stringlist = {"Patient ID","Patient Name","Doctor ID","Doctor Name","Date","Test type","Reporting Time","Result","Organisation","Location","Network","Enterprise"};
+        for(int i = 0; i < stringlist.length; i++) {
+            TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
+            column1.setHeaderValue(stringlist[i]);
+            }
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -131,6 +142,7 @@ Connection conn = dbConn.getConn();
         jComboBox1 = new javax.swing.JComboBox();
         btnUpdateStatus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -161,7 +173,7 @@ Connection conn = dbConn.getConn();
         });
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 840, 166));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 990, 166));
 
         btnConfirm.setText("Confirm");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +181,7 @@ Connection conn = dbConn.getConn();
                 btnConfirmActionPerformed(evt);
             }
         });
-        add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
+        add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,10 +209,10 @@ Connection conn = dbConn.getConn();
         });
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 50, 790, 166));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 790, 166));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Positive", "Negative" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 90, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 560, 90, -1));
 
         btnUpdateStatus.setText("Update Status");
         btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -208,14 +220,21 @@ Connection conn = dbConn.getConn();
                 btnUpdateStatusActionPerformed(evt);
             }
         });
-        add(btnUpdateStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, -1));
+        add(btnUpdateStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 560, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("TESTING REQUESTS");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 490, -1));
+        jLabel6.setText("TESTING DATABSE");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 490, -1));
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("TESTING REQUESTS");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 490, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
@@ -408,6 +427,7 @@ Connection conn = dbConn.getConn();
     private javax.swing.JButton btnUpdateStatus;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
