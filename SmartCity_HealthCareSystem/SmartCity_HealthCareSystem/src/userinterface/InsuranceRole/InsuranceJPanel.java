@@ -255,7 +255,15 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
 //            String type=jComboBox2.getSelectedItem().toString();
-        String sql = "update insure_request set status='" + "Accepted" + "' where username='"+username+"'";
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow< 0){
+            JOptionPane.showMessageDialog(null,"Please select row from the table");
+            return;
+        }
+        
+        
+        
+        String sql = "update insure_request set status='" + "Accepted" + "' where username='"+username+"' AND status='Requested'";
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
@@ -291,12 +299,12 @@ public class InsuranceJPanel extends javax.swing.JPanel {
 //            String model=jTextField2.getText();
 //            String name=jComboBox1.getSelectedItem().toString();
 //            String type=jComboBox2.getSelectedItem().toString();
-        String sql = "update insure_request set status='" + "Rejected" + "' where username='"+username+"'";
+        String sql = "update insure_request set status='" + "Rejected" + "' where username='"+username+"' AND status='Requested'";
                 pst = conn.prepareStatement(sql);
                 
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Upadted successfuly");
-                
+                populateStatusTable();
                 Update_table();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
