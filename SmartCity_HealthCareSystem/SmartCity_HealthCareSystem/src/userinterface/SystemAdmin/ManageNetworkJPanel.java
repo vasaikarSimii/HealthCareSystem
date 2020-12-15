@@ -196,7 +196,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 txtStateName.setText("");
         }
         catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,"State Name already exist");
+                JOptionPane.showMessageDialog(null,"City Name already exist");
         }finally{
             try {
               //  rs.close();
