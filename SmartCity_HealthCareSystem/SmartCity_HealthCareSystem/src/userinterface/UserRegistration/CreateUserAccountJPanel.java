@@ -303,10 +303,11 @@ public class CreateUserAccountJPanel extends javax.swing.JPanel {
         
         String email = txtEmail.getText();
         
-        flag = email.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
-        
+//        flag = email.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
+//        flag = email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\\.com$");
+        flag = email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\\.com$");
         if(!flag) {
-            JOptionPane.showMessageDialog(null, "Email Address must be in format of X@Y.Z");
+            JOptionPane.showMessageDialog(null, "Email Address must be in format of X@Y.com");
             return;
         }
         

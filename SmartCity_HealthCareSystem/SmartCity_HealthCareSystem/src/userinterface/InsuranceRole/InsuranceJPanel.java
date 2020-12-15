@@ -343,7 +343,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         else if(status.equals("Accepted")) {
             msg = "Hello " + name + "\n\n" + "Your insurance is been granted for " + duration + 
                 "\n\nThank you" ;
-                
+        }       
         Properties properties = new Properties();
         properties.put("mail.smtp.auth","true");
         properties.put("mail.smtp.starttls.enable","true");
@@ -365,7 +365,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         }catch(Exception ex){
             System.out.println(""+ex);
         }
-        }
+        
     }//GEN-LAST:event_btnEmailActionPerformed
 
 
