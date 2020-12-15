@@ -60,7 +60,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 //                TableColumn column1 = jTable1.getTableHeader().getColumnModel().getColumn(i);
 //                column1.setHeaderValue(stringlist[i]);
 //            }
-        String[] stringlist = {"State","Network Name"};
+        String[] stringlist = {"City","Network Name"};
         for(int i = 0; i < stringlist.length; i++) {
             TableColumn column1 = tblNetwork.getTableHeader().getColumnModel().getColumn(i);
             column1.setHeaderValue(stringlist[i]);

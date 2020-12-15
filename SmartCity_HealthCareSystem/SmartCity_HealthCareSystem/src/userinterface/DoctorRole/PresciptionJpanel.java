@@ -315,11 +315,6 @@ public class PresciptionJpanel extends javax.swing.JPanel {
             return;
         }
         
-        flag = duration.matches("^[0-9]+$");
-        if(!flag) {
-            JOptionPane.showMessageDialog(null, "Duration must have digits only");
-            return;
-        }
         
         System.out.println("Drug" + drug);
         try{
@@ -355,7 +350,7 @@ public class PresciptionJpanel extends javax.swing.JPanel {
             populateTable();
            
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "Already user have asked for this Drug");
         } finally {
             try {
                 pst.close();

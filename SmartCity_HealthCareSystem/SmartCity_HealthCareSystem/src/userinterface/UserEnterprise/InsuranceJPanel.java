@@ -40,6 +40,10 @@ public class InsuranceJPanel extends javax.swing.JPanel {
     
     PreparedStatement pst1 = null;
     
+    PreparedStatement pst3 = null;
+    
+    
+    
     /**
      * Creates new form InsuranceJPanel
      */
@@ -349,33 +353,33 @@ public class InsuranceJPanel extends javax.swing.JPanel {
          rs=pst1.executeQuery();
          
          if(rs.next()) {
-                JOptionPane.showMessageDialog(null,"User has already have Health Insuranceve");
+                JOptionPane.showMessageDialog(null,"User has already have Health Insurance");
                 return;
             }
             
             
         String sql = " insert into insure_request values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-                pst = conn.prepareStatement(sql);
-                pst.setString(1, f_name);
-                pst.setString(2, l_name);
-                pst.setString(3, gender);
-                pst.setString(4, address);
-                pst.setString(5, email);
-                pst.setString(6, phone);
-                pst.setString(7, blood);
-                pst.setString(8, weight);
-                pst.setString(9, height);
-                pst.setString(10, username);
+                pst3 = conn.prepareStatement(sql);
+                pst3.setString(1, f_name);
+                pst3.setString(2, l_name);
+                pst3.setString(3, gender);
+                pst3.setString(4, address);
+                pst3.setString(5, email);
+                pst3.setString(6, phone);
+                pst3.setString(7, blood);
+                pst3.setString(8, weight);
+                pst3.setString(9, height);
+                pst3.setString(10, username);
               //  pst.setString(11, password);
-                pst.setString(11, age);
-                pst.setString(12, duration);
-                pst.setString(13, pack);
-                pst.setFloat(14, amount);
-                pst.setString(15,"Requested");
+                pst3.setString(11, age);
+                pst3.setString(12, duration);
+                pst3.setString(13, pack);
+                pst3.setFloat(14, amount);
+                pst3.setString(15,"Requested");
                 
                 
-                pst.executeUpdate();
+                pst3.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Insurance Requested  successfuly");
                 
                
@@ -386,8 +390,8 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "User already have health Insurance");
         }finally{
             try {
-              //  rs.close();
-                pst.close();
+//                rs.close();
+                pst3.close();
                 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e);
