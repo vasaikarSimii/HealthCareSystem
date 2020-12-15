@@ -139,7 +139,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 94, 541, 112));
 
-        jLabel1.setText("State Name:");
+        jLabel1.setText("City Name:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
         add(txtStateName, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 281, 165, -1));
 
